@@ -1,0 +1,100 @@
+{
+  "schema": "forgeax-ide-release-baseline/v1",
+  "source": {
+    "runId": 33622205397,
+    "url": "https://github.com/ForgeaX-Games/forgeax-ide/actions/runs/33622205397",
+    "orchestrationId": "issue4-m0-0c5ecc11",
+    "ideRevision": "0c5ecc11cff8f54d8f7c5cefd47d5bc0ff321e6f",
+    "integrationRevision": "2f5d00234dc043a133dcd4df75eab78c45d09e4f",
+    "intent": "dry-run",
+    "conclusion": "success"
+  },
+  "method": {
+    "jobTimings": "GitHub Actions job startedAt/completedAt timestamps",
+    "stageTimingsAndDirectories": "forgeax-ide-release-stage/v1 reports uploaded by the preflight and platform jobs",
+    "artifactTransfers": "GitHub Actions artifacts API size_in_bytes",
+    "installers": "forgeax-ide-release-candidate/v1 artifact size fields"
+  },
+  "preflight": {
+    "stages": {
+      "installMs": 9359.903,
+      "enginePrepareMs": 5449.943,
+      "webBuildMs": 117463.992
+    },
+    "webDist": { "files": 292, "symlinks": 0, "bytes": 24074326 }
+  },
+  "jobs": [
+    {
+      "platform": "macos-arm64",
+      "targetTriple": "aarch64-apple-darwin",
+      "totalSeconds": 588,
+      "stages": {
+        "installMs": 7548.607,
+        "enginePrepareMs": 7672.221,
+        "runtimeAssembleMs": 78591.736,
+        "tauriBuildMs": 410772.577
+      },
+      "outputs": {
+        "webDist": { "files": 292, "symlinks": 0, "bytes": 24074326 },
+        "desktopResources": { "files": 8503, "symlinks": 0, "bytes": 364407628 },
+        "tauriBundle": { "files": 8513, "symlinks": 0, "bytes": 596130710 }
+      },
+      "artifactTransferBytes": 146222286,
+      "installers": [{ "kind": "dmg", "bytes": 146540007 }]
+    },
+    {
+      "platform": "macos-x64",
+      "targetTriple": "x86_64-apple-darwin",
+      "totalSeconds": 1294,
+      "stages": {
+        "installMs": 17329.764,
+        "enginePrepareMs": 10740.167,
+        "runtimeAssembleMs": 144793.019,
+        "tauriBuildMs": 1020043.266
+      },
+      "outputs": {
+        "webDist": { "files": 292, "symlinks": 0, "bytes": 24074326 },
+        "desktopResources": { "files": 8503, "symlinks": 0, "bytes": 381698790 },
+        "tauriBundle": { "files": 8513, "symlinks": 0, "bytes": 629455394 }
+      },
+      "artifactTransferBytes": 156002593,
+      "installers": [{ "kind": "dmg", "bytes": 156322221 }]
+    },
+    {
+      "platform": "windows-x64",
+      "targetTriple": "x86_64-pc-windows-msvc",
+      "totalSeconds": 1256,
+      "stages": {
+        "installMs": 100446.507,
+        "enginePrepareMs": 56053.934,
+        "runtimeAssembleMs": 164636.245,
+        "tauriBuildMs": 824918.984
+      },
+      "outputs": {
+        "webDist": { "files": 292, "symlinks": 0, "bytes": 24079731 },
+        "desktopResources": { "files": 8494, "symlinks": 0, "bytes": 433477528 },
+        "tauriBundle": { "files": 2, "symlinks": 0, "bytes": 255808274 }
+      },
+      "artifactTransferBytes": 254162559,
+      "installers": [
+        { "kind": "msi", "bytes": 153876742 },
+        { "kind": "nsis", "bytes": 101931532 }
+      ]
+    }
+  ],
+  "totals": {
+    "platformJobSeconds": 3138,
+    "measuredPlatformStageMs": {
+      "install": 125324.878,
+      "enginePrepare": 74466.322,
+      "runtimeAssemble": 388021,
+      "tauriBuild": 2255734.827
+    },
+    "platformArtifactTransferBytes": 556387438,
+    "installerBytes": 558670502,
+    "publicAssetsArtifactBytes": 556384128,
+    "candidateArtifactBytes": 3344,
+    "contextArtifactBytes": 557
+  },
+  "unavailable": []
+}

@@ -1,0 +1,36 @@
+[package]
+name = "forgeax-ide-desktop"
+version = "0.3.31-alpha.1"
+description = "ForgeaX Studio desktop shell (Tauri 2)"
+edition = "2021"
+rust-version = "1.77"
+
+# The library is what the desktop binary and (future) mobile targets link
+# against. `main.rs` is a thin launcher that calls `forgeax_studio_desktop_lib::run()`.
+#
+# NOTE (Windows desktop-dev): cdylib/staticlib are only needed for (future)
+# mobile targets. On the x86_64-pc-windows-gnu toolchain the cdylib link hits
+# GNU ld's "export ordinal too large" limit, which has nothing to do with the
+# desktop .exe (a bin target exports no symbols). Keep this `["lib"]` for
+# Windows-gnu desktop dev; restore ["lib", "cdylib", "staticlib"] when building
+# for mobile (or on the MSVC toolchain, which links the cdylib fine).
+[lib]
+name = "forgeax_ide_desktop_lib"
+crate-type = ["lib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-os = "2"
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Timer for the SidecarSupervisor's restart backoff. tokio is already pulled in
+# transitively by tauri's async_runtime; we depend on it directly for time::sleep.
+tokio = { version = "1", features = ["time"] }
+
+[features]
+# Tauri's devtools in debug builds.
+default = []

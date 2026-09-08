@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {"sourceRepo":"forgeax-ide","ref":"refs/remotes/origin/main","commit":"28ad35b5a827dabd7d5494d522c58f2a6fad1269","tree":"5d7f9e19ac7e1005085d576c8fc78f5d19e91bd8","mainReachable":true},
+    {"sourceRepo":"forgeax-editor","ref":"refs/remotes/origin/main","commit":"68711a28049335c7d812cb13a34da0a3e1648257","tree":"70e6f7d07fd24fe33bfc0984620105e23157380b","mainReachable":true},
+    {"sourceRepo":"forgeax-server","ref":"refs/remotes/origin/main","commit":"22c96ac7c3660e7fd4c912c86da463da683a36a3","tree":"f500895c541b0ff5d5e998a512fa600ff961759d","mainReachable":true,"releaseEvidence":"../../.forgeax-harness/forgeax-loop/feat-20260822-ide-public-gameplay-carrier/release-leaves.json#/server"},
+    {"sourceRepo":"forgeax-interface","ref":"refs/remotes/origin/main","commit":"53f4d1c4297a2c64a0cd1891180fbd4329d39348","tree":"6a7c3e7a0d40aa25378d78800f410896059b0760","mainReachable":true},
+    {"sourceRepo":"forgeax-marketplace","ref":"refs/remotes/origin/main","commit":"743a23bb08acf6869b7dbe84fc83643566c732c1","tree":"b99d5682d28ef208b67f2a33327ac9af4d9cc4ce","mainReachable":true}
+  ],
+  "registryInputs": [
+    {"package":"@forgeax/extension-platform","version":"0.4.0","registry":"https://registry.npmjs.org/","source":"immutable-registry-release"}
+  ]
+}

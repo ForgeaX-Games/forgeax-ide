@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "operation": "provenance-merge",
+  "candidate": "migration-candidate",
+  "sources": [
+    {
+      "sourceRepo": "forgeax-studio",
+      "sourceCommit": "ba491f5a761ed2c64d8965f2d39e024eb810520b",
+      "sourceTree": "39cda87cc89bf9c0ccc81416d9803cf8dc63e6a5",
+      "importRoot": "imported/studio",
+      "selectedPaths": ["packages/studio/src", "packages/studio/package.json"]
+    },
+    {
+      "sourceRepo": "forgeax-interface",
+      "sourceCommit": "563164b10bb27b1ee8cd6420c1f4d820fe41ac21",
+      "sourceTree": "cf807d4ddc2ab1f7615b5c8f1e13d2a337a205a3",
+      "importRoot": "imported/interface",
+      "selectedPaths": ["src-tauri", "test"]
+    }
+  ],
+  "rules": {
+    "sourceCheckout": "clean detached remote main",
+    "gitObjectsAreNotDelivery": true,
+    "normalization": "deferred-to-m4-ide-normalization"
+  }
+}

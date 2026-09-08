@@ -1,0 +1,21 @@
+{
+  "name": "@forgeax/files",
+  "version": "0.1.0",
+  "private": false,
+  "license": "Apache-2.0",
+  "type": "module",
+  "description": "ForgeaX file browsing, preview, editing and resource-page contribution",
+  "exports": {
+    ".": "./src/index.tsx",
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@google/model-viewer": "^4.2.0",
+    "lucide-react": "^0.460.0",
+    "react-markdown": "^10.1.0"
+  },
+  "peerDependencies": {
+    "@forgeax/app-shell": "^0.83.0",
+    "react": "^19.0.0"
+  }
+}

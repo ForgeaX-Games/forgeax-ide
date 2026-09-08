@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "candidate": "migration-candidate",
+  "sources": [
+    {"sourceRepo":"forgeax-studio","remote":"https://github.com/ForgeaX-Games/forgeax-studio.git","ref":"refs/remotes/origin/main","commit":"ba491f5a761ed2c64d8965f2d39e024eb810520b","scope":"packages/studio"},
+    {"sourceRepo":"forgeax-interface","remote":"https://github.com/ForgeaX-Games/forgeax-interface.git","ref":"refs/remotes/origin/main","commit":"563164b10bb27b1ee8cd6420c1f4d820fe41ac21","scope":"src-tauri,tests,test"}
+  ]
+}

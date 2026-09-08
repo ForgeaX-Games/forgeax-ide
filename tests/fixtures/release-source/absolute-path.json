@@ -1,0 +1,6 @@
+{
+  "packageText": "{\"dependencies\":{\"@forgeax/extension-platform\":\"0.4.0\"}}",
+  "lockText": "@forgeax/extension-platform@0.4.0 registry",
+  "productText": "@forgeax-extension/scene-generator",
+  "bundleText": "/private/tmp/forgeax-ide/dist/index.js"
+}

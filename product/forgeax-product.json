@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "id": "forgeax-ide",
+  "displayName": "ForgeaX Studio",
+  "package": "@forgeax/ide",
+  "runtime": {"platform": "@forgeax/extension-platform@0.4.0", "providerModes": ["web-dev", "desktop-dev", "desktop-prod"]},
+  "extensions": [
+    {"id":"@forgeax-extension/scene-generator","required":false},
+    {"id":"@forgeax-extension/video-game","required":false},
+    {"id":"@forgeax-extension/bgm","required":false},
+    {"id":"@forgeax-extension/agent-monitor","required":false},
+    {"id":"@forgeax-extension/diffusion-renderer","required":false},
+    {"id":"@forgeax-extension/plugin-author","required":false},
+    {"id":"@forgeax-extension/model-anthropic-text","required":false},
+    {"id":"@forgeax-extension/skill-author-plugin","required":false},
+    {"id":"@forgeax-extension/skill-make-game-design","required":false},
+    {"id":"@forgeax-extension/team-forge","required":false},
+    {"id":"@forgeax-extension/tool-balance-resim","required":false},
+    {"id":"@forgeax-extension/ai-asset","required":false},
+    {"id":"@forgeax-extension/character-3d","required":false},
+    {"id":"@forgeax-extension/animation","required":false},
+    {"id":"@forgeax-extension/skill-effects","required":false},
+    {"id":"@forgeax-extension/system-configuration","required":false},
+    {"id":"@forgeax-extension/agent-persona","required":false},
+    {"id":"@forgeax-extension/game-balance","required":false},
+    {"id":"@forgeax-extension/source-navigation","required":false},
+    {"id":"@forgeax-extension/color-grading","required":false}
+  ],
+  "services": [{"id":"forgeax-server","version":"0.1.0","source":"released-service","required":true}],
+  "ports": {"web":18920,"server":18900,"engine":15173}
+}

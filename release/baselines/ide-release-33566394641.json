@@ -1,0 +1,74 @@
+{
+  "schema": "forgeax-ide-release-baseline/v1",
+  "source": {
+    "runId": 33566394641,
+    "url": "https://github.com/ForgeaX-Games/forgeax-ide/actions/runs/33566394641",
+    "orchestrationId": "release20260901-v0331-alpha1-startup-perf-r13",
+    "ideRevision": "2a1eb8d1e2dea3ba3712ebf4b51264da92756d10",
+    "integrationRevision": "c7120b2061a122228ae6ff79f2751f97f2504518",
+    "intent": "dry-run"
+  },
+  "method": {
+    "timings": "GitHub Actions job and step startedAt/completedAt timestamps",
+    "webBuilds": "Count of '$ bun run prepare:shader-build-inputs && bun run scripts/build-web.ts' in the complete run log",
+    "artifactTransfers": "GitHub Actions artifacts API size_in_bytes",
+    "installers": "forgeax-ide-platform-evidence/v1 size fields from the run candidate artifact"
+  },
+  "webBuilds": {
+    "count": 7,
+    "totalViteSeconds": 238.25,
+    "executions": [
+      { "job": "preflight", "origin": "explicit", "seconds": 35.62 },
+      { "job": "macos-arm64", "origin": "assemble", "seconds": 18.14 },
+      { "job": "macos-arm64", "origin": "tauri-beforeBuildCommand", "seconds": 29.54 },
+      { "job": "macos-x64", "origin": "assemble", "seconds": 33.1 },
+      { "job": "macos-x64", "origin": "tauri-beforeBuildCommand", "seconds": 37.68 },
+      { "job": "windows-x64", "origin": "assemble", "seconds": 42.94 },
+      { "job": "windows-x64", "origin": "tauri-beforeBuildCommand", "seconds": 41.23 }
+    ]
+  },
+  "jobs": [
+    {
+      "platform": "macos-arm64",
+      "totalSeconds": 744,
+      "stages": { "install": 236, "runtimeAssemble": 47, "tauriBuild": 336, "artifactUpload": 5 },
+      "artifactTransferBytes": 144900679,
+      "installers": [{ "kind": "dmg", "bytes": 147443125 }]
+    },
+    {
+      "platform": "macos-x64",
+      "totalSeconds": 1240,
+      "stages": { "install": 327, "runtimeAssemble": 72, "tauriBuild": 471, "artifactUpload": 10 },
+      "artifactTransferBytes": 155009778,
+      "installers": [{ "kind": "dmg", "bytes": 157469685 }]
+    },
+    {
+      "platform": "windows-x64",
+      "totalSeconds": 1482,
+      "stages": { "install": 391, "runtimeAssemble": 83, "tauriBuild": 901, "artifactUpload": 12 },
+      "artifactTransferBytes": 252114129,
+      "installers": [
+        { "kind": "msi", "bytes": 152818392 },
+        { "kind": "nsis", "bytes": 100911722 }
+      ]
+    }
+  ],
+  "totals": {
+    "platformJobSeconds": 3466,
+    "platformArtifactTransferBytes": 552024586,
+    "installerBytes": 558642924,
+    "publicAssetsArtifactBytes": 552021221,
+    "candidateArtifactBytes": 3396,
+    "contextArtifactBytes": 554
+  },
+  "unavailable": [
+    {
+      "metric": "intermediate-directory-bytes",
+      "reason": "The historical workflow did not record or upload intermediate directory sizes; a new instrumented dry-run is required. No value is inferred."
+    },
+    {
+      "metric": "engine-prepare-seconds",
+      "reason": "The historical workflow combined Engine preparation with workspace installation; a new instrumented dry-run is required. No value is inferred."
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@forgeax/chat/runtime": ["../chat/src/runtime.tsx"],
+      "@forgeax/interface/*": ["src/types/interface-integration.d.ts"],
+      "@forgeax/editor/*": ["src/types/interface-integration.d.ts"]
+    }
+  }
+}

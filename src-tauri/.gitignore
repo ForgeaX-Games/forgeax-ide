@@ -1,0 +1,7 @@
+# Rust / Cargo build output
+/target/
+# Tauri codegen
+/gen/schemas/
+# Plan B desktop payload (assembled by scripts/build-desktop.sh) — large, generated
+/resources/
+/binaries/

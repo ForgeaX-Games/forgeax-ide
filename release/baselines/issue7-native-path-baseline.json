@@ -1,0 +1,403 @@
+{
+  "schema": "forgeax-ide-release-benchmark-summary/v1",
+  "kind": "baseline",
+  "identity": {
+    "version": "0.3.31-alpha.1",
+    "ideRevision": "9324db8c1a3eef67fff385075dc8bbff0d5d8daf",
+    "integrationRevision": "4d5d57960b74193ca7a2c9864a9ae6e1d438471d",
+    "revisionBranch": "main",
+    "sidecarManifestUrl": "https://github.com/ForgeaX-Games/forgeax-server/releases/download/server-v0.1.0/candidate.json",
+    "sidecarManifestSha256": "0508ef1c911767d144aa1fb320c82a3ddc8b7e202de267b246a5e059b6924682",
+    "mode": "dry-run",
+    "workflowDefinitionRevision": "9324db8c1a3eef67fff385075dc8bbff0d5d8daf"
+  },
+  "runnerLabels": [
+    {
+      "job": "candidate",
+      "labels": [
+        "ubuntu-latest"
+      ]
+    },
+    {
+      "job": "desktop-dry-run (macos-arm64, macos-14, aarch64-apple-darwin)",
+      "labels": [
+        "macos-14"
+      ]
+    },
+    {
+      "job": "desktop-dry-run (macos-x64, macos-15-intel, x86_64-apple-darwin)",
+      "labels": [
+        "macos-15-intel"
+      ]
+    },
+    {
+      "job": "desktop-dry-run (windows-x64, windows-2022, x86_64-pc-windows-msvc)",
+      "labels": [
+        "windows-2022"
+      ]
+    },
+    {
+      "job": "preflight",
+      "labels": [
+        "ubuntu-latest"
+      ]
+    },
+    {
+      "job": "resolve",
+      "labels": [
+        "ubuntu-latest"
+      ]
+    }
+  ],
+  "sampleSize": 3,
+  "runs": [
+    {
+      "repository": "ForgeaX-Games/forgeax-ide",
+      "runId": 33834588175,
+      "runAttempt": 1,
+      "url": "https://github.com/ForgeaX-Games/forgeax-ide/actions/runs/33834588175",
+      "headSha": "9324db8c1a3eef67fff385075dc8bbff0d5d8daf"
+    },
+    {
+      "repository": "ForgeaX-Games/forgeax-ide",
+      "runId": 33836553095,
+      "runAttempt": 1,
+      "url": "https://github.com/ForgeaX-Games/forgeax-ide/actions/runs/33836553095",
+      "headSha": "9324db8c1a3eef67fff385075dc8bbff0d5d8daf"
+    },
+    {
+      "repository": "ForgeaX-Games/forgeax-ide",
+      "runId": 33838270010,
+      "runAttempt": 1,
+      "url": "https://github.com/ForgeaX-Games/forgeax-ide/actions/runs/33838270010",
+      "headSha": "9324db8c1a3eef67fff385075dc8bbff0d5d8daf"
+    }
+  ],
+  "metrics": {
+    "wallClockMs": {
+      "values": [
+        1397000,
+        1617000,
+        1895000
+      ],
+      "min": 1397000,
+      "median": 1617000,
+      "max": 1895000,
+      "rangePercent": 30.798
+    },
+    "runnerTotalMs": {
+      "values": [
+        2552000,
+        3015000,
+        3412000
+      ],
+      "min": 2552000,
+      "median": 3015000,
+      "max": 3412000,
+      "rangePercent": 28.524
+    },
+    "artifactTransferBytes": {
+      "values": [
+        1179249452,
+        1179264526,
+        1179290542
+      ],
+      "min": 1179249452,
+      "median": 1179264526,
+      "max": 1179290542,
+      "rangePercent": 0.003
+    },
+    "installerBytes": {
+      "values": [
+        567468714,
+        567472457,
+        567490453
+      ],
+      "min": 567468714,
+      "median": 567472457,
+      "max": 567490453,
+      "rangePercent": 0.004
+    },
+    "stages": {
+      "common/engine-prepare": {
+        "values": [
+          5818.685,
+          6073.963,
+          9349.621
+        ],
+        "min": 5818.685,
+        "median": 6073.963,
+        "max": 9349.621,
+        "rangePercent": 58.132
+      },
+      "common/install": {
+        "values": [
+          10479.32,
+          10565.773,
+          13245.607
+        ],
+        "min": 10479.32,
+        "median": 10565.773,
+        "max": 13245.607,
+        "rangePercent": 26.182
+      },
+      "common/runtime-common": {
+        "values": [
+          3889.588,
+          4026.934,
+          4858.244
+        ],
+        "min": 3889.588,
+        "median": 4026.934,
+        "max": 4858.244,
+        "rangePercent": 24.054
+      },
+      "common/web-build": {
+        "values": [
+          95163.054,
+          109242.705,
+          114116.079
+        ],
+        "min": 95163.054,
+        "median": 109242.705,
+        "max": 114116.079,
+        "rangePercent": 17.349
+      },
+      "macos-arm64/bundle-verify": {
+        "values": [
+          7218.194,
+          10141.32,
+          10817.973
+        ],
+        "min": 7218.194,
+        "median": 10141.32,
+        "max": 10817.973,
+        "rangePercent": 35.496
+      },
+      "macos-arm64/cargo-compile-link": {
+        "values": [
+          114084.623,
+          165778.166,
+          172047.534
+        ],
+        "min": 114084.623,
+        "median": 165778.166,
+        "max": 172047.534,
+        "rangePercent": 34.964
+      },
+      "macos-arm64/engine-target": {
+        "values": [
+          331.512,
+          499.693,
+          598.649
+        ],
+        "min": 331.512,
+        "median": 499.693,
+        "max": 598.649,
+        "rangePercent": 53.46
+      },
+      "macos-arm64/install": {
+        "values": [
+          10918,
+          11333.163,
+          13566.011
+        ],
+        "min": 10918,
+        "median": 11333.163,
+        "max": 13566.011,
+        "rangePercent": 23.365
+      },
+      "macos-arm64/runtime-assemble": {
+        "values": [
+          7401.634,
+          10288.46,
+          12523.101
+        ],
+        "min": 7401.634,
+        "median": 10288.46,
+        "max": 12523.101,
+        "rangePercent": 49.779
+      },
+      "macos-arm64/runtime-target": {
+        "values": [
+          2471.68,
+          2630.727,
+          5278.339
+        ],
+        "min": 2471.68,
+        "median": 2630.727,
+        "max": 5278.339,
+        "rangePercent": 106.688
+      },
+      "macos-arm64/tauri-bundle": {
+        "values": [
+          89667.322,
+          148602.46,
+          152784.588
+        ],
+        "min": 89667.322,
+        "median": 148602.46,
+        "max": 152784.588,
+        "rangePercent": 42.474
+      },
+      "macos-x64/bundle-verify": {
+        "values": [
+          17991.382,
+          18864.303,
+          25013.686
+        ],
+        "min": 17991.382,
+        "median": 18864.303,
+        "max": 25013.686,
+        "rangePercent": 37.225
+      },
+      "macos-x64/cargo-compile-link": {
+        "values": [
+          361903.764,
+          456552.015,
+          572643.078
+        ],
+        "min": 361903.764,
+        "median": 456552.015,
+        "max": 572643.078,
+        "rangePercent": 46.159
+      },
+      "macos-x64/engine-target": {
+        "values": [
+          467.441,
+          496.814,
+          499.235
+        ],
+        "min": 467.441,
+        "median": 496.814,
+        "max": 499.235,
+        "rangePercent": 6.4
+      },
+      "macos-x64/install": {
+        "values": [
+          34800.289,
+          37756.411,
+          44939.022
+        ],
+        "min": 34800.289,
+        "median": 37756.411,
+        "max": 44939.022,
+        "rangePercent": 26.853
+      },
+      "macos-x64/runtime-assemble": {
+        "values": [
+          28048.614,
+          31290.45,
+          32283.971
+        ],
+        "min": 28048.614,
+        "median": 31290.45,
+        "max": 32283.971,
+        "rangePercent": 13.536
+      },
+      "macos-x64/runtime-target": {
+        "values": [
+          4256.689,
+          4494.147,
+          5549.248
+        ],
+        "min": 4256.689,
+        "median": 4494.147,
+        "max": 5549.248,
+        "rangePercent": 28.761
+      },
+      "macos-x64/tauri-bundle": {
+        "values": [
+          82345.653,
+          700035.587,
+          751237.736
+        ],
+        "min": 82345.653,
+        "median": 700035.587,
+        "max": 751237.736,
+        "rangePercent": 95.551
+      },
+      "windows-x64/bundle-verify": {
+        "values": [
+          6677.319,
+          7052.068,
+          7909.105
+        ],
+        "min": 6677.319,
+        "median": 7052.068,
+        "max": 7909.105,
+        "rangePercent": 17.467
+      },
+      "windows-x64/cargo-compile-link": {
+        "values": [
+          441350.855,
+          447435.279,
+          485718.232
+        ],
+        "min": 441350.855,
+        "median": 447435.279,
+        "max": 485718.232,
+        "rangePercent": 9.916
+      },
+      "windows-x64/engine-target": {
+        "values": [
+          693.619,
+          920.531,
+          1153.907
+        ],
+        "min": 693.619,
+        "median": 920.531,
+        "max": 1153.907,
+        "rangePercent": 50.002
+      },
+      "windows-x64/install": {
+        "values": [
+          89063.266,
+          95592.552,
+          109057.536
+        ],
+        "min": 89063.266,
+        "median": 95592.552,
+        "max": 109057.536,
+        "rangePercent": 20.916
+      },
+      "windows-x64/runtime-assemble": {
+        "values": [
+          39313.429,
+          39538.68,
+          40556.442
+        ],
+        "min": 39313.429,
+        "median": 39538.68,
+        "max": 40556.442,
+        "rangePercent": 3.144
+      },
+      "windows-x64/runtime-target": {
+        "values": [
+          3226.434,
+          3969.791,
+          5141.306
+        ],
+        "min": 3226.434,
+        "median": 3969.791,
+        "max": 5141.306,
+        "rangePercent": 48.236
+      },
+      "windows-x64/tauri-bundle": {
+        "values": [
+          317015.534,
+          320241.499,
+          340104.258
+        ],
+        "min": 317015.534,
+        "median": 320241.499,
+        "max": 340104.258,
+        "rangePercent": 7.21
+      }
+    }
+  },
+  "interpretation": {
+    "estimator": "median",
+    "hostedRunnerVariance": "Report min/max/rangePercent for every metric; do not infer deterministic gains from a single run."
+  }
+}

@@ -1,0 +1,16 @@
+Welcome · Language · Connect
+Choose a game
+Enter home
+Welcome to Forgeax Studio!
+Just tell Forge "make a game about X" — it plans, writes the code, and shows your game running live.
+Language
+中文
+English
+Connect a model
+Pick one way to connect — you can change it later in Settings.
+Use an API Key
+Any OpenAI-compatible endpoint (official / OpenRouter / private proxy).
+Use a local CLI
+Connect a local claude-code / codex / cursor-agent.
+Skip setup
+Next

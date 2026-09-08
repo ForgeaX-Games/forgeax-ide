@@ -1,0 +1,33 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main-capability",
+  "description": "Core capabilities for the ForgeaX Studio desktop shell: window control, multi-window (detached surfaces), tray, os info, and the `bun` backend sidecar (Plan B). LOCAL-ONLY (no `remote` block) — the shell:* grants below must never reach the sidecar origin, which also serves game/preview content; see capabilities/remote-webview.json.",
+  "windows": ["main", "fx-surface-*"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-start-dragging",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+    "core:window:allow-show",
+    "core:window:allow-hide",
+    "core:window:allow-set-focus",
+    "core:window:allow-set-always-on-top",
+    "core:webview:allow-create-webview-window",
+    "core:webview:default",
+    "core:event:default",
+    "os:default",
+    {
+      "identifier": "shell:allow-execute",
+      "allow": [
+        { "name": "bun", "sidecar": true, "args": true }
+      ]
+    },
+    {
+      "identifier": "shell:allow-spawn",
+      "allow": [
+        { "name": "bun", "sidecar": true, "args": true }
+      ]
+    }
+  ]
+}

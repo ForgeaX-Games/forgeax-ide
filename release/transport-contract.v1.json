@@ -1,0 +1,48 @@
+{
+  "schema": "forgeax-ide-release-transport/v1",
+  "sourceRepository": "ForgeaX-Games/forgeax-ide",
+  "releaseRepository": "ForgeaX-Games/forgeax-studio",
+  "integrationRepository": "ForgeaX-Games/forgeax-studio",
+  "publisherWorkflowPath": ".github/workflows/release.yml",
+  "tagPrefix": "v",
+  "candidateDigest": {"algorithm":"SHA-256","canonicalization":"RFC8785"},
+  "nativeTrustPolicy": "unsigned-user-authorized",
+  "artifacts": {
+    "candidate": "ide-release-candidate-{orchestrationId}",
+    "assets": "ide-release-assets-{orchestrationId}",
+    "platform": "ide-release-platform-{orchestrationId}-{logicalId}",
+    "completion": "ide-release-completion-{orchestrationId}"
+  },
+  "trustedSidecarSource": {
+    "origin": "https://github.com",
+    "downloadOrigins": ["https://github.com", "https://release-assets.githubusercontent.com"],
+    "repositoryPath": "/ForgeaX-Games/forgeax-server/releases/download/",
+    "manifestMaxBytes": 1048576,
+    "binaryMaxBytes": 536870912,
+    "timeoutMs": 120000
+  },
+  "platforms": [
+    {
+      "logicalId": "macos-arm64",
+      "targetTriple": "aarch64-apple-darwin",
+      "installerRoster": [{"logicalId":"macos-arm64-dmg","extension":".dmg","mediaType":"application/x-apple-diskimage"}]
+    },
+    {
+      "logicalId": "macos-x64",
+      "targetTriple": "x86_64-apple-darwin",
+      "installerRoster": [{"logicalId":"macos-x64-dmg","extension":".dmg","mediaType":"application/x-apple-diskimage"}]
+    },
+    {
+      "logicalId": "windows-x64",
+      "targetTriple": "x86_64-pc-windows-msvc",
+      "installerRoster": [
+        {"logicalId":"windows-x64-msi","extension":".msi","mediaType":"application/x-msi"},
+        {"logicalId":"windows-x64-nsis","extension":".exe","mediaType":"application/vnd.microsoft.portable-executable"}
+      ]
+    }
+  ],
+  "secretNames": {
+    "integration": ["INTERNAL_TOKEN"]
+  },
+  "optionalNotificationSecret": "WECOM_WEBHOOK_KEY"
+}
