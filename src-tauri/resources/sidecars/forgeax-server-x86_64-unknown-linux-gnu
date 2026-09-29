@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+printf '%s\n' '{"code":"IDE_SIDECAR_PLACEHOLDER","phase":"service-start","status":"unavailable","hint":"Install the released forgeax-server sidecar before desktop production packaging."}'
+exit 78
