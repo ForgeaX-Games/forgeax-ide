@@ -1,0 +1,152 @@
+/* Existing connect prompt declarations, owned with its product view. */
+.fx-ob-h2 {
+	font-size: 18px;
+	font-weight: 620;
+	margin: 0 0 2px;
+}
+
+.fx-ob-sec {
+	color: var(--ob-text-2);
+}
+
+.fx-ob-stack {
+	display: flex;
+	flex-direction: column;
+}
+
+.fx-ob-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.fx-ob-gap6 > * + * {
+	margin-top: 6px;
+}
+
+.fx-ob-gap8 > * + * {
+	margin-top: 8px;
+}
+
+.fx-ob-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 6px 12px;
+	border-radius: 7px;
+	font-size: 13px;
+	font-weight: 500;
+	border: 1px solid var(--ob-stroke-1);
+	background: transparent;
+	color: var(--ob-text);
+	cursor: pointer;
+}
+
+.fx-ob-btn:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.fx-ob-btn-primary {
+	background: var(--ob-accent);
+	color: var(--ob-on-accent);
+	border: none;
+}
+
+.fx-ob-btn-primary:hover:not(:disabled),
+.fx-ob-btn-primary:active:not(:disabled),
+.fx-ob-btn-primary:focus-visible:not(:disabled) {
+	background: var(--color-brand-primary-hover, var(--ob-accent));
+	color: var(--ob-on-accent);
+}
+
+.fx-ob-btn-primary:disabled,
+.fx-ob-btn-primary:disabled:hover {
+	opacity: 1;
+	cursor: not-allowed;
+	background: color-mix(in srgb, var(--ob-accent) 42%, var(--ob-bg-editor));
+	color: var(--ob-on-accent);
+}
+
+.fx-ob-btn-secondary {
+	background: var(--ob-fill-2);
+	color: var(--ob-text);
+}
+
+.fx-ob-btn-secondary:hover:not(:disabled) {
+	background: var(--ob-fill-1);
+	color: var(--ob-text);
+}
+
+.fx-ob-btn-ghost {
+	background: transparent;
+	border-color: transparent;
+	color: var(--ob-text-3);
+}
+
+.fx-ob-btn-ghost:hover:not(:disabled) {
+	color: var(--ob-text-2);
+}
+
+.fx-ob-btn-block {
+	width: 100%;
+}
+
+.fx-ob-modal-scrim {
+	/* Re-declare the --ob-* palette here too: ConnectModelPrompt renders a bare
+     .fx-ob-modal-scrim at the app root (no .fx-ob-overlay ancestor), so without
+     this the tokens don't cascade and the modal renders unstyled (transparent
+     bg / invisible borders). Keep in sync with the .fx-ob-overlay block above. */
+	--ob-accent: var(--primary, #d4ff48);
+	--ob-on-accent: var(--on-primary, #12161c);
+	--ob-bg-chrome: #141414;
+	--ob-bg-editor: #181818;
+	--ob-text: var(--text-primary, #e8e8e8);
+	--ob-text-2: rgba(232, 232, 232, 0.62);
+	--ob-text-3: rgba(232, 232, 232, 0.4);
+	--ob-text-4: rgba(232, 232, 232, 0.26);
+	--ob-fill-1: rgba(232, 232, 232, 0.14);
+	--ob-fill-2: rgba(232, 232, 232, 0.1);
+	--ob-fill-3: rgba(232, 232, 232, 0.06);
+	--ob-fill-4: rgba(232, 232, 232, 0.035);
+	--ob-stroke-1: rgba(232, 232, 232, 0.2);
+	--ob-stroke-2: rgba(232, 232, 232, 0.12);
+	--ob-stroke-3: rgba(232, 232, 232, 0.08);
+	--ob-ok: #3fa266;
+	--ob-ok-bg: rgba(63, 162, 102, 0.14);
+	--ob-warn: #e0a44a;
+	--ob-warn-bg: rgba(224, 164, 74, 0.13);
+	--ob-info-bg: rgba(89, 156, 231, 0.12);
+	--ob-err-bg: rgba(224, 74, 90, 0.14);
+	color: var(--ob-text);
+	font-family:
+		-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+		"Microsoft YaHei", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.55);
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+.fx-ob-modal {
+	max-width: 460px;
+	width: 100%;
+	background: var(--ob-bg-chrome);
+	border: 1px solid var(--ob-stroke-1);
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.fx-ob-modal-inner {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}

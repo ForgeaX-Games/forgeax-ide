@@ -1,0 +1,27 @@
+/* =============================================================================
+   FX BRIDGE LAYER — short `--fx-*` namespace consumed by the Tailwind preset
+   (see preset.ts). Maps the ForgeaX semantic tokens onto the handful of names
+   shadcn/Tailwind needs (background / foreground / border / accent / ...).
+
+   This is the ONLY layer the framework migration adds. Components reference
+   semantic Tailwind classes (bg-background, text-muted-foreground, ...) which
+   resolve here → semantic tokens → primitives. Swapping skins = redefining
+   these (and the semantic layer) under a `[data-theme]` selector; no `.tsx`
+   touched.
+
+   ForgeaX is dark-only today, so the values live on `:root`.
+   ============================================================================= */
+:root {
+	--fx-bg: var(--color-background-canvas); /* page background  #0D0D0D */
+	--fx-bg-elev1: var(
+		--color-background-elevated
+	); /* card / popover   #242424 */
+	--fx-bg-elev2: var(--color-background-base); /* muted / secondary #191919 */
+	--fx-fg: var(--color-text-primary); /* #FFFFFF */
+	--fx-fg-muted: var(--color-text-secondary); /* rgba(255,255,255,.6) */
+	--fx-border: var(--color-border-default); /* #404040 */
+	--fx-accent: var(--color-brand-primary); /* lime #D4FF48 */
+	--fx-danger: var(--color-status-error); /* #BE3636 */
+	--fx-success: var(--color-status-success); /* #1B9D4B */
+	--fx-info: var(--color-accent-blue-default); /* #639CF8 */
+}

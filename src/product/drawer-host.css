@@ -1,0 +1,116 @@
+/* IDE bottom drawer. The expandable panel is a FIXED overlay anchored just above the
+ * status bar that grows UPWARD over the workspace, its right edge flush against
+ * the plugin rail (--fx-drawer-right measured at runtime). */
+
+/* ── Expandable panel (fixed overlay, grows upward, slides in) ── */
+.fx-drawer-panel {
+	position: fixed;
+	left: 0;
+	right: var(--fx-drawer-right, 0px);
+	bottom: var(--forgeax-shell-status-h, 24px);
+	display: flex;
+	flex-direction: column;
+	background: var(--color-background-elevated);
+	border-top: 1px solid var(--forgeax-divider);
+	box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.28);
+	overflow: hidden;
+	z-index: var(--z-overlay, 40);
+	animation: fx-drawer-reveal 170ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Grow UPWARD from the footer's top edge (the panel's fixed bottom): reveal the
+ * box from the bottom up via clip-path — no downward slide, no content stretch. */
+@keyframes fx-drawer-reveal {
+	from {
+		clip-path: inset(100% 0 0 0);
+		opacity: 0.5;
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+		opacity: 1;
+	}
+}
+
+/* Collapse: reverse reveal (conceal downward to the footer top), then unmount
+ * on animationend. fill-mode forwards holds it hidden until React unmounts. */
+.fx-drawer-panel.is-closing {
+	animation: fx-drawer-conceal 150ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes fx-drawer-conceal {
+	from {
+		clip-path: inset(0 0 0 0);
+		opacity: 1;
+	}
+	to {
+		clip-path: inset(100% 0 0 0);
+		opacity: 0.5;
+	}
+}
+
+.fx-drawer-resizer {
+	position: absolute;
+	top: -3px;
+	left: 0;
+	right: 0;
+	height: 6px;
+	cursor: row-resize;
+	z-index: 2;
+	margin: 0;
+}
+.resize-handle.fx-drawer-resizer::after {
+	content: none;
+}
+.fx-drawer-resizer:hover {
+	background: var(--primary);
+	opacity: 0.5;
+}
+
+.fx-drawer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 30px;
+	padding: 0 8px 0 12px;
+	border-bottom: 1px solid var(--forgeax-divider);
+	flex: 0 0 auto;
+}
+
+.fx-drawer-title {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--text-primary);
+}
+
+.fx-drawer-collapse {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border: none;
+	background: transparent;
+	color: var(--text-secondary);
+	cursor: pointer;
+	border-radius: var(--radius-sm);
+}
+.fx-drawer-collapse:hover {
+	background: var(--color-interaction-hover);
+	color: var(--text-primary);
+}
+
+.fx-drawer-body {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow: auto;
+}
+
+/* Lock the engine iframe during a drag so it can't swallow pointer moves once
+ * the cursor crosses its boundary (mirrors .fx-auxbar-resizing). */
+.fx-drawer-resizing iframe {
+	pointer-events: none;
+}
+.fx-drawer-resizing {
+	cursor: row-resize;
+	user-select: none;
+}

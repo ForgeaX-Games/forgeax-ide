@@ -1,0 +1,146 @@
+/* forgeax-preview — ambient background (no layout impact) */
+
+.scene-fx {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.scene-noise {
+	position: absolute;
+	inset: 0;
+	opacity: 0.045;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	background-size: 128px 128px;
+}
+
+.scene-orb {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(80px);
+	opacity: 0.5;
+	animation: fgx-orb-drift 18s var(--ease-flow) infinite alternate;
+}
+
+.scene-orb--lime {
+	width: 42vmin;
+	height: 42vmin;
+	top: -8%;
+	left: -6%;
+	background: radial-gradient(
+		circle,
+		rgba(212, 255, 72, 0.22) 0%,
+		transparent 68%
+	);
+}
+
+.scene-orb--teal {
+	width: 36vmin;
+	height: 36vmin;
+	bottom: 12%;
+	right: 8%;
+	background: radial-gradient(
+		circle,
+		rgba(72, 255, 212, 0.08) 0%,
+		transparent 70%
+	);
+	animation-delay: -6s;
+	animation-duration: 22s;
+}
+
+.scene-orb--violet {
+	width: 28vmin;
+	height: 28vmin;
+	top: 40%;
+	left: 45%;
+	background: radial-gradient(
+		circle,
+		rgba(120, 100, 255, 0.06) 0%,
+		transparent 72%
+	);
+	animation-delay: -11s;
+	animation-duration: 26s;
+}
+
+.scene-sheen {
+	position: absolute;
+	inset: -50%;
+	background: conic-gradient(
+		from 0deg at 50% 50%,
+		transparent 0deg,
+		rgba(212, 255, 72, 0.03) 40deg,
+		transparent 80deg,
+		rgba(255, 255, 255, 0.02) 120deg,
+		transparent 200deg,
+		rgba(212, 255, 72, 0.04) 280deg,
+		transparent 360deg
+	);
+	animation: fgx-sheen-rotate 24s linear infinite;
+}
+
+.scene-grid {
+	position: absolute;
+	inset: 0;
+	background-image: radial-gradient(
+		rgba(255, 255, 255, 0.045) 1px,
+		transparent 1px
+	);
+	background-size: 20px 20px;
+	-webkit-mask-image: radial-gradient(
+		ellipse 70% 60% at 50% 30%,
+		black 0%,
+		transparent 75%
+	);
+	mask-image: radial-gradient(
+		ellipse 70% 60% at 50% 30%,
+		black 0%,
+		transparent 75%
+	);
+	opacity: 0.7;
+}
+
+@keyframes fgx-orb-drift {
+	0% {
+		transform: translate(0) scale(1);
+	}
+	100% {
+		transform: translate(4%, 6%) scale(1.08);
+	}
+}
+
+@keyframes fgx-sheen-rotate {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.scene-orb,
+	.scene-sheen {
+		animation: none !important;
+	}
+}
+
+/* Desktop (Tauri/WKWebView) perf-lite: WKWebView's compositor is much weaker
+   than Chrome's, and an animated 80px blur + a rotating conic-gradient repaint
+   the full screen every frame even when idle. Keep a STATIC soft glow (so the
+   background isn't flat) but drop the infinite animations and lighten the blur.
+   Set in main.tsx via `document.documentElement.dataset.perf = 'lite'` when
+   isTauri(); the web form is untouched. */
+[data-perf="lite"] .scene-orb,
+[data-perf="lite"] .scene-sheen {
+	animation: none !important;
+}
+
+[data-perf="lite"] .scene-orb {
+	filter: blur(28px);
+}
+
+[data-perf="lite"] .scene-sheen {
+	/* The conic-gradient sheen reads as motion-only; with rotation gone it's just
+     a faint static wash, so drop it entirely to save a large composited layer. */
+	display: none;
+}

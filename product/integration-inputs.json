@@ -1,7 +1,15 @@
 {
-  "schemaVersion": 1,
-  "settings": {
-    "repository": "ForgeaX-Games/forgeax-settings",
-    "revision": "98ce724cdadac7bb4e428c7ee72aae49c05907eb"
-  }
+	"schemaVersion": 1,
+	"studio": {
+		"repository": "ForgeaX-Games/forgeax-studio",
+		"revision": "d684c3b8c4ada91b255a8994706068f813a7a762"
+	},
+	"appShell": {
+		"repository": "ForgeaX-Games/forgeax-app-shell",
+		"revision": "951c048dc1c25214aa66297a25bbdc1b72726c6b"
+	},
+	"settings": {
+		"repository": "ForgeaX-Games/forgeax-settings",
+		"revision": "a69d51b4252daf605470e95b8406d713934ac3be"
+	}
 }

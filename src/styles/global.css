@@ -1,0 +1,262 @@
+@import "./tokens.css";
+/* Keep the IDE token bridge local to its Tailwind build. The relative import
+   resolves before Vite alias rewriting in some setups. */
+@import "./fx-bridge.css";
+@import "./plugin-token-bridge.css";
+@import "./motion.css";
+@import "./forgeax-preview/index.css";
+
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v3 expands this directive through PostCSS. */
+@tailwind base;
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v3 expands this directive through PostCSS. */
+@tailwind components;
+/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind CSS v3 expands this directive through PostCSS. */
+@tailwind utilities;
+
+* {
+	box-sizing: border-box;
+}
+html,
+body,
+#root {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--bg-0);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	font-size: 13px;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+}
+button {
+	font-family: inherit;
+}
+/* Tailwind preflight is off, so native form controls otherwise keep the UA's
+   default (black) text/font instead of the design tokens. Make them inherit so
+   token text colors apply everywhere. Buttons opt in to a text color per
+   component (e.g. ui/select Trigger uses text-foreground) so accent-filled
+   buttons keep their own foreground. */
+input,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+}
+code {
+	font-family: var(--font-mono);
+	background: var(--bg-2);
+	border-radius: 4px;
+	padding: 1px 4px;
+	font-size: 0.9em;
+	color: var(--accent-orange);
+}
+
+/* 滚动条统一（对齐 vag_web · P4.72 pearl bevel + faint lime tint —
+   thumb 从中性灰 rgba(255,255,255,0.18) 切到 primary 荧光绿透明家族 rgba(212,255,72,0.14)，
+   叠 inset box-shadow 2-stop pearl 配方（顶高光 0.10 / 底暗影 0.20）跟 TopBar/TabStrip/App.css resize-handle pearl 同源 → scrollbar 也成"凸 chrome ribbon" 视觉系统的一员） */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(212, 255, 72, 0.22) transparent;
+}
+*::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+	background-color: rgba(212, 255, 72, 0.14);
+	border-radius: 3px;
+	border: 1px solid transparent;
+	background-clip: padding-box;
+	box-shadow:
+		0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+		0 -1px 0 0 rgba(0, 0, 0, 0.2) inset;
+	transition: background-color 0.15s;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(212, 255, 72, 0.32);
+}
+*::-webkit-scrollbar-corner {
+	background: transparent;
+}
+*::-webkit-scrollbar-button {
+	display: none !important;
+	width: 0 !important;
+	height: 0 !important;
+	-webkit-appearance: none !important;
+	background: transparent !important;
+}
+.thin-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: rgba(212, 255, 72, 0.18) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+	width: 2px;
+	height: 2px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+	background-color: rgba(212, 255, 72, 0.18);
+	border-radius: 2px;
+	box-shadow: none;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(212, 255, 72, 0.36);
+}
+
+/* 桌面化选区策略：默认全局禁用，白名单内容区放开。原有 component-local
+   的 user-select:none 不需要清理 — 会被这条全局规则吸收，无冲突。 */
+html,
+body,
+#root,
+* {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.user-bubble,
+.kc-body,
+.kc-text,
+/* Open the whole chat scroll region so users can drag-select message text,
+   agent names, timestamps, empty-state hints, etc. Sub-controls that need
+   to stay un-selectable (.kc-meta / .md-skip-btn / .as-track when nested)
+   keep their own user-select:none — same specificity, later-loaded → wins. */
+.cp-thread,
+.cp-thread *,
+.md,
+.md p,
+.md li,
+.md h1,
+.md h2,
+.md h3,
+.md h4,
+.md h5,
+.md h6,
+.md blockquote,
+.md td,
+.md th,
+.md-code,
+.md-code code,
+.md-inline-code,
+.md-code-wrap,
+.console-text,
+.console-row .wbb-time,
+.fp-slug,
+.fp-name,
+input,
+textarea,
+[contenteditable="true"] {
+	user-select: text;
+	-webkit-user-select: text;
+}
+
+.user-bubble,
+.kc-body,
+.kc-text,
+.md,
+.md-code,
+.md-inline-code,
+.console-text,
+.fp-slug {
+	cursor: text;
+}
+
+.forgeax-ctx-menu-panel {
+	min-width: 216px;
+	padding: 5px;
+	border-color: var(--color-border-default);
+	border-radius: 9px;
+	background: var(--color-background-floating);
+	box-shadow: 0 14px 44px rgba(0, 0, 0, 0.62);
+}
+
+.fx-ctx-menu-title {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 9px;
+	color: var(--color-text-secondary);
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.fx-ctx-menu-item {
+	gap: 9px;
+	padding: 6px 9px;
+	border-radius: 5px;
+	color: var(--color-text-secondary);
+	font-size: 12px;
+}
+
+.forgeax-ctx-menu-panel .fx-ctx-menu-item:hover,
+.forgeax-ctx-menu-panel .fx-ctx-menu-item:focus,
+.forgeax-ctx-menu-panel .fx-ctx-menu-item[data-highlighted],
+.forgeax-ctx-menu-panel .fx-ctx-menu-item[data-state="open"] {
+	background: var(--color-interaction-selected-neutral) !important;
+	color: var(--color-text-primary) !important;
+}
+
+.fx-ctx-menu-icon {
+	width: 14px;
+	height: 14px;
+	flex: 0 0 14px;
+	color: var(--color-text-tertiary);
+}
+
+.fx-ctx-menu-label {
+	min-width: 0;
+}
+
+.fx-ctx-menu-kbd {
+	margin-left: auto;
+	padding-left: 20px;
+	color: var(--color-text-disabled);
+	font-family: var(--prim-font-mono);
+	font-size: 10px;
+}
+
+.fx-ctx-menu-sub-arrow {
+	width: 13px;
+	height: 13px;
+	margin-left: auto;
+	color: var(--color-text-tertiary);
+}
+
+.forgeax-ctx-menu-panel .fx-ctx-menu-item:hover .fx-ctx-menu-sub-arrow,
+.forgeax-ctx-menu-panel .fx-ctx-menu-item:focus .fx-ctx-menu-sub-arrow,
+.forgeax-ctx-menu-panel
+	.fx-ctx-menu-item[data-highlighted]
+	.fx-ctx-menu-sub-arrow,
+.forgeax-ctx-menu-panel
+	.fx-ctx-menu-item[data-state="open"]
+	.fx-ctx-menu-sub-arrow {
+	color: var(--color-text-primary);
+}
+
+.fx-ctx-menu-forge,
+.fx-ctx-menu-forge .fx-ctx-menu-icon {
+	color: var(--color-brand-primary);
+	font-weight: 600;
+}
+
+.forgeax-ctx-menu-panel .fx-ctx-menu-forge:hover,
+.forgeax-ctx-menu-panel .fx-ctx-menu-forge:focus,
+.forgeax-ctx-menu-panel .fx-ctx-menu-forge[data-highlighted] {
+	background: var(--color-interaction-selected-neutral) !important;
+	color: var(--color-brand-primary) !important;
+}
+
+.fx-ctx-menu-danger,
+.fx-ctx-menu-danger .fx-ctx-menu-icon {
+	color: var(--color-text-danger);
+}
+
+.forgeax-ctx-menu-panel .fx-ctx-menu-danger:hover,
+.forgeax-ctx-menu-panel .fx-ctx-menu-danger:focus,
+.forgeax-ctx-menu-panel .fx-ctx-menu-danger[data-highlighted] {
+	background: var(--color-interaction-selected-neutral) !important;
+	color: var(--color-text-danger) !important;
+}

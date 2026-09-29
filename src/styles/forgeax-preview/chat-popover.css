@@ -1,0 +1,154 @@
+/* 聊天底栏弹出层 — 统一毛玻璃、选中态、头像样式 */
+
+.chat-popover {
+	--popover-accent: var(--primary);
+	--popover-accent-dim: var(--primary-bg);
+	--popover-accent-border: color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.chat-popover--agents {
+	--popover-accent: var(--color-role-orchestrator);
+	--popover-accent-dim: var(--accent-purple-soft);
+	--popover-accent-border: color-mix(
+		in srgb,
+		var(--color-role-orchestrator) 45%,
+		transparent
+	);
+}
+
+.chat-popover--skills {
+	--popover-accent: var(--color-kind-skill);
+	--popover-accent-dim: var(--accent-orange-soft);
+	--popover-accent-border: color-mix(
+		in srgb,
+		var(--color-kind-skill) 50%,
+		transparent
+	);
+}
+
+.chat-popover--model {
+	--popover-accent: var(--accent-cyan);
+	--popover-accent-dim: var(--accent-cyan-soft);
+	--popover-accent-border: color-mix(
+		in srgb,
+		var(--accent-cyan) 45%,
+		transparent
+	);
+}
+
+.chat-popover--provider {
+	--popover-accent: var(--text-secondary);
+	--popover-accent-dim: var(--color-interaction-hover);
+	--popover-accent-border: var(--color-border-default);
+}
+
+.chat-popover-title {
+	color: var(--popover-accent);
+}
+
+.chat-popover-pill {
+	background: var(--popover-accent-dim);
+	color: var(--popover-accent);
+	border: 1px solid color-mix(in srgb, var(--popover-accent) 35%, transparent);
+}
+
+.chat-popover-item {
+	border: 1px solid transparent;
+	transition:
+		background 0.15s var(--ease-out),
+		border-color 0.15s var(--ease-out),
+		box-shadow 0.15s var(--ease-out);
+}
+
+.chat-popover-item:hover {
+	background: rgba(255, 255, 255, 0.04);
+	border-color: color-mix(in srgb, var(--popover-accent) 25%, transparent);
+}
+
+.chat-popover-item.selected {
+	background: var(--popover-accent-dim);
+	border-color: var(--popover-accent-border);
+	box-shadow: 0 0 0 1px
+		color-mix(in srgb, var(--popover-accent) 20%, transparent);
+}
+
+/* 去掉旧版实心圆头像 */
+.chat-popover-item .chat-agent-avatar {
+	display: none;
+}
+
+.chat-popover-item .agent-avatar--art {
+	flex-shrink: 0;
+}
+
+.chat-popover-item--agent .chat-agent-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 2px;
+	flex: 1;
+	min-width: 0;
+}
+
+.chat-popover-item--agent .chat-agent-handle {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--text);
+}
+
+.chat-popover-item--agent .chat-agent-title {
+	font-size: 12px;
+	color: var(--text-secondary);
+}
+
+.chat-popover-item--agent .chat-agent-role-row {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 11px;
+	font-style: italic;
+	color: var(--text-tertiary);
+}
+
+.chat-popover-item--agent .tribe-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	flex-shrink: 0;
+}
+
+.chat-popover--agents .chat-bus-tag {
+	background: var(--popover-accent-dim);
+	color: var(--popover-accent);
+}
+
+.chat-popover--agents .chat-bus-arrow {
+	border-color: color-mix(in srgb, var(--popover-accent) 30%, transparent);
+	color: var(--popover-accent);
+}
+
+.chat-popover-item--skill.selected {
+	border-color: var(--popover-accent-border);
+	box-shadow: none;
+}
+
+.chat-popover-item--skill .chat-skill-cmd {
+	color: var(--popover-accent);
+}
+
+.chat-model-card.selected {
+	border-color: var(--popover-accent-border);
+	background: var(--popover-accent-dim);
+}
+
+.chat-version-chip.on {
+	border-color: var(--popover-accent-border);
+	color: var(--popover-accent);
+	background: var(--popover-accent-dim);
+}
+
+.chat-model-tag--draft.on {
+	border-color: rgba(212, 255, 72, 0.5);
+	color: var(--accent);
+	background: rgba(212, 255, 72, 0.12);
+}

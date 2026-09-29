@@ -1,2 +1,10 @@
-/node_modules/
+node_modules/
 /dist/
+/release-work/
+/blueking-artifacts/
+/.worktrees/
+/test-results/
+/node_modules/
+/packages/*/node_modules/
+/dist/
+/.forgeax/

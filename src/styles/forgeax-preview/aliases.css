@@ -1,0 +1,21 @@
+/**
+ * Legacy preview CSS variable names → forgeax-interface semantic tokens.
+ * See DESIGN-SYSTEM.md — do not override Figma values on .studio-shell.
+ */
+:root {
+	--accent: var(--primary);
+	--accent-hover: var(--color-brand-primary-hover);
+	--accent-muted: var(--primary-bg);
+	--accent-text: var(--color-text-on-bright-primary);
+	--border-subtle: var(--color-border-default);
+	--bg-base: var(--bg-0);
+	--bg-elevated: var(--bg-1);
+	--bg-surface: var(--bg-2);
+	--bg-hover: var(--color-interaction-hover);
+	--text-tertiary: var(--text-muted);
+	--ease-out: var(--motion-ease-out);
+	--ease-spring: var(--motion-ease-spring);
+	--ease-flow: var(--motion-ease-flow);
+	--dur-smooth: var(--motion-duration-smooth);
+	--dur-fast: var(--motion-duration-fast);
+}

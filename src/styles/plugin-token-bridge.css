@@ -1,0 +1,19 @@
+/* Host primary buttons — solid lime fill always uses on-bright text */
+.studio-shell .tb-modal-btn.primary,
+.studio-shell .settings-save-btn,
+.studio-shell .fx-ob-btn-primary,
+.studio-shell .tour-btn-primary {
+	color: var(--color-text-on-bright-primary, #000000);
+}
+
+.studio-shell .tb-modal-btn.primary:hover:not(:disabled),
+.studio-shell .tb-modal-btn.primary:active:not(:disabled),
+.studio-shell .settings-save-btn:hover:not(:disabled),
+.studio-shell .fx-ob-btn-primary:hover:not(:disabled),
+.studio-shell .fx-ob-btn-primary:active:not(:disabled),
+.studio-shell .fx-ob-btn-primary:disabled,
+.studio-shell .fx-ob-btn-primary:disabled:hover,
+.studio-shell .tour-btn-primary:hover:not(:disabled),
+.studio-shell .tour-btn-primary:active:not(:disabled) {
+	color: var(--color-text-on-bright-primary, #000000);
+}

@@ -1,0 +1,632 @@
+/* =============================================================================
+   MOTION LAYER — official ForgeaX UI motion primitives
+   Source of truth: tokens.css --motion-* values.
+
+   Rules:
+   - Use transform/opacity/color/background/border/box-shadow only.
+   - Hover should feel immediate and stable: 110-150ms.
+   - Pressed state is a short scale snap: 80ms.
+   - Panels/dropdowns reveal with opacity + small Y/scale: 180-220ms.
+   - High-frequency sidebar switches keep the container stable; use
+     .rail-panel + .reveal-stagger for local content only.
+   - Status flashes/pulses are informative, not decorative.
+   - Respect prefers-reduced-motion.
+   - Readability during transitions: pressables transition `color` (~fast).
+     Hover/active must keep contrast on every frame — bright-fill primaries use
+     --color-text-on-bright-primary on :default/:hover/:active; generic :hover
+     rules must exclude .primary. See DESIGN-SYSTEM.md § 动效与界面可读性.
+   ============================================================================= */
+
+.motion-pressable,
+.pressable,
+.studio-shell
+	button:not(:disabled):not([aria-disabled="true"]):not(.cb-soon):not(
+		.no-motion-lift
+	),
+.studio-shell [role="button"]:not([aria-disabled="true"]):not(.no-motion-lift),
+.studio-shell .mode-tab,
+.studio-shell .tb-icon-btn,
+.studio-shell .tb-game-btn,
+.studio-shell .tb-new-btn,
+.studio-shell .tb-publish-btn,
+.studio-shell .page-gallery-tile,
+.studio-shell .page-rail-icon-btn,
+.studio-shell .page-module-tile,
+.studio-shell .chat-agent-strip-btn,
+.studio-shell .tab,
+.studio-shell .tab-add,
+.studio-shell .sb-chip.is-link,
+.studio-shell .tb-modal-btn,
+.studio-shell .tb-game-pick,
+.studio-shell .cb-btn:not(.cb-soon) {
+	will-change: transform, box-shadow, background, border-color, color;
+	transform-origin: center;
+	transition:
+		transform var(--motion-duration-base) var(--motion-ease-out),
+		background var(--motion-duration-base) var(--motion-ease-out),
+		border-color var(--motion-duration-base) var(--motion-ease-out),
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-smooth) var(--motion-ease-out);
+}
+
+.motion-pressable:hover,
+.pressable:hover,
+.studio-shell
+	button:not(:disabled):not([aria-disabled="true"]):not(.cb-soon):not(
+		.no-motion-lift
+	):hover,
+.studio-shell
+	[role="button"]:not([aria-disabled="true"]):not(.no-motion-lift):hover,
+.studio-shell .mode-tab:hover,
+.studio-shell .tb-icon-btn:hover,
+.studio-shell .tb-game-btn:hover,
+.studio-shell .tb-new-btn:hover,
+.studio-shell .tb-publish-btn:hover,
+.studio-shell .page-gallery-tile:hover,
+.studio-shell .page-rail-icon-btn:hover,
+.studio-shell .page-module-tile:hover,
+.studio-shell .chat-agent-strip-btn:hover,
+.studio-shell .tab:hover,
+.studio-shell .tab-add:hover,
+.studio-shell .sb-chip.is-link:hover,
+.studio-shell .tb-modal-btn:hover:not(:disabled),
+.studio-shell .tb-game-pick:hover,
+.studio-shell .cb-btn:not(.cb-soon):hover {
+	transform: translate3d(0, var(--motion-hover-y), 0)
+		scale(var(--motion-hover-scale));
+	box-shadow: var(--motion-shadow-hover);
+}
+
+.motion-pressable:active,
+.pressable:active,
+.studio-shell
+	button:not(:disabled):not([aria-disabled="true"]):not(.cb-soon):not(
+		.no-motion-lift
+	):active,
+.studio-shell
+	[role="button"]:not([aria-disabled="true"]):not(.no-motion-lift):active,
+.studio-shell .mode-tab:active,
+.studio-shell .tb-icon-btn:active,
+.studio-shell .tb-game-btn:active,
+.studio-shell .tb-new-btn:active,
+.studio-shell .tb-publish-btn:active,
+.studio-shell .page-gallery-tile:active,
+.studio-shell .page-rail-icon-btn:active,
+.studio-shell .page-module-tile:active,
+.studio-shell .chat-agent-strip-btn:active,
+.studio-shell .tab:active,
+.studio-shell .tab-add:active,
+.studio-shell .sb-chip.is-link:active,
+.studio-shell .tb-modal-btn:active,
+.studio-shell .tb-game-pick:active,
+.studio-shell .cb-btn:not(.cb-soon):active {
+	transform: translate3d(0, 0, 0) scale(var(--motion-press-scale));
+	box-shadow: var(--motion-shadow-active);
+	transition-duration: var(--motion-duration-instant);
+}
+
+/* Child-layer micro motion: the preview feels richer because icons/avatars
+   move independently from their parent surface instead of only changing color. */
+.studio-shell
+	button:not(:disabled):not([aria-disabled="true"]):not(.no-motion-lift)
+	> svg,
+.studio-shell
+	[role="button"]:not([aria-disabled="true"]):not(.no-motion-lift)
+	> svg,
+.studio-shell .page-rail-icon-btn svg,
+.studio-shell .tb-icon-btn svg,
+.studio-shell .mode-tab svg,
+.studio-shell .tab svg,
+.studio-shell .page-gallery-tile-ico,
+.studio-shell .page-module-tile-icon,
+.studio-shell .chat-agent-letter-avatar,
+.studio-shell .chat-agent-avatar,
+.studio-shell .agent-avatar__frame,
+.studio-shell .agent-avatar--art,
+.studio-shell .agent-avatar,
+.studio-shell .cp-agent-avatar {
+	will-change: transform;
+	transform-origin: center;
+	transition: transform var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.studio-shell
+	button:not(:disabled):not([aria-disabled="true"]):not(.no-motion-lift):hover
+	> svg,
+.studio-shell
+	[role="button"]:not([aria-disabled="true"]):not(.no-motion-lift):hover
+	> svg,
+.studio-shell .page-rail-icon-btn:hover svg,
+.studio-shell .tb-icon-btn:hover svg,
+.studio-shell .mode-tab:hover svg,
+.studio-shell .tab:hover svg,
+.studio-shell .page-gallery-tile:hover .page-gallery-tile-ico,
+.studio-shell .page-module-tile:hover .page-module-tile-icon,
+.studio-shell .chat-agent-strip-btn:hover .chat-agent-letter-avatar,
+.studio-shell .chat-agent-strip-btn:hover .chat-agent-avatar,
+.studio-shell .chat-agent-strip-btn:hover .agent-avatar__frame,
+.studio-shell .chat-popover-item:hover .agent-avatar--art,
+.studio-shell .agent-card:hover .agent-avatar,
+.studio-shell .cp-agent-bar:hover .cp-agent-avatar {
+	transform: translate3d(0, -0.5px, 0) scale(var(--motion-hover-icon-scale))
+		rotate(var(--motion-hover-icon-rotate));
+}
+
+/* Row-style interactions: dropdown rows / list rows should glide sideways,
+   not float like cards. Loaded after the generic button rule to override it. */
+.motion-row,
+.studio-shell .tb-game-pick,
+.studio-shell .tb-new-item,
+.studio-shell .tb-game-row.reset,
+.studio-shell .dropdown-item,
+.studio-shell .chat-popover-item,
+.studio-shell .agent-card,
+.studio-shell .file-row,
+.studio-shell .bus-tool-family,
+.studio-shell .bus-tool-open,
+.studio-shell .settings-nav-item,
+.studio-shell .settings-section button,
+.studio-shell .ap-h-mode-tab {
+	will-change: transform, background, border-color, color, box-shadow;
+	transition:
+		transform var(--motion-duration-base) var(--motion-ease-out),
+		background var(--motion-duration-base) var(--motion-ease-out),
+		border-color var(--motion-duration-base) var(--motion-ease-out),
+		color var(--motion-duration-fast) var(--motion-ease-out),
+		box-shadow var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.motion-row:hover,
+.studio-shell .tb-game-pick:hover,
+.studio-shell .tb-new-item:hover,
+.studio-shell .tb-game-row.reset:hover,
+.studio-shell .dropdown-item:hover,
+.studio-shell .chat-popover-item:hover,
+.studio-shell .agent-card:hover,
+.studio-shell .file-row:hover,
+.studio-shell .bus-tool-family:hover,
+.studio-shell .bus-tool-open:hover,
+.studio-shell .settings-nav-item:hover,
+.studio-shell .settings-section button:hover,
+.studio-shell .ap-h-mode-tab:hover {
+	transform: translate3d(var(--motion-row-x), 0, 0);
+	box-shadow:
+		inset 2px 0 0 color-mix(in srgb, var(--primary) 40%, transparent),
+		0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.motion-row:active,
+.studio-shell .tb-game-pick:active,
+.studio-shell .tb-new-item:active,
+.studio-shell .tb-game-row.reset:active,
+.studio-shell .dropdown-item:active,
+.studio-shell .chat-popover-item:active,
+.studio-shell .agent-card:active,
+.studio-shell .file-row:active,
+.studio-shell .bus-tool-family:active,
+.studio-shell .bus-tool-open:active,
+.studio-shell .settings-nav-item:active,
+.studio-shell .settings-section button:active,
+.studio-shell .ap-h-mode-tab:active {
+	transform: translate3d(1px, 0, 0) scale(var(--motion-press-scale));
+	box-shadow: var(--motion-shadow-active);
+	transition-duration: var(--motion-duration-instant);
+}
+
+.motion-panel-in {
+	animation: motion-panel-in var(--motion-duration-smooth)
+		var(--motion-ease-out) both;
+}
+
+.motion-dropdown-in {
+	transform-origin: top left;
+	animation: motion-dropdown-in var(--motion-duration-base)
+		var(--motion-ease-out) both;
+}
+
+.studio-shell .tb-game-dropdown,
+.studio-shell .tb-new-dropdown,
+.studio-shell .chat-popover,
+.studio-shell .dropdown-menu,
+.studio-shell [role="menu"],
+.studio-shell [data-radix-popper-content-wrapper] {
+	transform-origin: top left;
+	animation: motion-dropdown-in var(--motion-duration-base)
+		var(--motion-ease-out) both;
+}
+
+.motion-fade-in {
+	animation: motion-fade-in var(--motion-duration-base) var(--motion-ease-out)
+		both;
+}
+
+.motion-flash {
+	animation: motion-flash var(--motion-duration-flash) var(--motion-ease-out);
+}
+
+.motion-pulse {
+	animation: motion-pulse var(--motion-duration-pulse) ease-in-out infinite;
+}
+
+.motion-page-in,
+.studio-shell .preview-mode,
+.studio-shell .page-gallery,
+.studio-shell .ws-active-content,
+.studio-shell .page-center,
+.studio-shell .extension-page-host {
+	animation: motion-page-in var(--motion-duration-panel) var(--motion-ease-out)
+		both;
+}
+
+.motion-page-switch-in {
+	animation: motion-page-switch-in var(--motion-duration-switch)
+		var(--motion-ease-out) both;
+}
+
+.motion-stagger > *,
+.studio-shell .page-gallery-grid > *,
+.studio-shell .page-module-strip > *,
+.studio-shell .chat-agent-strip > *,
+.studio-shell .tb-game-dropdown > *,
+.studio-shell .tb-new-dropdown > *,
+.studio-shell .cp-thread > .msg-block {
+	animation: motion-content-item-in var(--motion-duration-switch-item)
+		var(--motion-ease-out) both;
+}
+
+.studio-shell .reveal-stagger > * {
+	animation: reveal-up 0.55s var(--motion-ease-out) backwards;
+}
+
+.studio-shell .agent-list.reveal-stagger > .agent-card {
+	animation-delay: calc(35ms * var(--i, 0));
+}
+
+.studio-shell .rail-panel {
+	animation: panel-in 0.28s var(--motion-ease-out) both;
+}
+
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(1) {
+	animation-delay: 20ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(2) {
+	animation-delay: 40ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(3) {
+	animation-delay: 60ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(4) {
+	animation-delay: 80ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(5) {
+	animation-delay: 100ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(6) {
+	animation-delay: 120ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(7) {
+	animation-delay: 140ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(8) {
+	animation-delay: 160ms;
+}
+.studio-shell .file-tree.reveal-stagger > .fp-row:nth-of-type(n + 9) {
+	animation-delay: 180ms;
+}
+
+.motion-stagger > *:nth-child(1),
+.studio-shell .page-gallery-grid > *:nth-child(1),
+.studio-shell .page-module-strip > *:nth-child(1),
+.studio-shell .chat-agent-strip > *:nth-child(1),
+.studio-shell .tb-game-dropdown > *:nth-child(1),
+.studio-shell .tb-new-dropdown > *:nth-child(1),
+.studio-shell .cp-thread > .msg-block:nth-child(1) {
+	animation-delay: 0ms;
+}
+
+.motion-stagger > *:nth-child(2),
+.studio-shell .page-gallery-grid > *:nth-child(2),
+.studio-shell .page-module-strip > *:nth-child(2),
+.studio-shell .chat-agent-strip > *:nth-child(2),
+.studio-shell .tb-game-dropdown > *:nth-child(2),
+.studio-shell .tb-new-dropdown > *:nth-child(2),
+.studio-shell .cp-thread > .msg-block:nth-child(2) {
+	animation-delay: calc(var(--motion-stagger-step) * 1);
+}
+
+.motion-stagger > *:nth-child(3),
+.studio-shell .page-gallery-grid > *:nth-child(3),
+.studio-shell .page-module-strip > *:nth-child(3),
+.studio-shell .chat-agent-strip > *:nth-child(3),
+.studio-shell .tb-game-dropdown > *:nth-child(3),
+.studio-shell .tb-new-dropdown > *:nth-child(3),
+.studio-shell .cp-thread > .msg-block:nth-child(3) {
+	animation-delay: calc(var(--motion-stagger-step) * 2);
+}
+
+.motion-stagger > *:nth-child(4),
+.studio-shell .page-gallery-grid > *:nth-child(4),
+.studio-shell .page-module-strip > *:nth-child(4),
+.studio-shell .chat-agent-strip > *:nth-child(4),
+.studio-shell .tb-game-dropdown > *:nth-child(4),
+.studio-shell .tb-new-dropdown > *:nth-child(4),
+.studio-shell .cp-thread > .msg-block:nth-child(4) {
+	animation-delay: calc(var(--motion-stagger-step) * 3);
+}
+
+.motion-stagger > *:nth-child(5),
+.studio-shell .page-gallery-grid > *:nth-child(5),
+.studio-shell .page-module-strip > *:nth-child(5),
+.studio-shell .chat-agent-strip > *:nth-child(5),
+.studio-shell .tb-game-dropdown > *:nth-child(5),
+.studio-shell .tb-new-dropdown > *:nth-child(5),
+.studio-shell .cp-thread > .msg-block:nth-child(5) {
+	animation-delay: calc(var(--motion-stagger-step) * 4);
+}
+
+.motion-stagger > *:nth-child(6),
+.studio-shell .page-gallery-grid > *:nth-child(6),
+.studio-shell .page-module-strip > *:nth-child(6),
+.studio-shell .chat-agent-strip > *:nth-child(6),
+.studio-shell .tb-game-dropdown > *:nth-child(6),
+.studio-shell .tb-new-dropdown > *:nth-child(6),
+.studio-shell .cp-thread > .msg-block:nth-child(6) {
+	animation-delay: calc(var(--motion-stagger-step) * 5);
+}
+
+.motion-stagger > *:nth-child(7),
+.studio-shell .page-gallery-grid > *:nth-child(7),
+.studio-shell .page-module-strip > *:nth-child(7),
+.studio-shell .chat-agent-strip > *:nth-child(7),
+.studio-shell .tb-game-dropdown > *:nth-child(7),
+.studio-shell .tb-new-dropdown > *:nth-child(7),
+.studio-shell .cp-thread > .msg-block:nth-child(7) {
+	animation-delay: calc(var(--motion-stagger-step) * 6);
+}
+
+.motion-stagger > *:nth-child(8),
+.studio-shell .page-gallery-grid > *:nth-child(8),
+.studio-shell .page-module-strip > *:nth-child(8),
+.studio-shell .chat-agent-strip > *:nth-child(8),
+.studio-shell .tb-game-dropdown > *:nth-child(8),
+.studio-shell .tb-new-dropdown > *:nth-child(8),
+.studio-shell .cp-thread > .msg-block:nth-child(8) {
+	animation-delay: calc(var(--motion-stagger-step) * 7);
+}
+
+.motion-stagger > *:nth-child(n + 9),
+.studio-shell .page-gallery-grid > *:nth-child(n + 9),
+.studio-shell .page-module-strip > *:nth-child(n + 9),
+.studio-shell .chat-agent-strip > *:nth-child(n + 9),
+.studio-shell .tb-game-dropdown > *:nth-child(n + 9),
+.studio-shell .tb-new-dropdown > *:nth-child(n + 9),
+.studio-shell .cp-thread > .msg-block:nth-child(n + 9) {
+	animation-delay: calc(var(--motion-stagger-step) * 8);
+}
+
+@keyframes motion-panel-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, var(--motion-panel-y), 0)
+			scale(var(--motion-panel-scale));
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes motion-page-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 4px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes motion-page-switch-in {
+	from {
+		opacity: var(--motion-page-enter-opacity);
+		transform: translate3d(0, 2px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes motion-list-item-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, var(--motion-list-y), 0)
+			scale(var(--motion-list-scale));
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes motion-content-item-in {
+	from {
+		opacity: var(--motion-list-enter-opacity);
+		transform: translate3d(0, var(--motion-list-y), 0)
+			scale(var(--motion-list-scale));
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes reveal-up {
+	from {
+		opacity: 0.84;
+		transform: translate3d(0, 4px, 0) scale(0.992);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes panel-in {
+	from {
+		opacity: 0.92;
+		transform: translate3d(-2px, 0, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes motion-dropdown-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -4px, 0) scale(0.992);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+	}
+}
+
+@keyframes motion-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes motion-flash {
+	0% {
+		box-shadow: 0 0 0 0 currentColor;
+		opacity: 1;
+	}
+	40% {
+		box-shadow: none;
+		opacity: 1;
+	}
+	100% {
+		box-shadow: 0 0 0 0 currentColor;
+		opacity: 1;
+	}
+}
+
+@keyframes motion-pulse {
+	0%,
+	100% {
+		opacity: 0.72;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.08);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 1ms !important;
+	}
+
+	.motion-page-in,
+	.motion-page-switch-in,
+	.motion-stagger > *,
+	.studio-shell .reveal-stagger > *,
+	.studio-shell .rail-panel,
+	.studio-shell .preview-mode,
+	.studio-shell .page-gallery,
+	.studio-shell .page-page-surface,
+	.studio-shell .ws-active-content,
+	.studio-shell .page-center,
+	.studio-shell .extension-page-host,
+	.studio-shell .page-gallery-grid > *,
+	.studio-shell .page-module-strip > *,
+	.studio-shell .chat-agent-strip > *,
+	.studio-shell .tb-game-dropdown > *,
+	.studio-shell .tb-new-dropdown > *,
+	.studio-shell .cp-thread > .msg-block {
+		animation: none !important;
+		filter: none !important;
+		transform: none !important;
+	}
+
+	.motion-pressable:hover,
+	.motion-pressable:active,
+	.pressable:hover,
+	.pressable:active,
+	.motion-row:hover,
+	.motion-row:active,
+	.studio-shell
+		button:not(:disabled):not([aria-disabled="true"]):not(.cb-soon):hover,
+	.studio-shell
+		button:not(:disabled):not([aria-disabled="true"]):not(.cb-soon):active,
+	.studio-shell [role="button"]:not([aria-disabled="true"]):hover,
+	.studio-shell [role="button"]:not([aria-disabled="true"]):active,
+	.studio-shell .mode-tab:hover,
+	.studio-shell .mode-tab:active,
+	.studio-shell .tb-icon-btn:hover,
+	.studio-shell .tb-icon-btn:active,
+	.studio-shell .tb-game-btn:hover,
+	.studio-shell .tb-game-btn:active,
+	.studio-shell .tb-new-btn:hover,
+	.studio-shell .tb-new-btn:active,
+	.studio-shell .tb-publish-btn:hover,
+	.studio-shell .tb-publish-btn:active,
+	.studio-shell .page-gallery-tile:hover,
+	.studio-shell .page-gallery-tile:active,
+	.studio-shell .page-rail-icon-btn:hover,
+	.studio-shell .page-rail-icon-btn:active,
+	.studio-shell .page-module-tile:hover,
+	.studio-shell .page-module-tile:active,
+	.studio-shell .chat-agent-strip-btn:hover,
+	.studio-shell .chat-agent-strip-btn:active,
+	.studio-shell .tab:hover,
+	.studio-shell .tab:active,
+	.studio-shell .tab-add:hover,
+	.studio-shell .tab-add:active,
+	.studio-shell .sb-chip.is-link:hover,
+	.studio-shell .sb-chip.is-link:active,
+	.studio-shell .tb-modal-btn:hover,
+	.studio-shell .tb-modal-btn:active,
+	.studio-shell .tb-game-pick:hover,
+	.studio-shell .tb-game-pick:active,
+	.studio-shell .tb-new-item:hover,
+	.studio-shell .tb-new-item:active,
+	.studio-shell .tb-game-row.reset:hover,
+	.studio-shell .tb-game-row.reset:active,
+	.studio-shell .dropdown-item:hover,
+	.studio-shell .dropdown-item:active,
+	.studio-shell .chat-popover-item:hover,
+	.studio-shell .chat-popover-item:active,
+	.studio-shell .agent-card:hover,
+	.studio-shell .agent-card:active,
+	.studio-shell .file-row:hover,
+	.studio-shell .file-row:active,
+	.studio-shell .bus-tool-family:hover,
+	.studio-shell .bus-tool-family:active,
+	.studio-shell .bus-tool-open:hover,
+	.studio-shell .bus-tool-open:active,
+	.studio-shell .settings-nav-item:hover,
+	.studio-shell .settings-nav-item:active,
+	.studio-shell .settings-section button:hover,
+	.studio-shell .settings-section button:active,
+	.studio-shell .ap-h-mode-tab:hover,
+	.studio-shell .ap-h-mode-tab:active,
+	.studio-shell .cb-btn:not(.cb-soon):hover,
+	.studio-shell .cb-btn:not(.cb-soon):active {
+		transform: none !important;
+	}
+}

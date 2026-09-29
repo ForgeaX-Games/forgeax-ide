@@ -1,0 +1,1947 @@
+{
+	"common": {
+		"ok": "OK",
+		"cancel": "Cancel",
+		"close": "Close",
+		"save": "Save",
+		"reset": "Reset",
+		"delete": "Delete",
+		"confirm": "Confirm",
+		"loading": "Loading…",
+		"error": "Error",
+		"retry": "Retry",
+		"today": "Today",
+		"yesterday": "Yesterday"
+	},
+	"statusBar": {
+		"diagnostics": {
+			"title": "Diagnostics",
+			"tooltip": "Diagnostics · device and runtime status",
+			"checking": "Checking…",
+			"webgpuUnavailable": "WebGPU unavailable",
+			"unknownDevice": "Unknown device",
+			"cores": "cores",
+			"device": "Device",
+			"memory": "Memory",
+			"unavailable": "Unavailable",
+			"engine": "Engine",
+			"processMemory": "Process memory",
+			"uptime": "Uptime",
+			"wsConnections": "WS connections",
+			"project": "Project",
+			"scene": "Current scene",
+			"assets": "Assets"
+		}
+	},
+	"onboarding": {
+		"step": {
+			"welcome": "Welcome · Language · Connect",
+			"project": "Choose a game",
+			"home": "Enter home"
+		},
+		"welcome": {
+			"title": "Welcome to Forgeax Studio!",
+			"lead": "Just tell Forge \"make a game about X\" — it plans, writes the code, and shows your game running live.",
+			"language": "Language"
+		},
+		"connect": {
+			"title": "Connect a model",
+			"hint": "Pick one way to connect — you can change it later in Settings.",
+			"keyTitle": "Use an API Key",
+			"keySub": "Any OpenAI-compatible endpoint (official / OpenRouter / private proxy).",
+			"cliTitle": "Use a local CLI",
+			"cliSub": "Connect a local claude-code / codex / cursor-agent.",
+			"cliStatus": {
+				"loading": "checking…",
+				"ok": "connectable",
+				"down": "unavailable",
+				"unknown": "not detected"
+			}
+		},
+		"collapse": "Collapse",
+		"connected": {
+			"key": "API Key",
+			"cli": "Local CLI · {{cli}}"
+		},
+		"check": {
+			"checking": "Checking connection…",
+			"ok": "Connected: {{list}}. Continuing shortly…",
+			"fail": "Connection failed. Check the connection method you configured.",
+			"failEmpty": "Please enter Base URL and API Key.",
+			"failNeedSelect": "Please choose a connection method (API Key or local CLI).",
+			"failLive": "API connectivity test failed. Please check your base URL or API key.",
+			"failCli": "Connection failed. Is local CLI · {{cli}} installed and running? Install guide:"
+		},
+		"next": "Next",
+		"nextCountdown": "Next ({{n}})",
+		"back": "Back",
+		"skip": "Skip setup",
+		"project": {
+			"title": "Choose your game",
+			"name": "Game name",
+			"namePlaceholder": "Optional; leave blank for untitled-1",
+			"nameRequired": "Enter a project name (≥1 char, lowercase/digits/hyphens).",
+			"willCreate": "Will create game: {{name}}",
+			"busy": {
+				"new": "Creating your project…",
+				"template": "Copying the template into your project… this can take a few seconds",
+				"open": "Opening the directory…"
+			},
+			"newTitle": "New empty project",
+			"newDesc": "Create an empty game from the default template.",
+			"newCta": "Create",
+			"existingTitle": "Open an existing project",
+			"existingDesc": "{{count}} game(s) already exist — pick one to enter directly.",
+			"existingOpen": "Open",
+			"openTitle": "Open a directory",
+			"openDesc": "Use any folder as a game directory. Empty folders are auto-initialized.",
+			"openCta": "Choose directory",
+			"errNotGame": "That folder is not a game and is not empty. Pick an empty folder (auto-initialized) or one that already has forge.json / main.ts.",
+			"sampleTitle": "From a template",
+			"sampleDesc": "Copy a built-in game as a new game.",
+			"sampleCta": "Choose template",
+			"select": "Select",
+			"footer": "Any option creates or opens a game and enters the home screen."
+		},
+		"template": {
+			"title": "Pick a built-in template",
+			"loading": "Loading templates…",
+			"empty": "No built-in templates available.",
+			"picked": "Picked",
+			"cancel": "Cancel",
+			"confirm": "Confirm"
+		},
+		"tour": {
+			"footer": {
+				"anchor": "Status Bar · Content Browser & Info",
+				"body": "The status bar at the very bottom hosts collapsed tool panels: open the 'Content Browser' to manage, search, and import your files, scenes, and art assets — your resource hub; open 'Info' to view live logs from play, edit, and the engine. They stay tucked away here and expand upward whenever you need them."
+			},
+			"preview": {
+				"anchor": "Viewport",
+				"body": "The live game view. Every time the AI changes code, this hot-reloads in seconds so you can play and inspect the result right away."
+			},
+			"hierarchy": {
+				"anchor": "Scene Outline · Properties",
+				"body": "The upper 'Scene Outline' manages every object in the scene like a layer tree (visibility, lock, hierarchy); select one and the 'Properties' panel below lets you tweak its transform, components, and parameters."
+			},
+			"topbar": {
+				"anchor": "Top Bar & Publish",
+				"body": "Project-level actions — File, Edit, Window, Build, Select, Help — live in the top bar; the 'Publish' button on the right packages and ships your finished game in one click."
+			},
+			"chat": {
+				"anchor": "★ Start building here",
+				"body": "This is where you collaborate with the AI team. In the input box at the bottom, describe the game you want in one sentence (e.g. 'make a top-down survivor game'), press Enter, and Forge will lead the agents to build it for you."
+			},
+			"prev": "Prev",
+			"skip": "Skip",
+			"next": "Next",
+			"done": "Done"
+		},
+		"nudge": {
+			"title": "Send your first message",
+			"body": "Describe the game you want to make in the chat and watch it come alive in the preview.",
+			"gotIt": "Got it",
+			"connectTitle": "Connect a model to send",
+			"connectSub": "Your message is saved. Pick a source and we'll send it right after you connect.",
+			"connectKey": "Add an API key",
+			"connectCli": "Use a local CLI",
+			"connectCancel": "Not now"
+		}
+	},
+	"lang": {
+		"auto": "Auto",
+		"switcherTitle": "Agent reply language",
+		"followInput": "Follow my input",
+		"followInputDesc": "The agent replies in the language you type in."
+	},
+	"settings": {
+		"title": "Settings",
+		"subtitle": "configure forgeax · extensions · keys · account",
+		"providers": {
+			"hint": "Connect a model source: a LiteLLM proxy or a local CLI.",
+			"activeBanner": "Currently using: {{source}}",
+			"setActive": "Set as active",
+			"inUse": "In use",
+			"switched": "Switched model source: {{source}}",
+			"native": {
+				"title": "ForgeaX Kernel (native)",
+				"hint": "The built-in ForgeaX kernel — the default, flagship path. Runs in-process and resolves whatever model credential you configure below (a LiteLLM proxy, or a direct ANTHROPIC / OPENAI / GEMINI key).",
+				"badge": "Native",
+				"useReason": "Configure a model credential first — a LiteLLM proxy, or an ANTHROPIC / OPENAI / GEMINI key."
+			},
+			"api": {
+				"title": "LiteLLM Proxy",
+				"hint": "Point at your LiteLLM proxy: set Base URL + Key. Both the model catalog and the native ForgeaX kernel route through it (the key is mirrored to ANTHROPIC_* so forgeax-core speaks to the proxy)."
+			},
+			"cli": {
+				"title": "Local CLI",
+				"hint": "Detects installed claude-code / codex / cursor-agent / codebuddy / kimi-code / DeepSeek Harness and can run a Test.",
+				"healthy": "Healthy",
+				"unavailable": "Unavailable",
+				"useReason": "This CLI is unavailable and cannot be set as active"
+			},
+			"test": "Test"
+		},
+		"groups": {
+			"ai": "AI",
+			"system": "System",
+			"about": "About",
+			"other": "Other"
+		},
+		"nav": {
+			"providers": "Models",
+			"agents": "Agents",
+			"about": "About"
+		},
+		"navAria": "Settings section navigation",
+		"agents": {
+			"hint": "You only chat with ForgeaX. Main-agent switching is removed; all agents stay enabled by default.",
+			"missingFromCatalog": "Missing from catalog (/api/agents did not return this id)",
+			"incompleteCatalogEntry": "Catalog entry is missing naming.title / name",
+			"rosterGaps": "Roster layout references agents absent from the catalog: {{ids}}",
+			"detail": {
+				"back": "Back",
+				"tabPersona": "Persona",
+				"tabMemory": "Memory",
+				"tabSkills": "Skill",
+				"tabTools": "Tool",
+				"save": "Save",
+				"discard": "Discard changes",
+				"saved": "Saved",
+				"addMemory": "+ Add memory",
+				"addSkill": "+ Add Skill",
+				"addTool": "+ Add Tool",
+				"file": "File name",
+				"skillId": "Skill id",
+				"toolId": "Tool id",
+				"desc": "Description",
+				"body": "Body",
+				"emptyMemory": "No long-term memory yet.",
+				"emptySkills": "No skills yet.",
+				"emptyTools": "No tools yet.",
+				"remove": "Remove"
+			}
+		},
+		"closeEsc": "Close · Esc",
+		"closeAria": "close settings",
+		"noSections": "No sections registered.",
+		"noSectionsHint1": "No registered settings sections.",
+		"noSectionsHint2": "useSettingsSection({ id, label, node }) — mount one anywhere to add it.",
+		"language": {
+			"label": "Language",
+			"description": "Interface language. Controls all UI chrome, agent catalog labels, and the language agents reply in.",
+			"selectAria": "Select interface language"
+		},
+		"memory": {
+			"label": "Memory",
+			"toggle": "Memory",
+			"masterLabel": "Automatic memory extraction",
+			"masterHint": "Turn this off to stop memory extraction for every kernel. When enabled, each kernel follows its setting below.",
+			"byKernel": "By kernel",
+			"noKernels": "No registered kernels",
+			"lowestTokenUsage": "Lowest token usage",
+			"additionalTokenCost": "Uses a small number of additional tokens",
+			"additionalTokenHint": "{{kernel}} memory extraction uses a small number of additional tokens. Turn it off here if you do not need it."
+		},
+		"kernelPermissions": {
+			"title": "Permission gear per kernel",
+			"hint": "Every kernel starts in \"{{mode}}\" by default. This only sets the baseline; permissions.deny rules and hook gates still apply.",
+			"followDefault": "Follow default ({{mode}})",
+			"singleGearHint": "{{kernel}} supports only this gear — that is its real headless capability. Narrow it with deny rules or hooks instead.",
+			"denyStillApplies": "Even at full access, deny rules, protected paths and PreToolUse hooks still block operations.",
+			"mode": {
+				"gated": "Ask each time",
+				"autoEdits": "Auto edits",
+				"planning": "Read-only planning",
+				"unrestricted": "Full access (dangerous)"
+			},
+			"riskyGearHint": "Below full access, {{kernel}} may hang waiting for approval on turns carrying project MCP — a real limitation of that kernel; we no longer silently raise the gear for you."
+		},
+		"env": {
+			"saved": "Wrote {{count}} variable(s) to .env (takes effect after restarting the stack)"
+		},
+		"refresh": "Refresh",
+		"readonly": "Read-only",
+		"readFailed": "Failed to load: {{error}}",
+		"apiKeys": {
+			"llmHint": "forgeax/.env; takes effect after restarting the stack",
+			"anthropicPlaceholder": "sk-ant-... or Azure key",
+			"multimodalTitle": "Multimodal Keys",
+			"multimodalHint": "image-gen / video-gen / multimodal proxy · used by extensions like character",
+			"arkImageLabel": "ARK_IMAGE_KEY (Seedream illustration)",
+			"arkVideoLabel": "ARK_VIDEO_KEY (Seedance video)"
+		},
+		"models": {
+			"title": "Model",
+			"hint": "Change FORGEAX_MODEL (takes effect after restarting the stack)",
+			"current": "Current",
+			"helpPrefix": "All LLM credentials are read from",
+			"helpAdapter": "; the adapter is auto-selected by model id pattern",
+			"helpProxyPrefix": "When",
+			"helpProxySuffix": "is set, everything goes through the proxy."
+		},
+		"modelLab": {
+			"hint": "One-off model testing · tune temperature / top_p / max_tokens · via /api/llm/test → lib/llm-gateway → LiteLLM proxy",
+			"systemPromptOptional": "System prompt (optional)",
+			"modelsLabel": "Models — select models to test in parallel ({{count}} selected)",
+			"running": "Running… ({{count}} rows)",
+			"cancelAll": "Cancel all",
+			"hideUnavailable": "Hide unavailable",
+			"exportCsvTitle": "Export current results as CSV (also copied to clipboard)",
+			"streamNote": "/api/llm/test-stream (SSE · TTFT taken from first chunk)",
+			"emptyHint": "Select models, then click \"Run all\".",
+			"allFiltered": "All rows filtered out by \"Hide unavailable\"."
+		},
+		"cliProviders": {
+			"hint": "Multiple CLI backends — agents are routed by marketplace/manifest.json#agents[].provider",
+			"none": "No registered providers — check the server startup logs.",
+			"healthy": "Healthy ✓",
+			"unavailable": "Unavailable ✗",
+			"testing": "Testing…",
+			"snapshotAge": "Snapshot · {{seconds}}s ago"
+		},
+		"workspace": {
+			"resetSessionsTitle": "Reset sessions",
+			"resetSessionsHint": "Clear team/sessions/* — keeps agent config / marketplace / games",
+			"resetSessionsBtn": "Clear all session history",
+			"resetSessionsConfirm": "Clear all sessions (including sub-agent history)?",
+			"resetSessionsDone": "Deleted {{count}} session directories, created a new empty session",
+			"resetSessionsTimeout": "Resetting sessions timed out (30s)",
+			"resetGamesTitle": "Reset GAMES",
+			"resetGamesHint": "Delete all user-created games (real directories under .forgeax/games/) — keeps the official examples in packages/games",
+			"resetGamesBtn": "Delete all games I created",
+			"resetGamesHelp": "Only deletes the real directories under .forgeax/games/ (games you created); symlinked official examples (cow-survivor / fps etc.) are kept as-is. This cannot be undone.",
+			"resetGamesConfirm": "Delete all games you created? Official examples (cow-survivor/fps etc.) are kept.\n\nThis deletes the real directories under .forgeax/games/ (games you created); symlinked official examples are untouched. This cannot be undone.",
+			"resetGamesDone": "Deleted {{count}} user games",
+			"resetGamesDoneSwitched": "Deleted {{count}} user games, switched to {{slug}}",
+			"resetGamesTimeout": "Resetting GAMES timed out (30s)",
+			"pathsTitle": "Paths / ports"
+		},
+		"account": {
+			"title": "Account",
+			"hint": "Cloud sync / subscription / sharing settings (planned)",
+			"notLoggedIn": "Not logged in",
+			"intro": "The cloud account system is still being planned. The local forgeax-studio works fully offline; cloud features will unlock later:",
+			"feature1": "Multi-device sync of games/agents",
+			"feature2": "Cloud model gateway · shared LLM key pool",
+			"feature3": "Subscription · token quota"
+		},
+		"about": {
+			"hint": "Version · paths · links",
+			"productName": "ForgeaX Studio",
+			"connecting": "connecting…",
+			"repoLabel": "repo:",
+			"projectRoot": "project root:",
+			"envFile": "env file:",
+			"studioPorts": "studio:",
+			"studioPortsValue": "UI :{{ui}} · Server :{{server}} · Engine :{{engine}}",
+			"mainBranch": "main",
+			"pathsTitle": "Paths / ports",
+			"versionLabel": "version:",
+			"commitLabel": "commit:",
+			"versionSchemeLabel": "Versioning scheme",
+			"totalCommits": "total commits:",
+			"versionScheme": "Versioning scheme",
+			"versionSchemeDetail": "— 0 = pre-1.0 epoch · M.D = month.day of latest main commit · N = cumulative main commits.",
+			"versionSchemeSee": "See"
+		},
+		"changelog": {
+			"title": "Changelog",
+			"hint": "Version iteration log · sourced from CHANGELOG.md",
+			"empty": "CHANGELOG.md has no version sections yet."
+		},
+		"shortcuts": {
+			"title": "Keyboard shortcuts",
+			"hint": "Read-only · not customizable yet",
+			"platformAria": "Shortcut display platform",
+			"platformMac": "Mac",
+			"platformWin": "Win",
+			"introBlenderPrefix": "Blender-style",
+			"introBlenderSuffix": "combos — avoiding browser Ctrl+1/2/3 tab switching / Ctrl+J downloads / Ctrl+B bookmarks bar.",
+			"introImeSafe": "IME-safe",
+			"introImePrefix": ": composing state",
+			"introImeSuffix": "or keyCode 229 is auto-skipped; also doesn't fire while focused on input/textarea/editable elements (Esc / Ctrl+/ are exceptions).",
+			"introReadonlyPrefix": "Currently a",
+			"introReadonlySuffix": "display; customization will open up later.",
+			"groups": {
+				"layout": "Layout",
+				"mode": "Top mode",
+				"edit": "Edit",
+				"overlay": "Overlay",
+				"focus": "Focus",
+				"general": "General"
+			}
+		},
+		"usage": {
+			"title": "Usage",
+			"hint": "Aggregated from ledger hook:assistantMessage events · local sessions only",
+			"totalCalls": "total calls",
+			"inputTokens": "input tokens",
+			"outputTokens": "output tokens",
+			"sessions": "sessions",
+			"calls": "Calls",
+			"input": "Input",
+			"output": "Output",
+			"byModel": "By model",
+			"noData": "No usage data yet — the assistant hasn't returned any tokens.",
+			"byDay": "By day (UTC)",
+			"scanned": "Scanned {{events}} ledger events across {{sessions}} sessions."
+		},
+		"sections": {
+			"extensions": "Extensions",
+			"fxpackImport": ".fxpack import",
+			"forkRecord": "Fork & record",
+			"upload": "Upload",
+			"feedbackDelivery": "Feedback delivery"
+		},
+		"extensions": {
+			"colId": "ID",
+			"colName": "Name",
+			"colDesc": "Description",
+			"colVersion": "Version"
+		},
+		"upload": {
+			"title": "Upload",
+			"hint": "Upload this project's .forgeax creative content to a GitHub repo (same as the /upload chat command).",
+			"tokenPlaceholder": "Paste a GitHub token (classic or fine-grained, shared or personal)",
+			"tokenNotSetHint": "Built-in shared token · paste your own to override",
+			"resetTokenTitle": "Clear override and restore the built-in shared token",
+			"repoHelp": "Defaults to the shared repo; you can point it at any repo your token can write (e.g. under your own account). Branch defaults to main.",
+			"btnIdle": "Upload to GitHub",
+			"btnPlanning": "Checking…",
+			"btnPushing": "Uploading…",
+			"tokenHintPrefix": "Tip: a shared token is built in — click the button to upload. Want your own repo?",
+			"tokenHintLink": "Create a personal token ↗",
+			"tokenHintSuffix": "(repo scope is enough; the page is pre-filled), paste it into the token field above and Save to override the default.",
+			"planSummary": "Will compress {{count}} files ({{bytes}}) and upload as",
+			"planPath": "under {{namespace}}/data/<upload-time>/",
+			"skippedSymlinks": "Skipped {{count}} symlink dir(s) (sample games, not uploaded)",
+			"skippedLarge": "Skipped {{count}} oversized file(s)",
+			"secretBlocked": "⛔ Detected {{count}} suspected secret(s); upload blocked: {{samples}}",
+			"tokenMissingTitle": "⛔ Token not configured — three steps:",
+			"tokenMissingStep1Before": "1. Ask an admin for the shared token, or ",
+			"tokenMissingStep1Link": "create your own personal token ↗",
+			"tokenMissingStep1After": " (needs write access to the target repo)",
+			"tokenMissingStep2": "2. Paste into FORGEAX_UPLOAD_GITHUB_TOKEN above and click Save",
+			"tokenMissingStep3": "3. Come back and click \"Upload to GitHub\" again",
+			"empty": "Nothing to upload",
+			"confirm": "Confirm upload",
+			"cancel": "Cancel",
+			"skippedSame": "Content identical to the latest upload — no new version created",
+			"viewExisting": "View existing snapshot",
+			"uploaded": "Uploaded archive of {{count}} files ({{sourceBytes}} → {{archiveBytes}})",
+			"viewSnapshot": "View this snapshot",
+			"allVersions": "All versions",
+			"failed": "Upload failed: {{error}}",
+			"copyUrl": "Copy URL",
+			"copied": "Copied"
+		},
+		"feedbackDelivery": {
+			"title": "Feedback delivery",
+			"hint": "Configure diagnostic feedback archives and GitHub Issue delivery. Saving retries previously failed feedback automatically.",
+			"tokenPlaceholder": "Built-in organization token; paste a new token to override",
+			"resetTokenTitle": "Clear the override and restore the built-in organization token",
+			"modelPlaceholder": "Optional model used by forgeax-cli to organize feedback",
+			"help": ".forgeax diagnostics exclude credentials, caches, and oversized files, are redacted in a temporary copy, and must pass a secret scan before a tar.gz is uploaded to Forgeax-Data. The Issue is created in forgeax-issues."
+		},
+		"drawer": {
+			"relTimeJustNow": "just now",
+			"relTimeSecondsAgo": "{{seconds}}s ago",
+			"relTimeMinutesAgo": "{{minutes}}m ago",
+			"title": "System Settings",
+			"closeTitle": "Close (Esc)",
+			"apiKeysTitle": "API Keys (written to forgeax/.env)",
+			"apiKeysHint": "Takes effect after restarting the stack (FORGEAX_PROJECT_ROOT=forgeax bash run.sh)",
+			"anthropicKeyPlaceholder": "sk-ant-... or Azure Cognitive Services key",
+			"anthropicBaseUrlPlaceholder": "https://api.anthropic.com or Azure endpoint",
+			"openaiKeyLabel": "OPENAI_API_KEY (optional)",
+			"geminiKeyLabel": "GEMINI_API_KEY (optional)",
+			"modelTitle": "Model",
+			"modelHint": "Change FORGEAX_MODEL (takes effect after restarting the stack)",
+			"modelCurrent": "Current",
+			"modelHelpPrefix": "All LLM credentials are read from",
+			"modelHelpAdapter": "; the adapter is auto-selected by model id pattern.",
+			"modelHelpProxyPrefix": "When",
+			"modelHelpProxySuffix": "is set, everything goes through the proxy.",
+			"cliProvidersHint": "Multiple CLI backends — agents are routed by marketplace/manifest.json#agents[].provider",
+			"cliProvidersNone": "No registered providers — check the server startup logs.",
+			"providerHealthy": "Healthy ✓",
+			"providerUnavailable": "Unavailable ✗",
+			"providerTesting": "Testing…",
+			"snapshot": "Snapshot ·",
+			"resetSessionsTitle": "Reset sessions",
+			"resetSessionsHint": "Clear .forgeax/.../team/sessions/* — keeps agent config / marketplace / games",
+			"resetSessionsBtn": "Clear all session history",
+			"resetSessionsHelp": "For a clean restart when chat is stuck / state is confused; the next message creates a fresh main session.",
+			"resetSessionsConfirm": "Clear all sessions (including sub-agent history)?\n\nThis deletes the entire .forgeax/.../team/sessions/* directory.\nThe next chat will auto-create a new main agent session; agent config / marketplace / games are kept.",
+			"resetSessionsDone": "Deleted {{count}} session directories",
+			"aboutTitle": "About",
+			"aboutHint": "Paths + version",
+			"envNotSet": "Not set",
+			"savedMasked": "Saved {{masked}} · enter a new value to overwrite",
+			"hide": "Hide",
+			"show": "Show",
+			"noChanges": "No changes",
+			"enterNewKeyHint": "Enter a new key above, then save"
+		}
+	},
+	"bus": {
+		"title": "Bus Extension Overview",
+		"refresh": "Refresh",
+		"refreshTitle": "Re-fetch /api/extensions/list",
+		"mdFocusKind": "click to focus {{kind}} kind",
+		"healthOverview": "Health Overview",
+		"registered": "registered",
+		"mdSummaryLoading": "6 kind health loading…",
+		"mdClearFilter": "click to clear kind filter",
+		"filterByKind": "Filter by kind",
+		"kbdNavChips": "←→ / Home / End keyboard navigation",
+		"chipSolo": "Click: show only {{kind}} · {{count}}",
+		"chipHide": "Click: hide {{kind}}",
+		"chipShow": "Click: show {{kind}} again",
+		"chipToggleHint": "←→ toggle",
+		"searchPlaceholder": "Search by id / name (e.g. anim / character)…",
+		"reset": "Clear",
+		"resetTitle": "Clear kind filter + search",
+		"requestFailed": "Request failed: {{err}} · check whether /api/extensions/list is reachable",
+		"emptyNoExtensions": "Bus loaded no extensions — check the marketplace scan path",
+		"emptyNoMatch": "No match — check the search term or reset the filter",
+		"rowKbdTitle": "↑↓ / Home / End row keyboard navigation · Enter / Space to expand",
+		"rowKbdLabel": "Row keyboard navigation · {{n}} rows · Enter to expand",
+		"footnoteSource": "Source: ",
+		"footnoteExpanded": "expanded",
+		"footnoteBroken": "broken[] field not yet exposed by server (P3 work)",
+		"footnoteRowHint": "click row / ↑↓ switch row / Enter to expand details",
+		"kindTagFlashTitle": "Click: flash the {{kind}} pill in the left BUS KINDS list (P3.38 reverse-echo channel)",
+		"expand": "Expand",
+		"versionThSub": "0.0.x = manifest placeholder · 0.1+ = a real bumped version",
+		"rowTitleCollapse": "Click to collapse · ↑↓ switch row · Enter to collapse",
+		"rowTitleExpand": "Click to expand details · ↑↓ switch row · Enter to expand",
+		"verBumpedTitle": "manifest v{{ver}} bumped · the 0.0.x placeholder semantics have been bumped · this is a real version",
+		"copied": "Copied",
+		"manifestCopiedTitle": "✓ Path copied to clipboard",
+		"manifestCopyTitle": "Click to copy path to clipboard · paste into a terminal or editor to jump straight to forgeax-extension.json",
+		"detailKindSoloTitle": "Click to show only {{kind}} extensions · use the ✕ button in the top filter row to clear filtering",
+		"versionCopiedTitle": "✓ Version copied to clipboard",
+		"versionCopyTitle": "Click to copy version · paste into a changelog / shell / commit message",
+		"uiFrontendTitle": "entry.frontend · this extension's React panel source (relative to the extension dir) · dynamically imported by the Sidebar via PLUGIN_PANEL_LOADERS when the extension tab is opened",
+		"entryOpenPageTitle": "Open Page {{pageId}} · render {{path}}",
+		"backlinkAgent": "Highlight in Sidebar",
+		"backlinkAgentTitle": "Highlight the card matching {{id}} in the Sidebar AGENTS section",
+		"backlinkPage": "Open Page",
+		"backlinkPageTitle": "Open Page {{pageId}}",
+		"backlinkKind": "Flash BUS KINDS",
+		"backlinkKindTitle": "Flash the {{kind}} pill in the Sidebar BUS KINDS footer for 1.5s — peripheral confirmation of this extension's kind at the chrome edge",
+		"detailNoteBroken": "broken[] field not yet exposed by server — pending P3 work",
+		"tallyCliTitle": "This extension is registered as a cliProvider (1 = yes / 0 = no)",
+		"tallySkillTitle": "Number of skills this extension registers with the Bus (Bus.skills[])",
+		"tallyToolTitle": "Number of tools this extension registers with the Bus (Bus.tools[])",
+		"tallyEventTitle": "Number of event schemas this extension registers with the Bus (Bus.events[])",
+		"provTallyEmptyTitle": "This extension exposes no cliProvider/skill/tool/event to the Bus — usually a kind=extension pure-frontend extension (the panel runs on its own)",
+		"provTallyTitle": "This extension provides {{n}} provider entries to the Bus (cli+skill+tool+event total)",
+		"provTallyNote": "No provides · pure frontend / placeholder",
+		"provAiFlagTitle": "exposedToAI=true · directly callable by AI agents",
+		"kindDescExtension": "Extensions that contribute Pages or capabilities",
+		"kindDescAgent": "Personas summonable via sub-agent routing (cc-coder family, etc.)",
+		"kindDescCliProvider": "CLI runner adapters (claude-code / codex / cursor-agent / forgeax)",
+		"kindDescModelBinding": "text/multimodal channel vendor bindings (anthropic-text / openai, etc.)",
+		"kindDescSkill": "slash commands + personas (/make-game-design, etc.)",
+		"kindDescTool": "pure tools (balance:resim, etc.) — no UI / agent",
+		"kindDescUnknown": "(uncategorized kind)"
+	},
+	"composer": {
+		"cliButtonOverrideDown": "⚠ {{provider}} is currently unavailable — pick 'forgeax' or another healthy provider, or turns will error.",
+		"cliButtonForgeaxNative": "Provider — forgeax (native · sends messages directly to Session/EventBus)",
+		"queuedCount": "Queued {{count}}",
+		"queueSub": "Sent in order after the current reply finishes",
+		"clearQueueTitle": "Clear queue",
+		"clearQueue": "Clear",
+		"queueEditAria": "Edit this queued message",
+		"queueEditTitle": "Edit — pull back into the input box",
+		"queueSendNowAria": "Send this queued message now",
+		"queueSendNowStreamingTitle": "Send now — interrupt the current reply and handle this one first",
+		"queueSendNowTitle": "Send this now",
+		"queueRemoveAria": "Remove this queued message",
+		"queueRemoveTitle": "Remove",
+		"placeholderStreaming": "Reply in progress — you can keep typing; [Enter] queues it, sent in order after the current reply finishes",
+		"placeholderStreamingInterrupt": " · ⚡ interrupt and send now",
+		"placeholderOverrideDownSuffix": " ⚠ (unavailable)",
+		"imageUpload": "Attach any file — images and PDFs go straight to the model, other files are saved for the agent to read; paste or drag also works",
+		"fileTooLarge": "{{name}}: content too large — exceeds the {{limit}} limit",
+		"comingSoon": "Coming soon",
+		"mentionAgentTitle": "Choose a suggested expert ({{count}} available) — Forge may delegate when helpful",
+		"mentionSoon": "@ mention — coming soon",
+		"agentItemInBusTitle": "{{name}} · {{role}} · also on the bus host — select as an expert Forge may delegate to",
+		"agentItemTitle": "{{name}} · {{role}} — select as an expert Forge may delegate to",
+		"viewInBusAria": "View {{extension}} in Bus details",
+		"viewInBusTitle": "View {{extension}} in Bus details →",
+		"atFoot": "↑↓ choose an expert · ⏎ select · Esc close",
+		"summonChipClear": "Clear selected expert",
+		"summonChipTitle": "Suggested expert: {{name}} — Forge may delegate when helpful",
+		"busSkillsTitle": "Bus skills ({{count}}) — click to pick a trigger command and insert it into the input box",
+		"slashSoon": "Slash commands — coming soon",
+		"slashItemDescTitle": "{{name}} · {{extension}}\n{{desc}}\n— click to insert {{trigger}}",
+		"slashItemTitle": "{{name}} · {{extension}} — click to insert {{trigger}}",
+		"slashFoot": "↑↓ navigate · ⏎ insert trigger · → go to Bus details · Esc close",
+		"modelDisabledProvider": "Currently routing via the {{provider}} channel; that provider decides its own model. Switch to the forgeax or claude-code channel to edit agent.json::models.model",
+		"modelDisabledNoAgent": "No agent selected yet — cannot read agent.json",
+		"modelDisabledBooting": "forgeax session is still booting",
+		"modelTriggerTitle": "Current agent ({{agent}}) → agent.json::models.model",
+		"cliDescForgeax": "Native kernel · direct Session/EventBus (default)",
+		"cliDescClaudeCode": "Anthropic the reference agent CLI CLI",
+		"cliDescCodex": "OpenAI Codex CLI",
+		"cliDescCursor": "Cursor Agent CLI",
+		"cliDescCodebuddy": "a peer agent CLI Code CLI",
+		"cliDescKimiCode": "Moonshot Kimi Code CLI",
+		"cliDescDeepSeekHarness": "DeepSeek Harness CLI · model managed by its profile",
+		"cliBusPillTitle": "bus extension: {{extension}} · click to view in Bus details →",
+		"interruptTitle": "Interrupt the current reply and send now (steer)",
+		"queueSendTitle": "Queue send — runs in order after the current reply finishes ([Enter])",
+		"stopTitle": "Stop the current reply (does not affect queued messages)",
+		"sendNoSession": "Session is still loading — wait a second; if it stays stuck, check whether the server (bottom-right) is down",
+		"sendNoAgent": "No agent selected yet — wait for the AgentSwitcher list to load (usually <1s), or manually click an agent avatar above",
+		"send": "Send"
+	},
+	"reference": {
+		"send_to_chat": "Reference in Chat",
+		"file": "File",
+		"file_ref": "File reference",
+		"path": "Path",
+		"chip_hint": "Click chip to remove / hover for details",
+		"copy_file_name": "Copy file name",
+		"directory": "Directory",
+		"dir_ref": "Directory reference",
+		"dir_name": "Directory name",
+		"workshop_extension": "Workshop extension",
+		"workshop_extension_ref": "Workshop extension reference",
+		"current_game": "Current game",
+		"current_game_ref": "Current game reference",
+		"path_prefix": "Path prefix",
+		"console_log": "Console log",
+		"console_log_line": "Console log line",
+		"copy_log_line": "Copy log line",
+		"game_ref": "Game reference",
+		"copy_slug": "Copy slug",
+		"session_ref": "Session reference",
+		"copy_session_id": "Copy session id",
+		"chat_ref": "Chat reference",
+		"chat_message_ref": "Chat message reference",
+		"copy_message": "Copy message",
+		"user_message_ref": "User message reference",
+		"bus_extension": "Bus extension",
+		"bus_extension_ref": "Bus extension reference",
+		"copy_extension_id": "Copy extension id",
+		"scene_entity": "Scene entity",
+		"source": "Source",
+		"components": "Components",
+		"asset": "Asset",
+		"workspace": "Page",
+		"workspace_ref": "Page reference",
+		"workspace_context_hint": "Right-click to rename or delete this extension",
+		"component_property": "Component property"
+	},
+	"extension": {
+		"editorPlaceholder": "// Click a produced file under an Agents card on the left → its content shows here live.\n// e.g. Iori's card-roguelike_pillar.md / Suzu's *_design.md.",
+		"previewMarkdownTitle": "Preview (render markdown)",
+		"preview": "Preview",
+		"sourceEditableTitle": "Source (editable)",
+		"source": "Source",
+		"saveShortcutTitle": "Cmd/Ctrl+S to save",
+		"noUnsavedChanges": "No unsaved changes",
+		"saving": "Saving…",
+		"saveFailed": "Save failed",
+		"resizeBottomPanelTitle": "Drag to resize the bottom panel",
+		"openFailed": "Open failed",
+		"binaryNotPreviewable": "Binary file not previewable",
+		"downloadOriginal": "Download original file",
+		"model3dLoadFailed": "3D preview failed to load",
+		"loading3dViewer": "Loading 3D viewer…",
+		"clearConsole": "Clear console",
+		"clearNetwork": "Clear network",
+		"ledgerEmpty": "No activity yet — it appears here after Forge sends Iori/Suzu to set up pillars and write designs",
+		"lockedBy": "Being {{op}}ed by {{agent}}",
+		"editing": "Editing",
+		"consoleEmpty": "No console output yet — the game's console.log/warn/error shows here live",
+		"networkEmpty": "No network requests yet — the game's fetch / XHR / WebSocket shows here live",
+		"galleryTitle": "Page",
+		"loadingExtensionList": "Loading extension list…",
+		"gallerySub": "Pick an extension to open its Page",
+		"bumpedStatsSuffix": "bumped (manifest version is not a 0.0.x placeholder)",
+		"implementedEntryCount": "implemented entry count",
+		"positionDecidesOrder": "manifest extension.position decides the order",
+		"bumpedPastPlaceholder": "already bumped past the 0.0.x placeholder semantics",
+		"verTagBumped": "already bumped · in development (not a 0.0.x placeholder)",
+		"verTagPlaceholder": "placeholder semantic version · will bump when implemented",
+		"wipTagTitle": "experimental — manifest marks experimental:true · real implementation pending Phase 4+",
+		"toolsExposedToAi": "exposed to AI by this extension extension",
+		"agentsLoadFailed": "Failed to load agents",
+		"agentsTitle": "Agents · Team",
+		"agentsEmpty": "No agents yet — Forge dispatches team members automatically after you send a message",
+		"agentDisabledTitle": "disabled in Settings (not included in collaboration/dispatch)",
+		"agentDetailTitle": "click to open Agent detail (products / long-term memory / Skills)",
+		"disabledBadge": "Disabled",
+		"noProducedFiles": "No produced files yet",
+		"subagentsHint": "{n} sub-specialists below · talk to the lead (click to view Persona only)",
+		"skinGroupHint": "Affects chat tone only · click to switch skin · double-click to edit Persona",
+		"skinChipTitle": "click to switch · double-click to edit Persona",
+		"providerCodersHint": "{n} CLI drivers below · click to switch driver + open Persona editor"
+	},
+	"gameSwitcher": {
+		"activateFailedTitle": "Game switch not fully applied",
+		"activateFailedBody": "The game did not switch to {{slug}}; server authority remains {{activeSlug}} ({{message}}).",
+		"activatePartialBody": "The active game changed to {{slug}}, but the downstream runtime is not fully ready ({{message}}).",
+		"activateUnknownBody": "Could not confirm whether the game changed to {{slug}} ({{message}}). Inspect the current game before retrying.",
+		"deleteConfirm": "Delete games/{{slug}}/ ? This action cannot be undone.",
+		"deleteFailedTitle": "Delete failed",
+		"switchTooltip": "Switch game (each game = one game)",
+		"listTitle": "Open game",
+		"newGameTooltip": "Create a new game at .forgeax/games/<slug>/ (Iori/Suzu design + Forge writes code)",
+		"newGame": "New game",
+		"empty": "No games yet · click + above to create",
+		"switchToTooltip": "Switch to games/{{slug}}/",
+		"gameMeta": "Updated {{time}} ago",
+		"newSessionTooltip": "Create a session for {{slug}}",
+		"deleteTooltip": "Delete game",
+		"unpin": "Unpin — follow latest",
+		"slugError": "slug: 1-41 chars / lowercase ASCII / digits / hyphens",
+		"kickoffMessage": "Just created games/{{slug}}/, brief: {{brief}}. Please run the full pipeline: Iori → Suzu → you write the code.",
+		"modalTitle": "New game",
+		"slugLabel": "slug (game directory name)",
+		"nameLabel": "Display name (optional)",
+		"namePlaceholder": "Leave blank to use slug",
+		"templateLabel": "Template",
+		"templateLoading": "Loading templates…",
+		"templateEmpty": "No templates available; the default template will be used.",
+		"briefLabel": "brief (optional — leave one and Forge dispatches Iori immediately)",
+		"briefPlaceholder": "e.g. 2D card roguelike, 5-10 min per run, build a deck for satisfying blowout damage",
+		"creating": "Creating...",
+		"create": "Create"
+	},
+	"rewind": {
+		"confirmTitle": "Rewind to this message?",
+		"computingDiff": "Computing file diff…",
+		"noFileChanges": "No file changes after this — only the conversation will be reverted.",
+		"codeWillRevertPrefix": "Code will revert",
+		"codeWillRevertSuffix": "file(s)",
+		"binaryLargeNote": "(incl. {{count}} binary/large file(s))",
+		"revertCodeAndConversation": "Revert code and conversation",
+		"revertConversationOnly": "Revert conversation only",
+		"revertCodeOnly": "Revert code only",
+		"confirmHint": "You can restore with one click after rewinding; it locks in once you send a new message.",
+		"restoreFailed": "Restore failed",
+		"inlinePlaceholder": "Edit and press Enter to send · restart from here",
+		"resendFromHere": "Resend from here",
+		"redoCheckpoint": "Redo checkpoint",
+		"editAndSendFromHere": "Edit and send from here",
+		"cancelEdit": "Cancel edit",
+		"sendWillRevertTitle": "Sending will revert files?",
+		"revertAndSend": "Revert and send",
+		"revertedHere": "⟲ Reverted to here",
+		"revertedHereCodeOnly": "⟲ Reverted to here (code only)",
+		"redoCheckpointRestore": "Redo checkpoint · restore",
+		"keptDirtyFiles": "Kept {{count}} file(s) you edited manually",
+		"revertTheseFilesToo": "Revert these files too",
+		"overwroteDirtyFiles": "Overwrote {{count}} manually edited file(s)",
+		"undo": "Undo"
+	},
+	"sidebar": {
+		"expandSidebar": "Expand sidebar",
+		"collapseSidebar": "Collapse sidebar",
+		"extensionExtensionsHint": "Page extensions (bus-sourced · ←→ to switch)",
+		"tabTooltip": "{{label}} · {{id}} · ←→ to switch tab",
+		"inSeparateWindow": "In a separate window",
+		"redockToMainWindow": "Redock to main window",
+		"popOutToSeparateWindow": "Pop out to a separate window",
+		"inDockPanel": "In Dock panel",
+		"providesToolsTooltip": "{{count}} tools · callable by AI agent: {{list}}",
+		"providesNoTools": "This extension exposes no tools to the AI agent",
+		"providesEventsTooltip": "{{count}} events · emitted on the bus: {{list}}",
+		"providesNoEvents": "This extension emits no events on the bus",
+		"providesSkillsTooltip": "{{count}} skills · injected into chat composer: {{list}}",
+		"providesNoSkills": "This extension declares no skills",
+		"familyTooltip": "{{count}} extensions on the bus — click to filter Bus detail by kind=extension →",
+		"openInBusTooltip": "Switch to the Bus tab (⌘3) and auto-expand the {{id}} detail row",
+		"openInBusDetail": "View in Bus detail →",
+		"pluginAuthor": "Plugin Author",
+		"pluginStore": "Plugin Store",
+		"editor": "Editor",
+		"morePlugins": "More plugins",
+		"extensionsHint": "Pages and extensions",
+		"morePluginsHint": "Open more plugins menu",
+		"searchPlugins": "Search plugins…",
+		"noMatchingPlugins": "No matching plugins",
+		"pinPlugin": "Pin to sidebar",
+		"unpinPlugin": "Unpin from sidebar",
+		"categories": {
+			"3D": "3D",
+			"2D": "2D",
+			"general": "General"
+		},
+		"plugins": {
+			"skill": "Skill VFX",
+			"gen3d": "3D Character",
+			"lowpoly3d": "3D Low Poly",
+			"character": "Character Editor",
+			"items": "Items & Icons",
+			"animation": "Animation",
+			"sceneAssets2d": "2D Scene Assets",
+			"ui": "UI Design",
+			"narrative": "Narrative",
+			"reel": "Cinematic Studio",
+			"gameVideo": "Video Game",
+			"audio": "Music & SFX",
+			"sceneGenerator": "Scene Generator"
+		}
+	},
+	"trust": {
+		"import": {
+			"title": "Import .fxpack",
+			"hint": "Local absolute path — binary upload from the browser is not yet supported"
+		},
+		"inspect": {
+			"button": "Inspect",
+			"inProgress": "Inspecting…",
+			"help": "ADR-0014 default-deny · unsigned packs cannot install before confirmation. Inspect does not write to disk; it only reads the manifest and permissions.",
+			"failed": "Inspect failed"
+		},
+		"panel": {
+			"title": "Trust panel",
+			"signed": "Signed",
+			"unsigned": "Unsigned · please confirm the source"
+		},
+		"untitled": "(untitled)",
+		"permissions": {
+			"title": "Permission declaration",
+			"hint": "manifest.permissions[] · trusted by the host after install; runtime enforcement will land in a later version",
+			"none": "No permissions declared — this pack will not actively access fs / net.",
+			"empty": "(none)"
+		},
+		"conflicts": {
+			"title": "Conflicts",
+			"hint": "Same id already exists locally",
+			"entry": "already at {{origin}} v{{oldVersion}} → new pack v{{newVersion}}"
+		},
+		"warnings": {
+			"title": "Warnings",
+			"count": "{{count}} item(s)"
+		},
+		"install": {
+			"title": "Install",
+			"hint": "Copy to destRoot/.forgeax/extensions/<id>/ · auto reload",
+			"userRootPlaceholder": "Usually: ~ (writes to ~/.forgeax/extensions/)",
+			"projectRootPlaceholder": "Current project root",
+			"originUser": "User-installed · ~/.forgeax",
+			"originProject": "Project-specific · current project",
+			"unsignedAck": "I understand this pack is unsigned and I take responsibility for its source",
+			"button": "Install",
+			"inProgress": "Installing…"
+		},
+		"result": {
+			"title": "Install result",
+			"reloadTriggered": "reload triggered",
+			"empty": "(none)"
+		},
+		"policy": {
+			"skip": "skip · keep old version (default)",
+			"overwrite": "overwrite · replace old version",
+			"rename": "rename · new version renamed to <id>-<ts>"
+		}
+	},
+	"author": {
+		"fork": {
+			"title": "Fork extension",
+			"hint": "Copy an existing extension into your user or project extension directory, then chat-driven vibe-edit",
+			"sourceLabel": "Source",
+			"selectPlaceholder": "— select —",
+			"newIdLabel": "New id",
+			"destinationOriginLabel": "Destination",
+			"originUser": "User-installed · ~/.forgeax (recommended)",
+			"originProject": "Project-specific",
+			"copying": "Copying…",
+			"refresh": "Refresh list",
+			"refreshTitle": "Re-fetch /api/extensions/manifests",
+			"doneBadge": "Forked ✓",
+			"doneHelp": "Auto-reloaded — the new version should appear in the sidebar.",
+			"note": "Fork only copies the source directory (incl. prompt / handlers / config). manifest.id is rewritten, displayName gets a \"(mine)\" suffix. A user-installed copy takes precedence over the built-in copy, so the fork immediately replaces the original in the sidebar."
+		},
+		"record": {
+			"title": "Record as skill",
+			"hint": "Abstract the last N ledger events into a skill — backend is ready, UI goes through the chat flow",
+			"backendPre": "The backend path",
+			"backendMid": "is implemented (deterministic + LLM-distillation modes), but a ledger event subset must be selected",
+			"backendMid2": "— this step is currently driven by the",
+			"backendMid3": "skill in chat. Type",
+			"backendPost": "in the main chat box to start the recording flow.",
+			"draftPre": "Hand-written skill draft:",
+			"draftMid": ". Full record-as-skill: see",
+			"draftPost": "."
+		}
+	},
+	"boot": {
+		"theme": {
+			"title": "Theme",
+			"hint": "Boot animation style · applies on refresh"
+		},
+		"copy": {
+			"title": "Copy",
+			"hint": "Title / subtitle — leave empty to restore defaults",
+			"titleLabel": "Title",
+			"subtitleLabel": "Subtitle"
+		},
+		"components": {
+			"title": "Components",
+			"hint": "Toggle the progress bar / bus inventory row individually",
+			"showProgressBar": "Show progress bar",
+			"showProgressBarHint": "(React startup progress · usually finishes in ~1s)",
+			"showBusInventory": "Show bus extension count",
+			"showBusInventoryHint": "(fetches /api/extensions/list once · for debugging)"
+		},
+		"apply": {
+			"title": "Apply / Reset",
+			"reloadTooltip": "Reload the page · re-render the splash",
+			"reloadButton": "Apply & refresh preview",
+			"resetTooltip": "Restore classic-lime + default copy",
+			"resetButton": "Restore defaults",
+			"apiHintBefore": "AI can also POST",
+			"apiHintAfter": "to modify"
+		}
+	},
+	"chat": {
+		"systemLine": {
+			"collapse": "Collapse",
+			"expand": "Expand",
+			"expandAll": "Expand all"
+		},
+		"empty": {
+			"title": "Start a conversation",
+			"subtitle": "Tell FORGE what game you want to make — e.g. \"write a spinning cube in games/gta-2.5d/main.ts\"."
+		},
+		"loadEarlier": {
+			"tooltip": "Scroll to the top to auto-load earlier messages; or click here to load",
+			"label": "Scroll up to load {{count}} earlier messages"
+		},
+		"editMessage": "Click to edit this message",
+		"rewindHere": {
+			"tooltip": "Rewind to here (checkpoint rewind)",
+			"label": "Rewind to here"
+		},
+		"jumpLatest": {
+			"tooltip": "Scroll to latest message",
+			"unread": "{{count}} new messages"
+		}
+	},
+	"gameDirectory": {
+		"openTitle": "Open game directory"
+	},
+	"dashboard": {
+		"busKindRegistering": "{{kind}} · registering extensions…",
+		"clickToBusAdmin": "click → Bus admin →",
+		"clickToBusDetail": "click to switch to Bus detail →",
+		"brandTotalTitle": "{{count}} sessions · auto-refresh every 30s",
+		"closeTitle": "Close · Esc",
+		"navItemTitleWithCount": "{{label}} · {{count}} items · ↑↓ switch sub-page",
+		"navItemTitle": "{{label}} · ↑↓ switch sub-page"
+	},
+	"pulse": {
+		"res": {
+			"title": {
+				"loading": "Server resources — loading…",
+				"down": "Server resources — /api/health unreachable (server down?)",
+				"ok": "Server resources — mem {{mem}}MB · up {{uptime}} · {{ws}} WS client(s) · polls every 5s"
+			}
+		},
+		"mb": {
+			"title": {
+				"some": "Model bindings · {{count}} on bus · click to drill into Bus admin →",
+				"none": "Model bindings · 0 extensions · click to open Bus admin",
+				"down": "Model bindings · Bus list temporarily unreadable",
+				"loading": "Model bindings · loading…"
+			}
+		},
+		"skill": {
+			"title": {
+				"some": "Skills · {{count}} on bus · click to drill into Bus admin →",
+				"none": "Skills · 0 extensions · click to open Bus admin",
+				"down": "Skills · Bus list temporarily unreadable",
+				"loading": "Skills · loading…"
+			}
+		},
+		"tool": {
+			"title": {
+				"some": "Tools · {{count}} on bus · click to drill into Bus admin →",
+				"none": "Tools · 0 extensions · click to open Bus admin",
+				"down": "Tools · Bus list temporarily unreadable",
+				"loading": "Tools · loading…"
+			}
+		},
+		"agent": {
+			"title": {
+				"some": "Agents · {{count}} on bus · click to drill into Bus admin →",
+				"none": "Agents · 0 extensions · click to open Bus admin",
+				"down": "Agents · Bus list temporarily unreadable",
+				"loading": "Agents · loading…"
+			}
+		}
+	},
+	"sessionSwitcher": {
+		"justNow": "just now",
+		"minutesAgo": "{{min}} min ago",
+		"yesterdayTime": "Yesterday {{time}}",
+		"daysAgo": "{{dayDiff}} days ago",
+		"deleteConfirm": "Delete this session?\nThe session directory and ledger on the server will be removed together.",
+		"triggerActive": "Current session: {{label}}",
+		"triggerEmpty": "Session list (booting or server empty)",
+		"newSessionTitle": "Create a new session (POST /api/sessions · scheduler auto-starts)",
+		"newSession": "New session",
+		"projectBound": "Project {{slug}}",
+		"projectUnbound": "No project bound",
+		"empty": "No sessions · click + to create",
+		"lastActive": "last active {{time}}",
+		"deleteTitle": "Delete session (DELETE /api/sessions/:sid · ledger cleared too)"
+	},
+	"sessionTabs": {
+		"newSession": "New conversation",
+		"untitled": "New Session",
+		"history": "Conversation history",
+		"historyTitle": "Conversation history",
+		"closeTab": "Delete conversation {{label}}",
+		"closeConfirm": "Delete conversation \"{{label}}\"?\nIts server session directory and ledger will also be removed.",
+		"empty": "No conversations"
+	},
+	"sessionTime": {
+		"justNow": "just now",
+		"todayTime": "Today {{time}}",
+		"yesterdayTime": "Yesterday {{time}}",
+		"weekdayTime": "{{weekday}} {{time}}",
+		"dateThisYear": "{{month}} {{day}}",
+		"dateOtherYear": "{{month}} {{day}}, {{year}}"
+	},
+	"store": {
+		"openFile": {
+			"notInWorkspace": "Cannot open \"{path}\"\n\nThis file is outside the editable game and is usually read-only engine or dependency source.\nStudio can only open files under .forgeax/games/** and packages/**.",
+			"serverDetail": "\n\nServer: {serverMsg}",
+			"notFound": "File does not exist: \"{path}\"\n\nIt may have been moved / renamed / deleted, or this game's entry file is actually named differently (e.g. main.ts instead of index.ts).",
+			"failed": "Cannot open \"{path}\": {status} {statusText}"
+		},
+		"createSession": {
+			"failedTitle": "Failed to create session"
+		},
+		"closeSession": {
+			"failedTitle": "Failed to delete conversation",
+			"failedBody": "The conversation was kept. {{message}}"
+		},
+		"loop": {
+			"started": "🔁 Long-running task `{daemonId}` started · runs every {intervalSec}s · view progress + screenshot wall in Dashboard → Agents Hub · view per-tick history in this ChatPanel",
+			"createFailed": "❌ Failed to create long-running task: {error}",
+			"networkError": "❌ Network error creating long-running task: {message}"
+		},
+		"tool": {
+			"invalidJson": "❌ /tool args are not valid JSON: {message}",
+			"networkError": "❌ /tool network error: {message}"
+		},
+		"command": {
+			"networkError": "❌ /{cmdName} network error: {message}"
+		},
+		"noAgentSelected": "⚠ No agent selected yet — wait for the AgentSwitcher list to load (usually <1s), or manually click an agent avatar above.",
+		"steer": {
+			"sendFailed": "❌ Interrupt send failed: {message}"
+		}
+	},
+	"topbar": {
+		"chatToggle": {
+			"expand": "Expand chat panel",
+			"collapse": "Collapse chat panel"
+		},
+		"package": {
+			"title": "Package as standalone game",
+			"noGame": "Select or create a game before packaging.",
+			"failed": "Packaging failed",
+			"unknownError": "Unknown error",
+			"done": "Packaged \"{{slug}}\" ({{platform}})",
+			"exportDir": "Export directory:",
+			"runLocally": "Run locally:",
+			"webgpuHint": "WebGPU requires opening over localhost or HTTPS.",
+			"menuTitle": "Package Game",
+			"platformWeb": "Web (Static Site)",
+			"platformWindows": "Windows (.exe)",
+			"platformMac": "macOS (.app Launcher)",
+			"platformAndroid": "Android (Project Export)",
+			"platformIos": "iOS (Project Export)",
+			"rebuildEngine": "Rebuild Engine Core",
+			"rebuildEngineHint": "Developer mode: rebuild Rust→WASM engine core (wgpu-wasm)",
+			"engineRoot": "Engine Root",
+			"engineRootInvalid": "missing deps",
+			"engineRootNone": "No usable engine root found",
+			"history": "Package History",
+			"historyEmpty": "No packaging records yet",
+			"historyDelete": "Delete",
+			"historyDeleteConfirm": "Delete this record?",
+			"historyRetry": "Retry",
+			"historyCleanArtifacts": "Also clean artifacts",
+			"progressTitle": "Packaging your game",
+			"progressPhase": "Phase: {{phase}}",
+			"progressClose": "Close",
+			"progressHint": "This can take a moment — you can keep working, we'll let you know when it's done.",
+			"progressLogs": "Build log",
+			"phaseLabel": {
+				"queued": "Getting ready",
+				"starting": "Getting ready",
+				"cleanup": "Cleaning previous build",
+				"shell": "Preparing launcher",
+				"shell-build": "Compiling launcher",
+				"toolchain": "Setting up toolchain",
+				"engine-rebuild": "Rebuilding engine core",
+				"web-build": "Bundling the game",
+				"assemble": "Assembling package",
+				"export-android-project": "Exporting Android project",
+				"done": "Finishing up",
+				"failed": "Failed",
+				"error": "Error"
+			},
+			"jobSuccess": "Package succeeded",
+			"jobFailed": "Package failed",
+			"cachedShell": "Used cached launcher",
+			"clean": "Clean Local Cache",
+			"cleanTitle": "Clean local packaging environment",
+			"cleanBody": "This will delete the following local packaging environment (irreversible; it is rebuilt automatically on the next packaging run):",
+			"cleanItemToolchain": "Isolated Rust toolchain ~/.forgeax/toolchains (rustup + cargo + wasm-pack)",
+			"cleanItemShell": "Launcher shell cache ~/.forgeax/cache/player-shell",
+			"cleanItemTmp": "Leftover temp export dirs .forgeax-export",
+			"cleanKeepHint": "Export products and packaging history are NOT deleted.",
+			"cleanConfirm": "Delete all",
+			"cleanDone": "Cleanup complete",
+			"cleanPartial": "Partially cleaned (some items failed to delete)",
+			"cleanFailed": "Cleanup failed",
+			"cleanFreed": "Freed about {{size}}",
+			"cleaning": "Cleaning local cache…",
+			"cleaningHint": "Removing the isolated toolchain and caches, please wait (may take a few to a dozen seconds for large dirs).",
+			"platformCloud": "One-Click Publish to Platform",
+			"comingSoon": "Coming soon",
+			"viewGuide": "View publish guide",
+			"success": {
+				"ready": "Your game is packaged — play it locally or share the folder.",
+				"play": "Play now",
+				"playServing": "Starting local server…",
+				"playFailed": "Could not start the local server — copy the command below and run it in a terminal.",
+				"open": "Open folder",
+				"copyPath": "Copy path",
+				"copyCmd": "Copy command",
+				"copied": "Copied"
+			},
+			"doc": {
+				"web": {
+					"what": "Bundle the game into a self-contained website folder — drop it on any server (or run it locally) and share a link.",
+					"when": "Lightest way to share · needs a WebGPU browser"
+				},
+				"windows": {
+					"what": "Produce a folder with a launcher .exe — double-click to play, no browser or internet needed.",
+					"when": "For a downloadable PC build"
+				},
+				"macos": {
+					"what": "Produce a folder with a launcher + a double-clickable \"Play\".command — runs the game locally on this Mac.",
+					"when": "For a downloadable / local playtest Mac build"
+				},
+				"android": {
+					"what": "Export a standard Android Studio project (not a ready APK); open it in Android Studio to build the app.",
+					"when": "Asks for app name / package id / icon first"
+				},
+				"cloud": {
+					"what": "The easiest path — no export, no config: publish to the cloud in one click and get a shareable online link in seconds.",
+					"when": "Coming soon"
+				},
+				"ios": {
+					"what": "Export an Xcode project to build an iOS app.",
+					"when": "Asks for app name / bundle id / icon first"
+				},
+				"engine": {
+					"what": "Advanced switch — rebuild the engine core before packaging.",
+					"when": "Only when the export looks different from the preview"
+				},
+				"engineRoot": {
+					"what": "Which engine build the export bundles against.",
+					"when": "Usually auto-selected — leave as is"
+				},
+				"history": {
+					"what": "Every export is recorded here; retry or delete any of them.",
+					"when": "To trace or re-run a previous build"
+				},
+				"clean": {
+					"what": "Free the disk space used by the build cache — never touches exported products or history.",
+					"when": "When disk space is tight"
+				}
+			}
+		},
+		"onboard": {
+			"introTitle": "Your game is ready!",
+			"introDesc": "You and Forge just built a game that runs — it's in the preview on the right. Now let's try publishing it!",
+			"introHint": "Click the \"Publish\" button at the top-right to continue",
+			"next": "Next",
+			"prev": "Back",
+			"skip": "Skip",
+			"done": "Get started",
+			"counter": "{{n}} / {{total}}"
+		},
+		"android": {
+			"title": "Export Android Studio Project",
+			"subtitle": "Generates an offline-openable Android Studio project (WebView shell + full game) that you open to integrate SDKs and build an APK/AAB.",
+			"appIdLabel": "Application ID (applicationId)",
+			"appIdHint": "e.g. com.acme.mygame — at least two segments, each starting with a letter.",
+			"appIdError": "Invalid application id, e.g. com.acme.mygame",
+			"appNameLabel": "App Name",
+			"appNameError": "Must be 1–30 characters",
+			"projectNameLabel": "Project Name (project_name)",
+			"projectNameHint": "Used as the Android project folder name and Gradle rootProject.name.",
+			"projectNameError": "Only letters, digits, \"-\" and \"_\"",
+			"orientationLabel": "Screen Orientation",
+			"orientationLandscape": "Landscape",
+			"orientationPortrait": "Portrait",
+			"orientationHint": "The exported app launches locked to the selected orientation.",
+			"iconLabel": "App Icon (ICON)",
+			"iconPick": "Choose PNG",
+			"iconRemove": "Remove",
+			"iconHint": "Optional PNG, 512×512 recommended, ≤2MB.",
+			"iconErrType": "Icon must be a PNG image",
+			"iconErrSize": "Icon too large (must be ≤2MB)",
+			"cancel": "Cancel",
+			"confirm": "Start Export"
+		},
+		"ios": {
+			"title": "Export Xcode Project",
+			"subtitle": "Generates an Xcode project (WKWebView shell + full game) that you open in Xcode to configure signing and archive an IPA (requires macOS + Xcode).",
+			"bundleIdLabel": "Bundle Identifier (Bundle ID)",
+			"bundleIdHint": "e.g. com.acme.mygame — at least two segments, each starting with a letter.",
+			"bundleIdError": "Invalid bundle identifier, e.g. com.acme.mygame",
+			"appNameLabel": "App Name",
+			"appNameError": "Must be 1–30 characters",
+			"projectNameLabel": "Project Name (project_name)",
+			"projectNameHint": "Used as the Xcode project folder name (.xcodeproj).",
+			"projectNameError": "Only letters, digits, \"-\" and \"_\"",
+			"orientationLabel": "Screen Orientation",
+			"orientationLandscape": "Landscape",
+			"orientationPortrait": "Portrait",
+			"orientationHint": "The exported app launches locked to the selected orientation.",
+			"iconLabel": "App Icon (ICON)",
+			"iconPick": "Choose PNG",
+			"iconRemove": "Remove",
+			"iconHint": "Optional PNG, 1024×1024 recommended, ≤2MB.",
+			"iconErrType": "Icon must be a PNG image",
+			"iconErrSize": "Icon too large (must be ≤2MB)",
+			"cancel": "Cancel",
+			"confirm": "Start Export"
+		},
+		"layout": {
+			"tooltip": "Layout · reopen / reset / presets"
+		},
+		"settings": {
+			"tooltip": "System settings · Extensions / Keys / Models / About"
+		},
+		"publish": {
+			"packaging": "Packaging {{platform}}…",
+			"tooltip": "Package game for target platform"
+		}
+	},
+	"agentSwitcher": {
+		"hintBusExpand": "cli not started · ⌘+click → Bus",
+		"hintBusList": "cli not started · ⌘+click → Bus list",
+		"titlePlaceholder": "{{id}} ({{role}}) · marketplace placeholder · cannot switch while cli daemon is not started · ⌘/Ctrl+click → Bus",
+		"titlePlaceholderExpand": " · expand {{busPluginId}}",
+		"titlePlaceholderAgentKind": " (agent kind)",
+		"titleAgent": "{{id}} ({{role}}) · click = switch to main chat target · double-click = send next message in this thread to it",
+		"hintNotInitialized": "not initialized"
+	},
+	"askUser": {
+		"noQuestion": "(no question)",
+		"questionProgress": "{{current}} / {{total}}",
+		"preparing": "Preparing options…",
+		"noOptions": "(ask_user has no valid options)",
+		"multiSelect": "Multi-select",
+		"singleSelect": "Single-select",
+		"other": "Other…",
+		"otherDesc": "Fill in your own answer",
+		"customPlaceholder": "Enter your answer…",
+		"selected": "Selected: {{values}}",
+		"none": "(none)",
+		"submitting": "Submitting…",
+		"confirm": "Confirm",
+		"submitFailed": "Could not submit. Your choices are still here; try again.",
+		"expired": "This question is no longer accepting an answer.",
+		"unparseableHistory": "This historical answer could not be parsed.",
+		"collapse": "Collapse",
+		"expand": "Expand"
+	},
+	"contextMenu": {
+		"cut": "Cut",
+		"copy": "Copy",
+		"paste": "Paste",
+		"selectAll": "Select All",
+		"copyCode": "Copy Code",
+		"copyPath": "Copy Path",
+		"textReference": "Text reference",
+		"selectedTextReference": "Selected text reference"
+	},
+	"shortcuts": {
+		"gameFullscreen": "Game fullscreen · hide only Studio's own TopBar / Sidebar / ChatPanel / StatusBar (browser frame stays)",
+		"browserFullscreen": "Browser fullscreen (presentation style) · native browser fullscreen API (tab bar / address bar disappear too)",
+		"toggleSidebar": "Toggle left Sidebar (extension bar)",
+		"toggleChatPanel": "Toggle right ChatPanel",
+		"revealChat": "Toggle chat (reveal / send home / close)",
+		"toggleDashboard": "Toggle Dashboard overview panel",
+		"toggleSettings": "Open / close Settings overlay",
+		"openChangelog": "Settings → About (changelog)",
+		"closeOverlay": "Close current overlay · browser fullscreen → game fullscreen → Settings → Dashboard in order",
+		"modePreview": "Switch to Preview mode",
+		"modePage": "Switch to Page mode",
+		"switchPageN": "Switch to extension {{n}} (Blender parity — indexed into extension list)",
+		"openExtensions": "Settings → Extensions (was the Bus mode tab)",
+		"focusComposer": "Focus the right ChatPanel composer",
+		"toggleCommandPalette": "Toggle command palette"
+	},
+	"analytics": {
+		"clickToBusDetail": "click to switch to Bus detail →",
+		"clickToBusAdminFilter": "click → Bus admin (filter={{label}}) →"
+	},
+	"centerExtension": {
+		"backToTileGridTitle": "Back to the 12-tile extension grid",
+		"backToPage": "Back to extension",
+		"pluginMainWindow": "Plugin · Main window",
+		"close": "Close",
+		"redockTitle": "Redock the standalone window into the main window",
+		"redock": "Redock",
+		"detachTitle": "Pop out as a standalone window",
+		"detach": "Pop out",
+		"openedInWindowPrefix": "Extension ",
+		"openedInWindowSuffix": " is now open in a standalone window.",
+		"loadingExtensionPrefix": "Loading extension ",
+		"loadingExtensionSuffix": "…",
+		"missingStandalonePrefix": "Extension ",
+		"missingStandaloneMid": " is missing a ",
+		"missingStandaloneSuffix": " entry.",
+		"extensionUnavailablePrefix": "Could not load extension ",
+		"extensionUnavailableSuffix": ". Make sure forgeax-server is running (run bun fx start in forgeax-studio), then refresh."
+	},
+	"errorBoundary": {
+		"retry": "Retry",
+		"reloadRegion": "Reload this region",
+		"reloadStudio": "Reload Studio",
+		"panelRenderError": "This panel failed to render",
+		"panelHint": "You can retry / reload this region without restarting the whole Studio.",
+		"fullscreenTitle": "UI render crashed",
+		"fullscreenHint": "The React UI threw while rendering. Try \"Retry\" first; if that fails, \"Reload this region\"; if it still errors, \"Reload Studio\". The desktop app has no address bar, so you must recover with the buttons below."
+	},
+	"footerPanel": {
+		"info": "Info",
+		"checkpoints": "Checkpoints",
+		"events": "Events"
+	},
+	"infoPanel": {
+		"clickToCopy": "Click to copy",
+		"repeatedTimes": "Repeated {{count}} times",
+		"filterLevel": "Filter {{level}}",
+		"filterSource": "Filter source {{source}}",
+		"copyAll": "Copy all",
+		"clear": "Clear",
+		"emptyNoMessages": "No messages yet. Errors from Play / Edit / extensions / shell will appear here.",
+		"emptyNoMatch": "No entries match the current filter."
+	},
+	"permission": {
+		"askAriaLabel": "AI question",
+		"commandAriaLabel": "Command permission approval",
+		"askTitle": "AI wants to ask you",
+		"commandTitle": "A command needs your authorization",
+		"multiSelectHint": " (multiple choice)",
+		"selectBeforeSubmit": "↑ Pick an option before submitting",
+		"submit": "Submit",
+		"deny": "Deny",
+		"allow": "Allow",
+		"capabilityLabel": "Capability: {{capability}}",
+		"rememberSession": "Remember for this session",
+		"expand": "▼ Expand ({{count}} chars)",
+		"collapse": "▲ Collapse"
+	},
+	"dockShell": {
+		"popoutToWindow": "Pop out to a separate OS window",
+		"resetLayout": "Reset Layout",
+		"emptySurface": "Open a project resource or extension to begin.",
+		"reset": "Reset",
+		"resetPositions": "Reset panel positions",
+		"editorPanels": "Editor Panels",
+		"mainPanels": "Main Panels",
+		"morePanels": "More Panels",
+		"extensionPanels": "Extension Panels",
+		"hidePanelTitle": "Hide Panel Title Bar",
+		"showPanelTitle": "Show Panel Title Bar",
+		"moveToSide": "Move to Side",
+		"moveOffSide": "Move off Side",
+		"moveToPrimaryDock": "Move to Primary Dock",
+		"chatToDefault": "Show in Default Position",
+		"detachedWindowPlaceholder": "Opened in a separate window",
+		"tabContext": {
+			"openInNewWindow": "Open in New Window",
+			"close": "Close",
+			"closeOthers": "Close Others"
+		},
+		"panelTitles": {
+			"tools": "Tools",
+			"main": "Studio",
+			"viewport": "Viewport",
+			"chat": "ForgeaX CLI",
+			"agents": "Agents",
+			"files": "Files",
+			"console": "Console",
+			"telemetry": "Telemetry",
+			"hierarchy": "Hierarchy",
+			"assets": "Content Browser",
+			"inspector": "Inspector",
+			"history": "History",
+			"capabilities": "Capabilities",
+			"launcher": "Launcher",
+			"asset-properties": "Asset Properties",
+			"mesh-slots": "Mesh Slots",
+			"info": "Info",
+			"checkpoints": "Checkpoints",
+			"events": "Events"
+		}
+	},
+	"pageTabs": {
+		"openPages": "Open pages",
+		"newPage": "New page",
+		"allPages": "All pages",
+		"noOpenableTypes": "No openable page types",
+		"searchPageTypes": "Search page types…",
+		"noMatchingTypes": "No matching page types",
+		"availableTypes": "Available Pages",
+		"closeTab": "Close {{title}}",
+		"context": {
+			"close": "Close",
+			"closeOthers": "Close Others",
+			"closeToRight": "Close to the Right"
+		}
+	},
+	"firstRun": {
+		"errMissingKey": "Please enter your OpenRouter API Key",
+		"errSaveFailed": "Save failed",
+		"title": "👋 Welcome to ForgeaX Studio",
+		"lead": "Just tell Forge \"make a game about XX\" and it will plan, write code, and run it live on the right. To start, pick how Forge reaches a model:",
+		"opt1Title": "① Use an OpenRouter Key",
+		"opt1Badge": "Recommended · self-serve",
+		"opt1DescBefore": "Create a key at ",
+		"opt1DescAfter": " (sk-or-…) and paste it here. It is only written to the local ~/ForgeaxProjects/.env and never uploaded anywhere.",
+		"opt2Title": "② Use a locally-installed CLI",
+		"opt2Desc": "claude-code / codex / cursor — once you `login` in that CLI, just switch provider at the bottom-left of the chat box. No key needed here.",
+		"skip": "Skip for now",
+		"useLocalCli": "I'll use a local CLI",
+		"fillKey": "Enter Key ▶",
+		"step2Title": "🔑 Enter your OpenRouter API Key",
+		"step2LeadBefore": "Create one at ",
+		"step2LeadAfter": " (format sk-or-…). OpenRouter bills against your account balance.",
+		"keyPlaceholder": "sk-or-...",
+		"advanced": "Advanced (proxy URL, usually no need to change)",
+		"baseUrlPlaceholder": "https://openrouter.ai/api",
+		"back": "◀ Back",
+		"saving": "Saving…",
+		"saveAndStart": "Save and Start"
+	},
+	"fsBrowser": {
+		"parentDir": "Parent directory",
+		"browse": "Browse… (open the system folder picker)",
+		"addrHint": "Type a path and press Enter to jump",
+		"emptyDir": "Empty directory",
+		"initWorkspaceWhenNoGame": "Initialize a default game when no game exists",
+		"selectDir": "Select {{dir}}",
+		"processing": "Processing…",
+		"selectThisDir": "Select this directory"
+	},
+	"subAgent": {
+		"status": {
+			"running": "Running…",
+			"error": "Failed",
+			"done": "Done"
+		},
+		"role": {
+			"iori": "Core Gameplay Designer",
+			"suzu": "Experience Designer",
+			"kotone": "Narrative Designer",
+			"iro": "Artist",
+			"tsumugi": "Engineer",
+			"ccCoder": "the reference agent CLI Engineer",
+			"fallback": "sub-agent"
+		}
+	},
+	"surfaces": {
+		"chip": {
+			"close": "Close surface overlay",
+			"open": "Open surface overlay (dev)"
+		},
+		"overlay": {
+			"empty": "No extension has called surface.expose"
+		},
+		"action": {
+			"formClose": "Close form",
+			"formOpen": "Open form to run",
+			"collapse": "Collapse",
+			"run": "Run",
+			"runConfirm": "Run (confirm required)"
+		}
+	},
+	"filesPanel": {
+		"fileCount": "{{count}} files",
+		"jumpToFile": "Jump to {{name}}",
+		"splitByFamily": "Split by 6 families",
+		"clickToCollapse": "Click to collapse",
+		"clickToExpand": "Click to expand"
+	},
+	"schemaForm": {
+		"addItem": "+ Add",
+		"missingRequired": "Missing required fields: {{fields}}",
+		"run": "Run"
+	},
+	"extensionAgentPicker": {
+		"unbound": "Unbound",
+		"target": "Current conversation target",
+		"targetWithRecommend": "Current conversation target · Recommended {{display}}",
+		"noAgents": "No available agent",
+		"recommendedPrefix": "Recommended",
+		"recommendedSuffix": "is not in the current session"
+	},
+	"extensionDock": {
+		"loadingExtension": "Loading {{extensionId}}…",
+		"loadingExtensionGeneric": "Loading extension…",
+		"loadingPageHost": "Connecting to the Page host…",
+		"extensionHostFailed": "Page host failed to load: {{error}}",
+		"extensionExtensionMissing": "The Page host did not register {{extensionId}}.",
+		"extensionGameRequired": "Open a game before loading this Page extension.",
+		"retry": "Retry"
+	},
+	"chatAgentCapsule": {
+		"prevPage": "Previous page",
+		"nextPage": "Next page",
+		"unreadMessage": "Unread message"
+	},
+	"confirmDialog": {
+		"wantsToRunTool": "{{caller}} wants to run a tool that needs confirmation",
+		"deny": "Deny",
+		"allow": "Allow"
+	},
+	"detachedSurface": {
+		"unknownPanel": "Unknown panel surface \"{{id}}\".",
+		"loadingExtension": "Loading extension {{id}}…",
+		"extensionNotFound": "Extension {{id}} not found."
+	},
+	"forgeCard": {
+		"thinking": "{{displayName}} is thinking",
+		"emptyResponse": "(Empty response — the upstream cli produced nothing this time; try sending again)"
+	},
+	"agentStatus": {
+		"expectant": [
+			"On standby",
+			"Slacking off",
+			"Rubbing hands, ready to go",
+			"Geared up and ready"
+		],
+		"focused": [
+			"Brain on fire",
+			"Holding a mental meeting",
+			"Gears spinning like crazy",
+			"Deep in thought"
+		],
+		"cheerful": [
+			"Yapping away",
+			"Keyboard's on fire",
+			"Muttering along",
+			"Typing at warp speed"
+		],
+		"diligent": [
+			"Firing up the grill",
+			"Clang-clang, under construction",
+			"Firing up the furnace",
+			"Heads down, grinding"
+		],
+		"delegating": [
+			"Handing out tasks",
+			"Calling in backup",
+			"Commanding the squad",
+			"Playing hands-off boss"
+		],
+		"proud": [
+			"Fresh out of the oven",
+			"Dish is served",
+			"Ding~ all done",
+			"Delivered with pride"
+		],
+		"weary": [
+			"Recovering HP",
+			"Grabbing a water break",
+			"Battery running low",
+			"Flopping for a bit"
+		],
+		"sad": [
+			"Oops, crashed",
+			"Hitting a wall",
+			"Having an emo moment",
+			"Wiping away tears"
+		],
+		"curious": [
+			"Gathering to watch",
+			"Peeking curiously",
+			"Looking around",
+			"Poking around"
+		]
+	},
+	"markdownView": {
+		"taskDoneReadonly": "Done (read-only)",
+		"taskTodoReadonly": "Not done (read-only)",
+		"taskStatusReadonly": "Task status is read-only — this is part of the message content and cannot be toggled by clicking"
+	},
+	"agentsPanel": {
+		"noActiveSession": "No active session",
+		"empty": "No agents yet — send a message and Forge will dispatch the team",
+		"mainAgent": "Main agent"
+	},
+	"dialog": {
+		"confirmActionTitle": "Confirm action",
+		"alertTitle": "Notice",
+		"unsavedTitle": "Unsaved changes",
+		"unsavedBody": "{{title}} has unsaved changes. Save before closing?",
+		"discardChanges": "Don't Save"
+	},
+	"eventFormatter": {
+		"filePart": "[File: {{path}}]",
+		"imagePart": "[Image: {{path}}]",
+		"imageGeneric": "[Image]"
+	},
+	"extensionSwitcher": {
+		"addPage": "New extension",
+		"rename": "Rename",
+		"duplicate": "Duplicate",
+		"deletePage": "Delete extension"
+	},
+	"consolePanel": {
+		"clearTitle": "Clear console",
+		"empty": "No console output yet — console.log·warn·error from the game/editor will appear here in real time"
+	},
+	"sessionStream": {
+		"imageRef": "[image: {{path}}]",
+		"fileRef": "[file: {{path}}]",
+		"narrativeWorkshop": "Narrative Workshop"
+	},
+	"standaloneExtension": {
+		"noEntryPrefix": "Extension",
+		"noEntryMiddle": "has no",
+		"noEntrySuffix": "entry.",
+		"iframeLoadFailed": "iframe failed to load: {{error}}"
+	},
+	"themes": {
+		"classicLime": {
+			"label": "Classic Lime",
+			"desc": "Current style · lime accent + horizontal progress bar"
+		},
+		"neonPulse": {
+			"label": "Neon Pulse",
+			"desc": "Radial pulse animation + full-screen logo + arc progress bar"
+		}
+	},
+	"toolChip": {
+		"collapse": "▲ Collapse ({{chars}} chars · {{lines}} lines · {{bytes}})",
+		"viewAll": "▼ View all ({{chars}} more chars · {{lines}} lines total · {{bytes}})"
+	},
+	"healthIndicator": {
+		"tooltipWithMsg": "{{source}}: {{message}}\n\nClick to open the Info panel",
+		"tooltipEmpty": "No messages · click to open the Info panel"
+	},
+	"forgeText": {
+		"collapse": "▲ Collapse",
+		"expand": "▼ Expand ({{count}} chars)"
+	},
+	"kcCopyBtn": {
+		"copyMessage": "Copy entire message"
+	},
+	"pillChip": {
+		"expandedFormTip": "Expanded form sent to the AI"
+	},
+	"modelPicker": {
+		"showInComposer": "Show this model in the Composer picker",
+		"hideFromComposer": "Hide this model from the Composer picker (still visible in Settings/ModelLab)"
+	},
+	"busHealthLamp": {
+		"linkTitle": "{{base}} — click to view in Bus details →"
+	},
+	"extensionModuleStrip": {
+		"ariaLabel": "Page modules",
+		"empty": "No extension extensions available"
+	},
+	"providerBadge": {
+		"clickToBusDetail": "{{title}} · click to view in Bus details →"
+	},
+	"menubar": {
+		"brand": "ForgeaX Studio",
+		"file": "File",
+		"edit": "Edit",
+		"window": "Window",
+		"build": "Build",
+		"select": "Select",
+		"help": "Help"
+	},
+	"menu": {
+		"brand": {
+			"settings": "Settings…",
+			"about": "About ForgeaX",
+			"checkUpdate": "Check for Updates"
+		},
+		"file": {
+			"newGame": "New Game…",
+			"openGameDirectory": "Open Game Directory…",
+			"openRecent": "Open Recent",
+			"openRecentEmpty": "No recent items",
+			"closeGame": "Close Game",
+			"saveAll": "Save All",
+			"reveal": "Show in System",
+			"import": "Import Asset…",
+			"export": "Export as Standalone Site…",
+			"package": "Package and Preview"
+		},
+		"edit": {
+			"cut": "Cut",
+			"copy": "Copy",
+			"paste": "Paste",
+			"copyPath": "Copy Path",
+			"copyGuid": "Copy GUID",
+			"find": "Find…",
+			"rollback": "Rollback to Checkpoint…"
+		},
+		"window": {
+			"timeline": "Timeline",
+			"runtime": "Runtime",
+			"viewport": "Viewport",
+			"chat": "Chat",
+			"resetLayout": "Reset Layout",
+			"fullscreen": "Enter Fullscreen"
+		},
+		"build": {
+			"export": "Export as Standalone Site…",
+			"settings": "Build Settings…"
+		},
+		"help": {
+			"onboarding": "Getting Started…",
+			"docs": "Documentation",
+			"tutorials": "Tutorials",
+			"examples": "Examples",
+			"blog": "Blog",
+			"games": "Game Demos",
+			"marketplace": "Marketplace",
+			"changelog": "Changelog",
+			"shortcuts": "Keyboard Shortcuts",
+			"askAi": "Ask AI",
+			"github": "GitHub Repository",
+			"report": "Report an Issue",
+			"about": "About ForgeaX",
+			"license": "License"
+		}
+	},
+	"taskFlow": {
+		"process": "Execution process",
+		"processInterrupted": "Execution process (interrupted)",
+		"processMeta": "{{steps}} steps · {{duration}}",
+		"workedFor": "Worked for {{duration}}",
+		"processRunning": "Working…",
+		"processWaiting": "Waiting for your answer…",
+		"processError": "failed",
+		"processAborted": "interrupted",
+		"collapseProcess": "Collapse work process",
+		"expandProcess": "Expand work process",
+		"planLabel": "Requirements plan",
+		"planTitle": "Starting {{count}} tasks",
+		"statusRunning": "Running",
+		"statusDone": "Done",
+		"statusPending": "Pending",
+		"statusError": "Failed",
+		"stepsEmpty": "Waiting for steps…",
+		"thinking": "Thinking",
+		"openAgentThread": "View {{name}}'s work",
+		"backToMain": "Back to main chat",
+		"backToSub": "Back to {{name}}",
+		"subAgentReadOnly": "Sub-agent work (read-only) · to add requests, go back to the main chat and let Forge relay them",
+		"role": {
+			"orchestrator": "Orchestrator",
+			"pillar": "Core gameplay",
+			"design": "Design",
+			"narrative": "Narrative",
+			"art": "Art",
+			"coding": "Coding"
+		},
+		"totalLabel": "Total changes",
+		"chipEdit": "edited",
+		"chipNew": "added",
+		"chipDel": "deleted",
+		"groupEdit": "Edited",
+		"groupNew": "Added",
+		"groupDel": "Deleted",
+		"groupEmpty": "None",
+		"artifactPartial": "partial",
+		"artifactUnavailable": "stats unavailable",
+		"artifactStatsUnavailable": "File statistics are unavailable",
+		"artifactReason": "Reason: {{reason}}",
+		"artifactUnattributed": "{{count}} file changes could not be attributed",
+		"artifactCandidates": "Reliable candidate paths",
+		"artifactNoCandidates": "No reliable candidate paths",
+		"artifactOutcomeComplete": "The requested work has been delivered. Review the summary, test evidence, and recommendations below.",
+		"artifactOutcomePartial": "The work is partially complete. Review the unresolved items and confirm how to continue.",
+		"deliveredAt": "Delivered",
+		"outcome": "Outcome",
+		"deliveryCardTitle": "Task delivery card",
+		"featureUnderConstruction": "Feature under construction...",
+		"copyArtifact": "Copy delivery result",
+		"copied": "Copied",
+		"files": "Files",
+		"filesCount": "{{count}}",
+		"tests": "Tests",
+		"testsCount": "✓ {{pass}}/{{total}} passed",
+		"testsNotReported": "No test results were reported for this delivery.",
+		"nextSteps": "Suggested next steps",
+		"confirmDeliveryRecommendation": "Review this delivery and confirm whether to continue.",
+		"buildPrepare": "Prepare build {{version}}",
+		"buildNote": "Saves the current changes and generates a new playable build.",
+		"buildAction": "Build",
+		"buildBuilding": "Building…",
+		"buildRetry": "Retry build",
+		"buildReady": "Build {{version}}",
+		"buildFailed": "Build {{version}} failed",
+		"play": "PLAY",
+		"playing": "PLAYING",
+		"badgeDone": "Done",
+		"badgeError": "Error",
+		"badgeAssets": "{{count}} assets",
+		"unplanned": "Unplanned step",
+		"tool": {
+			"readFile": "Read file",
+			"writeFile": "Write file",
+			"editFile": "Edit file",
+			"multiEdit": "Update files",
+			"bash": "Run command",
+			"applyPatch": "Apply patch",
+			"grep": "Search code",
+			"glob": "Find files",
+			"subagent": "Delegate task",
+			"askUser": "Ask for clarification",
+			"listDir": "List directory"
+		}
+	},
+	"feedback": {
+		"button": "Feedback",
+		"tooltip": "Send feedback / report a problem",
+		"panel": {
+			"title": "Feedback",
+			"write": "Write feedback",
+			"mine": "My feedback"
+		},
+		"form": {
+			"type": "Problem type",
+			"description": "Description",
+			"descriptionPh": "For example: clicking Play causes the screen to freeze…",
+			"screenshots": "Screenshots",
+			"screenshotLimit": "Up to 5",
+			"pasteScreenshot": "Paste screenshots directly (Cmd+V / Ctrl+V)",
+			"previewScreenshot": "Enlarge screenshot preview",
+			"zoomIn": "Zoom in",
+			"zoomOut": "Zoom out",
+			"resetZoom": "Reset zoom",
+			"removeScreenshot": "Remove screenshot",
+			"email": "Email",
+			"emailPh": "Company email recommended",
+			"cancel": "Cancel",
+			"submit": "Submit",
+			"snapshot": "Current snapshot",
+			"upload": "Upload"
+		},
+		"errors": {
+			"serverUnavailable": "Cannot connect to the local ForgeaX service. Your feedback was not submitted. Check that Studio is running, then retry.",
+			"requestTimeout": "The local service timed out. Your feedback was not submitted. Please retry.",
+			"invalidResponse": "The local service returned an unreadable response. Your feedback was not submitted.",
+			"localSaveFailed": "Feedback could not be saved to the local outbox. Check browser storage permissions and available disk space.",
+			"submitFailed": "Submission failed: {{detail}}",
+			"loadFailed": "Feedback history could not be loaded. Retry the connection.",
+			"attempt": "Attempt {{attempt}} · {{time}}",
+			"retryConnection": "Retry connection",
+			"retrySubmit": "Retry submission"
+		},
+		"types": {
+			"stuck": "Crash or not responding",
+			"wrong": "Feature malfunction",
+			"slow": "Performance issue",
+			"ui": "UI defect",
+			"idea": "Feature suggestion",
+			"other": "Other"
+		},
+		"success": {
+			"title": "Feedback received",
+			"body": "We will look into it as soon as possible.",
+			"id": "Feedback ID",
+			"copy": "Copy",
+			"guide": "Track progress in “My feedback”.",
+			"viewMine": "View my feedback",
+			"ok": "Done"
+		},
+		"mine": {
+			"empty": "No feedback yet.",
+			"id": "ID",
+			"updated": "Updated",
+			"autoTitle": "Auto error report",
+			"pendingSend": "Pending",
+			"localId": "Local ID",
+			"saved": "Saved",
+			"savedLocally": "Saved on this device",
+			"pendingHint": "Retry after the local service recovers. This entry remains until delivery succeeds.",
+			"retryPending": "Send again",
+			"attempts": "{{count}} attempts"
+		},
+		"status": {
+			"processing": "Processing",
+			"pending-confirm": "Pending confirmation",
+			"resolved": "Resolved"
+		},
+		"statusHint": {
+			"processing": "Received — the team is working on it.",
+			"pending-confirm": "A fix is out — update and confirm.",
+			"resolved": "Thanks for confirming — closed."
+		},
+		"delivery": {
+			"local": "Saved locally only",
+			"queued": "Waiting to upload",
+			"working": "Uploading diagnostics",
+			"published": "Published to issue tracker",
+			"failed": "Upload failed — feedback is saved locally",
+			"refreshFailed": "Could not refresh feedback. The status shown may be out of date; retrying shortly.",
+			"openIssue": "View feedback on GitHub"
+		},
+		"actions": {
+			"resolved": "Resolved",
+			"stillBroken": "Still broken"
+		},
+		"passive": {
+			"fullStack": "Full stack trace",
+			"ignore": "Ignore",
+			"dismiss": "Close error feedback",
+			"incidents": {
+				"mainThread": "Editor main thread unresponsive",
+				"renderer": "Renderer process terminated",
+				"gpu": "GPU device lost",
+				"uncaught": "Repeated uncaught errors detected",
+				"build": "Build repeatedly failed",
+				"play": "Play could not start",
+				"save": "Scene save failed",
+				"runtime": "Viewport runtime disconnected",
+				"agent": "Agent unresponsive"
+			},
+			"actions": {
+				"feedbackContinue": "Send feedback and continue",
+				"restartRenderer": "Restart renderer and send feedback",
+				"reloadPreview": "Reload preview and send feedback",
+				"reloadStudio": "Reload Studio and send feedback",
+				"retryBuild": "Send feedback and retry build",
+				"retryPlay": "Retry Play and send feedback",
+				"retrySave": "Retry save and send feedback",
+				"reconnectRuntime": "Reconnect runtime and send feedback",
+				"reconnectAgent": "Reconnect session and send feedback"
+			}
+		}
+	}
+}

@@ -1,7 +1,0 @@
-{
-  "sources": [{"sourceRepo":"forgeax-studio","sourceCommit":""}],
-  "mappings": [
-    {"sourceRepo":"forgeax-studio","sourceCommit":"deadbeef","newPath":"src/main.tsx","owner":"forgeax-ide"},
-    {"sourceRepo":"forgeax-studio","sourceCommit":"deadbeef","newPath":"src/main.tsx","owner":""}
-  ]
-}

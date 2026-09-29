@@ -1,0 +1,367 @@
+/* Global status bar — Figma: h-24px, Fira Mono 12px.
+   Layout: [bottom dock tabs] [spacer →] [ready] [pulse chips] [diagnostics] [version].
+   Slot names remain contribution-contract identifiers; CSS owns visual order. */
+
+.ide-status-bar {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	height: 24px;
+	padding: 0;
+	background: var(--color-background-elevated);
+	border-top: 1px solid var(--color-border-default);
+	font-family: var(--font-mono);
+	font-size: 12px;
+	color: var(--color-text-secondary);
+	user-select: none;
+	position: relative;
+	z-index: 5;
+}
+
+.sb-slot {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	min-width: 0;
+	overflow: hidden;
+}
+/* Game version control is the only left-slot contribution. CSS order 4 makes
+   that slot the visual far-right owner; build metadata stays in right/order 3. */
+.sb-slot-left {
+	order: 4;
+	flex: 0 0 auto;
+	justify-content: flex-start;
+	gap: 0;
+	padding-right: 8px;
+}
+/* divider immediately before the far-right version */
+.sb-slot-left::before {
+	content: "";
+	display: block;
+	width: 1px;
+	height: 10px;
+	background: var(--color-divider-default);
+	margin: 0 8px;
+	flex-shrink: 0;
+}
+/* Pulse chips + diagnostics sit between Ready and Version. */
+.sb-slot-right {
+	order: 3;
+	flex: 0 0 auto;
+	justify-content: flex-start;
+	gap: 0;
+}
+/* Ready starts the right-aligned status cluster. */
+.sb-slot-center {
+	order: 2;
+	/* margin-left:auto keeps the cluster right-aligned when the dock slot is
+     empty; when present, the dock's flex growth consumes the same space. */
+	flex: 0 0 auto;
+	margin-left: auto;
+	justify-content: flex-end;
+	padding-right: 8px;
+	overflow: visible;
+}
+
+.sb-item {
+	display: inline-flex;
+	align-items: center;
+	height: 100%;
+	flex-shrink: 0;
+}
+
+/* ── Merged dock bottom-edge strip host ───────────────────────────────────
+   installEdgeDrawer relocates dockview's bottom-edge `.dv-tabs-and-actions-
+   container` into this slot so the dock tabs sit on the SAME footer row as the
+   status items. order:1 keeps CB / Info / other bottom edge tabs flush-left;
+   flex:1 leaves the status cluster anchored at the right.
+   Empty (no docked bottom panels) → display:none, so the center slot's
+   margin-left:auto still right-aligns the status cluster. */
+.sb-slot-dock {
+	order: 1;
+	flex: 1 1 auto;
+	height: 100%;
+	align-items: stretch;
+	justify-content: flex-start;
+	overflow: visible;
+}
+.sb-slot-dock.is-empty,
+.sb-slot-dock:empty {
+	display: none;
+}
+
+/* Footer-ized dockview strip: the relocated container is no longer under
+   `.dv-groupview-edge`, so the vertical/edge tab rules in DockShell.css no
+   longer apply — restyle it compact + horizontal to live in the 24px footer. */
+.fx-bottom-edge-strip {
+	display: flex;
+	align-items: stretch;
+	height: 100%;
+	background: transparent;
+	min-width: 0;
+}
+.fx-bottom-edge-strip .dv-tabs-container {
+	display: flex;
+	align-items: stretch;
+	height: 100%;
+}
+.fx-bottom-edge-strip .dv-tab {
+	width: auto !important;
+	min-width: max-content !important;
+	flex: 0 0 auto !important;
+	height: 100%;
+	padding: 0 8px !important;
+	display: inline-flex;
+	align-items: center;
+	border-radius: 0;
+	border-right: 1px solid var(--color-border-default);
+	cursor: pointer;
+}
+/* Only highlight the active tab WHILE the drawer is open (fx-bottom-edge-open,
+   mirrored by edgeDrawer). The bottom group always has an "active" panel, so an
+   unconditional dv-active-tab rule would paint a persistent highlight in the
+   footer with no click. */
+.fx-bottom-edge-strip.fx-bottom-edge-open .dv-tab.dv-active-tab {
+	position: relative;
+	/* The footer strip sits on --color-background-elevated (#161619), so the old
+     `elevated` highlight was the SAME colour as its backdrop → invisible. Use
+     the darkest base (like the main dock's selected tab) so the open tab clearly
+     reads as connected to the drawer rising above it. */
+	background: var(--color-background-base);
+	color: var(--color-text-primary);
+}
+/* Hover feedback for footer tabs (the main dock's .dv-tab:hover rule doesn't
+   reach here — this strip is relocated out of .fx-dockshell into the footer).
+   The currently-open tab keeps its selected look and does NOT react to hover. */
+.fx-bottom-edge-strip .dv-tab:hover {
+	background: var(--color-interaction-selected-neutral);
+	color: var(--color-text-primary);
+}
+.fx-bottom-edge-strip.fx-bottom-edge-open .dv-tab.dv-active-tab:hover {
+	background: var(--color-background-base);
+}
+/* Closed footer strip: the bottom edge group always keeps one `.dv-active-tab`
+   (dockview never lets a group go active-less). This strip is relocated OUT of
+   .fx-dockwrap so the edge-group neutralizer in DockShell.css can't reach it —
+   restate it here so a closed footer shows NO selected tab (matches the open-only
+   highlight rule above). `:not(:hover)` so the footer hover rule below still gives
+   feedback on the (neutralized) active tab. */
+.fx-bottom-edge-strip:not(.fx-bottom-edge-open)
+.dv-tab.dv-active-tab:not(:hover) {
+	background: transparent;
+	color: inherit;
+}
+/* UE focus流光 on the footer active tab (drawer open) — mirrors the grid-group
+   accent in DockShell.css. Bottom strip: put the bar on the TOP edge (the side
+   the drawer rises from). Brightest at center, fading to both ends. */
+.fx-bottom-edge-strip.fx-bottom-edge-focused .dv-tab.dv-active-tab::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 1px;
+	z-index: 2;
+	pointer-events: none;
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		color-mix(in srgb, var(--lime, #7ee04a) 55%, transparent) 22%,
+		var(--lime, #7ee04a) 50%,
+		color-mix(in srgb, var(--lime, #7ee04a) 55%, transparent) 78%,
+		transparent 100%
+	);
+}
+.fx-bottom-edge-strip .dv-default-tab {
+	padding: 0;
+	gap: 5px;
+	font-size: 12px;
+	width: auto;
+	max-width: min(36vw, 360px);
+}
+.fx-bottom-edge-strip .dv-default-tab .dv-default-tab-content {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+.fx-bottom-edge-strip .dv-default-tab .fx-dock-tab-title {
+	display: inline-flex;
+	align-items: center;
+	min-width: 0;
+	height: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.fx-dock-tab-status-item--error {
+	color: #ff6b6b;
+}
+.fx-dock-tab-status-item--warning {
+	color: #e6c14b;
+}
+/* Keep the void container narrow — it stays a valid drop target for drag-in
+   but must not expand to eat the whole footer. */
+.fx-bottom-edge-strip .dv-void-container {
+	flex: 0 0 24px;
+	min-width: 24px;
+}
+
+/* ── Drag-in drop zone ────────────────────────────────────────────────────
+   When empty, the dock host is display:none and the void container is only a
+   24px sliver — there is nothing to drop ONTO, so dragging a panel over the
+   footer shows `not-allowed`. Only during a REAL HTML5 tab drag (`html.fx-edge-
+   drag`, set by edgeDrawer on dragstart — NOT the pointerdown-based
+   fx-dock-dragging, which would flash on a plain click) reveal the host and
+   widen its void container into a hittable drop target. We draw NO custom
+   frame: the void is the genuine dockview drop target (header_space), so
+   hovering it shows dockview's own lime overlay — identical to reorder. */
+html.fx-edge-drag .sb-slot-dock,
+html.fx-edge-drag .sb-slot-dock.is-empty {
+	display: flex;
+	min-width: 160px;
+}
+html.fx-edge-drag .fx-bottom-edge-strip {
+	width: 100%;
+}
+html.fx-edge-drag .fx-bottom-edge-strip .dv-void-container {
+	flex: 1 1 auto;
+	min-width: 140px;
+}
+/* Pin toggle (rendered by DockTab for any edge-located tab): the
+   `.dv-groupview-edge`-scoped rules don't reach the relocated footer strip, so
+   re-declare the footer variant here. Hidden by default —
+   dockview always keeps one panel "active" per group, and a persistently shown
+   pin made that tab read like it was selected. Reveal on hover, or on the
+   active tab while the drawer is open; pinned tabs stay lit unconditionally. */
+.fx-bottom-edge-strip .dv-default-tab-action.fx-edge-pin {
+	display: inline-flex !important;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	color: var(--color-text-tertiary, #9aa0aa);
+	transition: opacity 0.1s ease;
+}
+.fx-bottom-edge-strip .dv-tab:hover .dv-default-tab-action.fx-edge-pin,
+.fx-bottom-edge-strip.fx-bottom-edge-open
+	.dv-tab.dv-active-tab
+	.dv-default-tab-action.fx-edge-pin {
+	opacity: 0.85;
+}
+.fx-bottom-edge-strip .dv-default-tab-action.fx-edge-pin.fx-edge-pin--on {
+	opacity: 1;
+	color: var(--lime, #7ee04a);
+}
+.fx-bottom-edge-strip .dv-default-tab-action.fx-edge-pin .fx-edge-pin-icon {
+	display: block;
+	width: 12px;
+	height: 12px;
+	flex: 0 0 auto;
+}
+
+/* ── Footer drop-overlay anchor host (see edgeDrawer.ts bottomDropContainer) ──
+   Viewport-fixed layer that dockview paints the bottom strip's drop highlights
+   / reorder indicators into (its own theme-scoped .dv-drop-target-* CSS lives
+   under .dockview-theme-abyss and doesn't reach here, so we style it directly
+   with the app's lime accent). Never intercepts pointer/drag events. */
+.fx-edge-drop-anchor-host {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 100;
+}
+.fx-edge-drop-anchor-host .dv-drop-target-container {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+.fx-edge-drop-anchor-host .dv-drop-target-anchor {
+	position: absolute;
+	pointer-events: none;
+	box-sizing: border-box;
+	background: color-mix(in srgb, var(--lime, #7ee04a) 20%, transparent);
+	border: 1px solid var(--lime, #7ee04a);
+	border-radius: 3px;
+	transition:
+		left 0.07s ease,
+		top 0.07s ease,
+		width 0.07s ease,
+		height 0.07s ease;
+}
+/* 'line' insertion indicator (thin strip at a tab edge) → solid lime bar. */
+.fx-edge-drop-anchor-host .dv-drop-target-anchor.dv-drop-target-anchor-line {
+	background: var(--lime, #7ee04a);
+	border-color: var(--lime, #7ee04a);
+	border-radius: 2px;
+}
+
+.sb-overflow {
+	font-family: var(--font-mono);
+	font-size: 11px;
+	color: var(--color-text-tertiary);
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid var(--color-border-default);
+	padding: 1px 8px;
+	margin: 0 4px;
+	border-radius: 999px;
+	cursor: help;
+}
+
+/* StatusChip — Figma: badge px-12, gap-4, Fira Mono 12px.
+   Each chip is a label + value pair; no dots, no icons, no color tones. */
+
+.sb-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 100%;
+	padding: 0 12px;
+	background: transparent;
+	border: none;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	line-height: 1;
+	color: var(--color-text-secondary);
+	white-space: nowrap;
+	letter-spacing: 0;
+	transition: background 120ms ease;
+	cursor: default;
+}
+/* Any clickable chip — an explicit link, a command button, or any <button>
+   rendered as a chip (StripPopover trigger, is-button status items) — gets the
+   pointer affordance + hover. Non-interactive text chips (<span>) stay default. */
+.sb-chip.is-link,
+.sb-chip.is-button,
+button.sb-chip {
+	cursor: pointer;
+}
+.sb-chip.is-link:hover,
+.sb-chip.is-button:hover,
+button.sb-chip:hover {
+	background: var(--color-interaction-hover);
+}
+.sb-chip.is-link:focus-visible,
+.sb-chip.is-button:focus-visible,
+button.sb-chip:focus-visible {
+	outline: 1px solid var(--color-border-strong);
+	outline-offset: -1px;
+}
+
+/* Version badge — <a> reset */
+a.sb-chip {
+	text-decoration: none;
+}
+
+.sb-chip-label {
+	font-size: 12px;
+	color: var(--color-text-secondary);
+}
+.sb-chip-value {
+	font-size: 12px;
+	font-variant-numeric: tabular-nums;
+	color: var(--color-text-tertiary);
+}

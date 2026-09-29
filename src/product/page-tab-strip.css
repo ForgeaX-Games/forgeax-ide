@@ -1,0 +1,221 @@
+/* Document tab strip — ported from the studio-demo docTabBar. Theme tokens
+   only (no raw hex/rgba); brand-soft → --color-interaction-selected-brand,
+   brand-line → --color-brand-primary-soft. */
+.page-tab-strip {
+	--page-tab-h: 34px;
+	display: flex;
+	align-items: stretch;
+	min-width: 0;
+	height: 36px;
+	background: var(--color-background-canvas);
+	border-bottom: 1px solid var(--color-divider-default);
+}
+
+.page-tab-scope {
+	display: flex;
+	align-items: stretch;
+	min-width: 0;
+	flex: 1;
+	padding: 0 6px 0 8px;
+	gap: 6px;
+}
+
+/* Tab row shrinks to content so "+" hugs the last tab; on overflow the row
+   scrolls internally while "+" and the actions stay put. */
+.page-tab-list {
+	display: flex;
+	align-items: flex-end;
+	gap: 2px;
+	min-width: 0;
+	flex: 0 1 auto;
+	overflow-x: auto;
+	scrollbar-width: none;
+}
+.page-tab-list::-webkit-scrollbar {
+	display: none;
+}
+
+.page-tab-strip .page-tab {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: calc(var(--page-tab-h) - 5px);
+	min-width: 120px;
+	max-width: 220px;
+	padding: 0 8px 0 9px;
+	border: 1px solid transparent;
+	border-bottom: none;
+	border-radius: 7px 7px 0 0;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	background: transparent;
+	color: var(--color-text-secondary);
+	font: inherit;
+	font-size: 11.5px;
+	cursor: pointer;
+	white-space: nowrap;
+	flex-shrink: 0;
+	position: relative;
+	transition:
+		background var(--motion-duration-fast) var(--motion-ease-standard),
+		color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+.page-tab:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+/* Active wins on hover too — the selected highlight (lime top bar + raised
+   surface) must never be swallowed by the hover background. */
+.page-tab.is-active,
+.page-tab.is-active:hover {
+	background: var(--color-background-elevated);
+	border-color: var(--color-border-subtle);
+	color: var(--color-text-primary);
+	box-shadow: inset 0 2px 0 var(--color-brand-primary);
+}
+.page-tab.is-drag {
+	opacity: 0.45;
+}
+/* Inactive tabs are transparent and sit only 2px apart, so a run of them reads
+   as one undivided block. Draw a short hairline in the gap BETWEEN two adjacent
+   inactive tabs (VSCode/browser pattern). The adjacent-sibling selector keeps it
+   off the first tab and off both sides of the active tab — the active tab's
+   raised surface + border already reads as separated, so a divider there is
+   redundant noise. */
+.page-tab:not(.is-active) + .page-tab:not(.is-active)::before {
+	content: "";
+	position: absolute;
+	left: -1px;
+	top: 8px;
+	bottom: 8px;
+	width: 1px;
+	background: var(--color-border-subtle);
+	pointer-events: none;
+}
+
+.page-tab__icon {
+	width: 13px;
+	height: 13px;
+	flex-shrink: 0;
+}
+.page-tab__label {
+	flex: 1;
+	text-align: center;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Unsaved-changes marker, driven by a registered page-dirty probe. */
+.page-tab.is-dirty .page-tab__label {
+	font-style: italic;
+}
+.page-tab__dirty {
+	color: var(--color-brand-primary);
+	flex-shrink: 0;
+}
+
+.page-tab__pin {
+	width: 13px;
+	height: 13px;
+	color: var(--color-text-tertiary);
+	flex-shrink: 0;
+	margin-left: auto;
+}
+
+.page-tab__close {
+	width: 16px;
+	height: 16px;
+	border-radius: 4px;
+	border: none;
+	background: transparent;
+	color: var(--color-text-tertiary);
+	/* Always laid out (reserves its slot) — toggle visibility, not display, so
+     revealing the X on hover never widens the tab. VSCode/Chrome tab behaviour. */
+	display: grid;
+	place-items: center;
+	visibility: hidden;
+	cursor: pointer;
+	flex-shrink: 0;
+	margin-left: auto;
+	padding: 0;
+}
+.page-tab:hover .page-tab__close,
+.page-tab.is-active .page-tab__close {
+	visibility: visible;
+}
+.page-tab__close:hover {
+	background: var(--color-interaction-selected-neutral);
+	color: var(--color-text-primary);
+}
+.page-tab__close-icon {
+	width: 11px;
+	height: 11px;
+}
+
+/* Action buttons (all-pages overflow / rules). */
+.page-tab-actions {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	align-self: center;
+	flex-shrink: 0;
+	margin-left: auto;
+}
+.page-tab-btn {
+	height: 22px;
+	padding: 0 7px;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	border: 1px solid var(--color-border-subtle);
+	border-radius: 6px;
+	background: transparent;
+	color: var(--color-text-secondary);
+	font: inherit;
+	font-size: 11px;
+	cursor: pointer;
+	transition:
+		background var(--motion-duration-fast) var(--motion-ease-standard),
+		color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+.page-tab-btn:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+.page-tab-new {
+	width: 30px;
+	height: calc(var(--page-tab-h) - 5px);
+	padding: 0;
+	border-color: transparent;
+	justify-content: center;
+	align-self: flex-end;
+	flex-shrink: 0;
+}
+.page-tab-new:hover,
+.page-tab-new:focus-visible {
+	border-color: transparent;
+	background: var(--color-interaction-hover);
+}
+.page-tab-new .page-tab-btn__icon {
+	width: 13px;
+	height: 13px;
+}
+
+/* "+" new-page menu: title only, no type-id column. */
+.page-tab-new-menu.fx-searchable-menu {
+	width: 220px;
+}
+.page-tab-btn__icon {
+	width: 12px;
+	height: 12px;
+}
+/* All-pages dropdown rows. */
+.page-tab-menu__mark {
+	font-size: 10px;
+	color: var(--color-text-tertiary);
+}
+.page-tab-menu__label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

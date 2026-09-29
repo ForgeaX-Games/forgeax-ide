@@ -1,10 +1,18 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "paths": {
-      "@forgeax/chat/runtime": ["../chat/src/runtime.tsx"],
-      "@forgeax/interface/*": ["src/types/interface-integration.d.ts"],
-      "@forgeax/editor/*": ["src/types/interface-integration.d.ts"]
-    }
-  }
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"paths": {
+			"@forgeax/interface/*": ["../interface/dist/package/browser/*"],
+			"@forgeax/editor/ui/command": [
+				"../editor/packages/ui/src/components/command.tsx"
+			],
+			"@forgeax/editor/ui/dropdown-menu": [
+				"../editor/packages/ui/src/components/dropdown-menu.tsx"
+			],
+			"@forgeax/editor/ui/popover": [
+				"../editor/packages/ui/src/components/popover.tsx"
+			],
+			"@forgeax/editor/*": ["src/types/interface-integration.d.ts"]
+		}
+	}
 }

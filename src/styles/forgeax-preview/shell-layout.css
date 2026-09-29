@@ -1,0 +1,284 @@
+/**
+ * Preview shell — layout + spacing only. Colors: tokens.css / design-tokens.css
+ */
+
+.studio-shell--preview-skin {
+	font-size: 13px;
+	letter-spacing: -0.014em;
+}
+
+/* ── Top bar ──
+   Keep TopBar's own design-system styling. The preview merge must not restyle
+   .tb-center / .mode-tab, otherwise the official pill frame and active fill
+   diverge from packages/interface norms. */
+.studio-shell--preview-skin .topbar {
+	z-index: var(--z-top);
+	overflow: visible;
+}
+
+/* ── Column resize handles ── */
+.studio-shell--preview-skin .resize-handle::after {
+	background: var(--forgeax-divider);
+}
+
+.studio-shell--preview-skin .resize-handle:hover::after,
+.studio-shell--preview-skin .resize-handle:active::after {
+	background: var(--primary);
+	box-shadow: none;
+}
+
+/* ── Center column ── */
+.studio-shell--preview-skin .main-area {
+	background: var(--forgeax-canvas-tint);
+}
+
+.studio-shell--preview-skin .preview-toolbar.top {
+	border-bottom: 1px solid var(--forgeax-divider);
+	background: color-mix(
+		in srgb,
+		var(--color-background-canvas) 72%,
+		transparent
+	);
+}
+
+/* ── Right chat rail ── */
+.studio-shell--preview-skin .chat-panel {
+	background: transparent;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap {
+	padding: 8px 10px 6px;
+	border-bottom: none;
+}
+
+.studio-shell--preview-skin .cp-thread {
+	/* Chat keeps its agent capsule mounted for controller state but hides the
+     old floating UI, so the preview skin must not recreate its top reserve. */
+	padding: 0 14px 14px;
+}
+
+.studio-shell--preview-skin .day-divider span {
+	font-size: 11px;
+	color: var(--text-muted);
+}
+
+.studio-shell--preview-skin .day-divider::before,
+.studio-shell--preview-skin .day-divider::after {
+	border-color: var(--forgeax-divider);
+}
+
+/* ── Composer ── */
+.studio-shell--preview-skin .composer {
+	padding: 10px 10px;
+	border-top: none;
+	background: transparent;
+	position: relative;
+	overflow: visible;
+	z-index: var(--z-overlay);
+}
+
+.studio-shell--preview-skin .composer-input,
+.studio-shell--preview-skin .kbl-rich-input {
+	min-height: 56px;
+	padding: 10px 12px;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border-default);
+	background: var(--color-background-elevated);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.studio-shell--preview-skin .composer-input:focus,
+.studio-shell--preview-skin .kbl-rich-input:focus {
+	border-color: var(--forgeax-brand-ring);
+	box-shadow:
+		0 0 0 1px var(--forgeax-brand-ring),
+		0 0 0 4px var(--color-overlay-focus);
+}
+
+.studio-shell--preview-skin .composer-bar {
+	width: 100%;
+	flex-wrap: nowrap;
+	align-items: center;
+	gap: 5px;
+	margin-top: 8px;
+	overflow: visible;
+}
+.studio-shell--preview-skin .composer-bar.cb-at-menu-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+}
+.studio-shell--preview-skin .composer-bar .composer-toolbar-controls {
+	grid-area: 1 / 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 5px;
+	min-width: 0;
+	width: 100%;
+}
+
+.studio-shell--preview-skin .composer-bar .cb-at,
+.studio-shell--preview-skin .composer-bar .cb-slash {
+	position: relative;
+}
+
+.studio-shell--preview-skin .composer-bar .cb-mbsel,
+.studio-shell--preview-skin .composer-bar .cb-cli {
+	position: static;
+}
+
+.studio-shell--preview-skin .composer-bar .cb-at,
+.studio-shell--preview-skin .composer-bar .cb-slash {
+	flex: 0 0 30px;
+}
+.studio-shell--preview-skin .composer-bar .cb-at.has-summon-chip {
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: min(148px, calc(100vw - 140px));
+}
+.studio-shell--preview-skin .composer-bar .cb-left-group.has-summon-chip {
+	flex: 0 1 auto;
+	min-width: 0;
+}
+
+.studio-shell--preview-skin .composer-bar .cb-mbsel,
+.studio-shell--preview-skin .composer-bar .mp-root.cb-mbsel {
+	flex: 0 0 auto;
+	min-width: 0;
+	overflow: visible;
+}
+
+.studio-shell--preview-skin .composer .cb-at-menu,
+.studio-shell--preview-skin .composer .cb-slash-menu,
+.studio-shell--preview-skin .composer .cb-cli-menu,
+.studio-shell--preview-skin .composer .cb-mbsel-menu {
+	z-index: var(--z-top);
+	max-height: min(420px, calc(100vh - 220px));
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	box-sizing: border-box;
+}
+
+.studio-shell--preview-skin .composer .cb-slash-menu {
+	bottom: calc(100% + 8px);
+	left: 0;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-menu {
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: 50px;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	padding-bottom: 10px;
+}
+
+.studio-shell--preview-skin .composer .cb-cli-menu {
+	position: absolute;
+	left: 12px;
+	right: 12px;
+	bottom: 50px;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	padding-bottom: 10px;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-item {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	overflow: visible;
+	gap: 2px;
+	padding: 5px 8px;
+	line-height: 1.15;
+	flex-wrap: nowrap;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-main {
+	display: flex;
+	align-items: baseline;
+	gap: 5px;
+	width: 100%;
+	min-width: 0;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 3px;
+	min-width: 0;
+	margin-left: 0;
+	overflow: visible;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-vendor {
+	flex: 1 1 auto;
+	min-width: 0;
+	max-width: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-sep,
+.studio-shell--preview-skin .composer .cb-mbsel-channel {
+	flex: 0 0 auto;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-models,
+.studio-shell--preview-skin .composer .cb-mbsel-roles {
+	display: inline-flex;
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: 100%;
+	flex-wrap: wrap;
+	overflow: visible;
+	gap: 3px;
+	margin: 0;
+	padding-left: 0;
+	border-left: none;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-model,
+.studio-shell--preview-skin .composer .cb-mbsel-role {
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+.studio-shell--preview-skin .composer .cb-mbsel-arrow {
+	margin-left: auto;
+}
+
+/* ── Status bar ── */
+.studio-shell--preview-skin .global-status-bar {
+	height: var(--forgeax-shell-status-h);
+	min-height: var(--forgeax-shell-status-h);
+	padding: 0 12px;
+	background: var(--color-background-canvas);
+	border-top: 1px solid var(--forgeax-divider);
+	font-family: var(--font-mono);
+	font-size: 11px;
+	color: var(--text-secondary);
+	gap: 14px;
+}
+
+.studio-shell--preview-skin .sb-chip {
+	height: 22px;
+	border-radius: var(--radius-sm);
+	border-color: transparent;
+}
+
+.studio-shell--preview-skin .sb-chip.is-link:hover {
+	background: var(--color-interaction-hover);
+	border-color: var(--forgeax-divider);
+}
+
+.studio-shell--preview-skin .sb-chip-dot {
+	box-shadow: none;
+}

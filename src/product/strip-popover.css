@@ -1,0 +1,55 @@
+/* IDE status-bar chip and upward-anchored card shell. */
+
+.fx-strip-pop-btn.sb-chip[data-state="open"] {
+	color: var(--color-text-primary);
+	background: var(--color-interaction-hover);
+}
+
+.fx-strip-pop {
+	z-index: var(--z-popover, 60);
+	min-width: 240px;
+	max-width: 308px;
+	padding: 8px;
+	background: var(--color-background-floating);
+	border: 1px solid var(--color-border-default);
+	border-radius: 10px;
+	box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+	font-family: var(--font-mono);
+	font-size: 11.5px;
+	color: var(--color-text-secondary);
+	animation: fx-strip-pop-in 140ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fx-strip-pop[data-state="closed"] {
+	display: none;
+}
+
+@keyframes fx-strip-pop-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.fx-strip-pop-h {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--color-text-primary);
+	padding: 2px 4px 8px;
+}
+
+.fx-strip-pop-h svg {
+	width: 13px;
+	height: 13px;
+}
+
+.fx-strip-pop-h-act {
+	margin-left: auto;
+}

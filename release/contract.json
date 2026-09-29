@@ -1,20 +1,20 @@
 {
-  "schemaVersion": 1,
-  "productId": "forgeax-ide",
-  "sourceRepository": "ForgeaX-Games/forgeax-ide",
-  "releaseRepository": "ForgeaX-Games/forgeax-studio",
-  "integrationRepository": "ForgeaX-Games/forgeax-studio",
-  "tagPrefix": "v",
-  "transportContract": "release/transport-contract.v1.json",
-  "candidateSchema": "forgeax-ide-release-candidate/v1",
-  "platformEvidenceSchema": "forgeax-ide-platform-evidence/v1",
-  "recoverySchema": "forgeax-ide-release-recovery/v1",
-  "benchmarkRunSchema": "forgeax-ide-release-benchmark-run/v1",
-  "benchmarkSummarySchema": "forgeax-ide-release-benchmark-summary/v1",
-  "requiredPlatforms": ["macos-arm64", "macos-x64", "windows-x64"],
-  "sidecarService": "forgeax-server",
-  "secretNames": {
-    "integration": ["INTERNAL_TOKEN"]
-  },
-  "optionalNotificationSecret": "WECOM_WEBHOOK_KEY"
+	"schemaVersion": 1,
+	"productId": "forgeax-ide",
+	"sourceRepository": "ForgeaX-Games/forgeax-ide",
+	"releaseRepository": "ForgeaX-Games/forgeax-studio",
+	"integrationRepository": "ForgeaX-Games/forgeax-studio",
+	"tagPrefix": "v",
+	"transportContract": "release/transport-contract.v1.json",
+	"candidateSchema": "forgeax-ide-release-candidate/v1",
+	"platformEvidenceSchema": "forgeax-ide-platform-evidence/v1",
+	"recoverySchema": "forgeax-ide-release-recovery/v1",
+	"benchmarkRunSchema": "forgeax-ide-release-benchmark-run/v1",
+	"benchmarkSummarySchema": "forgeax-ide-release-benchmark-summary/v1",
+	"requiredPlatforms": ["macos-arm64", "macos-x64", "windows-x64"],
+	"sidecarService": "forgeax-server",
+	"secretNames": {
+		"integration": ["INTERNAL_TOKEN"]
+	},
+	"optionalNotificationSecret": "WECOM_WEBHOOK_KEY"
 }

@@ -1,0 +1,92 @@
+.fx-desktop-startup {
+	align-items: center;
+	background: #090a0d;
+	color: #f4f4f5;
+	display: flex;
+	font-family:
+		Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+	inset: 0;
+	justify-content: center;
+	position: fixed;
+}
+
+.fx-desktop-startup__content {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	max-width: min(720px, calc(100vw - 48px));
+}
+
+.fx-desktop-startup__spinner {
+	animation: fx-desktop-startup-spin 0.9s linear infinite;
+	border: 2px solid rgb(255 255 255 / 16%);
+	border-radius: 50%;
+	border-top-color: #d8ff3e;
+	height: 26px;
+	width: 26px;
+}
+
+.fx-desktop-startup__title {
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+
+.fx-desktop-startup__message {
+	color: #94969d;
+	font-size: 13px;
+}
+
+.fx-desktop-startup__failure {
+	color: #c4c5ca;
+	display: grid;
+	font-size: 12px;
+	gap: 10px;
+	max-width: 100%;
+}
+
+.fx-desktop-startup__error {
+	background: #15171c;
+	border: 1px solid #343741;
+	border-radius: 6px;
+	color: #ffb4ab;
+	margin: 0;
+	max-height: 220px;
+	overflow: auto;
+	padding: 12px;
+	white-space: pre-wrap;
+}
+
+.fx-desktop-startup__failure code {
+	overflow-wrap: anywhere;
+}
+
+.fx-desktop-startup__actions {
+	display: flex;
+	gap: 8px;
+}
+
+.fx-desktop-startup__actions button {
+	background: #252832;
+	border: 1px solid #484c59;
+	border-radius: 6px;
+	color: #f4f4f5;
+	cursor: pointer;
+	padding: 8px 12px;
+}
+
+.fx-desktop-startup__actions button:hover {
+	border-color: #d8ff3e;
+}
+
+.fx-desktop-startup__action-error {
+	color: #ffb4ab;
+}
+
+@keyframes fx-desktop-startup-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -1,0 +1,942 @@
+/* 右侧聊天栏 — cp-body 包裹消息流 + 悬浮 agent strip */
+
+.cp-body {
+	flex: 1;
+	min-height: 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap {
+	padding: 5px 8px 0;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab-strip-track {
+	align-items: center;
+	overflow-y: visible;
+	scrollbar-width: none;
+}
+
+.studio-shell--preview-skin
+	.chat-session-tabs-wrap
+	.tab-strip-track::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab {
+	box-sizing: border-box;
+	max-width: 124px;
+	min-height: 26px;
+	padding: 4px 9px 5px;
+	border-radius: 8px 8px 0 0;
+	border-bottom: none;
+	margin-bottom: -1px;
+	overflow: visible;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab.tab-active::after {
+	display: block;
+	left: 1px;
+	right: 1px;
+	bottom: -1px;
+	height: 1px;
+	background: var(--color-background-base);
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab-add {
+	width: 26px;
+	height: 26px;
+	border-radius: var(--radius-md);
+}
+
+.chat-session-tabs {
+	box-sizing: border-box;
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 44px;
+	padding: 6px 10px;
+	min-width: 0;
+	border-bottom: 1px solid var(--color-border-subtle);
+	background: var(--color-background-base);
+}
+
+.chat-session-tab-list {
+	flex: 1 1 auto;
+	min-width: 0;
+	display: flex;
+	align-items: stretch;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: none;
+}
+
+.chat-session-tab-list::-webkit-scrollbar {
+	display: none;
+}
+
+.chat-session-tab {
+	position: relative;
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	max-width: 140px;
+	min-width: 0;
+	color: var(--color-text-secondary);
+}
+
+.chat-session-tab + .chat-session-tab::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 7px;
+	bottom: 7px;
+	width: 1px;
+	background: var(--color-border-default);
+}
+
+.chat-session-tab.is-active::before,
+.chat-session-tab.is-active + .chat-session-tab::before,
+.chat-session-tab:hover::before,
+.chat-session-tab:hover + .chat-session-tab::before {
+	opacity: 0;
+}
+
+.chat-session-tab-button {
+	min-width: 0;
+	max-width: 118px;
+	height: 30px;
+	padding: 0 10px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: inherit;
+	font-size: 12px;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.chat-session-tab-label {
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.chat-session-tab:hover,
+.chat-session-tab.is-active {
+	color: var(--color-brand-primary);
+}
+
+.chat-session-tab.is-active .chat-session-tab-button {
+	font-weight: 600;
+}
+
+.chat-session-tab.is-active::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 8px;
+	right: 8px;
+	height: 2px;
+	border-radius: 1px;
+	background: var(--color-brand-primary);
+	pointer-events: none;
+}
+
+.chat-session-tab-close {
+	flex: 0 0 auto;
+	width: 24px;
+	height: 24px;
+	margin-left: -7px;
+	padding: 0;
+	display: inline-grid;
+	place-items: center;
+	border: 0;
+	border-radius: 5px;
+	background: transparent;
+	color: currentColor;
+	opacity: 0.62;
+	cursor: pointer;
+}
+
+.chat-session-tab-close:hover,
+.chat-session-tab-close:focus-visible {
+	opacity: 1;
+	background: var(--color-background-elevated);
+}
+
+.chat-session-tab-tools {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.chat-session-tab-tool {
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	border: 0;
+	background: transparent;
+	color: var(--color-text-secondary);
+	padding: 0;
+	display: inline-grid;
+	place-items: center;
+	cursor: pointer;
+}
+
+.chat-session-tab-tool:hover,
+.chat-session-tab-tool:focus-visible {
+	color: var(--color-text-primary);
+	background: var(--color-background-elevated);
+}
+
+.chat-session-tab-tool.is-active {
+	color: var(--color-brand-primary);
+	background: color-mix(
+		in srgb,
+		var(--color-brand-primary) 8%,
+		var(--color-background-elevated)
+	);
+}
+
+.chat-session-history {
+	box-sizing: border-box;
+	width: min(440px, calc(100vw - 24px));
+	max-height: min(520px, calc(100vh - 80px));
+	padding: 10px;
+	border: 1px solid var(--color-border-default);
+	border-radius: 10px;
+	background: var(--color-background-floating);
+	color: var(--color-text-primary);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55);
+}
+
+.chat-session-history-title {
+	height: 30px;
+	padding: 0 8px 6px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--color-text-secondary);
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.chat-session-history-list {
+	max-height: 430px;
+	overflow-y: auto;
+}
+
+.chat-session-history-row {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 40px;
+	padding: 0 9px;
+	display: grid;
+	grid-template-columns: 18px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 8px;
+	border: 0;
+	border-radius: 7px;
+	background: transparent;
+	color: var(--color-text-secondary);
+	text-align: left;
+	cursor: pointer;
+}
+
+.chat-session-history-row:hover,
+.chat-session-history-row:focus-visible,
+.chat-session-history-row.is-active {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+
+.chat-session-history-row.is-active {
+	color: var(--color-brand-primary);
+}
+
+.chat-session-history-name {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.chat-session-history-time {
+	color: var(--color-text-tertiary);
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+
+.chat-session-history-empty {
+	padding: 18px 10px;
+	color: var(--color-text-tertiary);
+	font-size: 12px;
+	text-align: center;
+}
+
+/* ─── Agent Facepile Strip ──────────────────────────────────────────────────
+ *
+ * Floats above the message thread, centered.
+ * Hover on the strip (anywhere) → ALL avatars expand + names appear together.
+ * Container itself also grows (gap & padding animate).
+ *   loading → spinning ring while that agent is streaming
+ *   unread  → red pulsing dot when a non-active agent has new output
+ *   selected→ 2 px brand-color border on the avatar
+ * ─────────────────────────────────────────────────────────────────────────── */
+/* Positioning shell — page dots live here, outside the flex pill */
+.chat-agent-capsule-wrap {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	box-sizing: border-box;
+	width: max-content;
+	max-width: calc(100% - 20px);
+	z-index: var(--z-overlay);
+}
+
+.cas-hover-moat {
+	position: absolute;
+	inset: -12px -18px;
+	z-index: 0;
+	border-radius: 999px;
+	background: transparent;
+}
+
+.chat-agent-capsule-wrap.has-paging:hover {
+	cursor: grab;
+	touch-action: none;
+}
+
+.chat-agent-capsule-wrap.has-paging.is-paging-drag {
+	cursor: grabbing;
+	user-select: none;
+}
+
+.chat-agent-capsule {
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+	display: flex;
+	/* Center every sibling on the tallest cas-btn (avatar + name in flow). */
+	align-items: center;
+	gap: 4px;
+	padding: 4px;
+	border-radius: 100px;
+	border: 1px solid var(--color-border-default);
+	background: color-mix(in srgb, var(--color-background-base) 72%, transparent);
+	max-width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	scrollbar-width: none;
+	transition:
+		gap 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		padding 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		border-color 0.2s ease;
+}
+
+.chat-agent-capsule::before,
+.chat-agent-capsule::after {
+	content: "";
+	position: absolute;
+	top: 1px;
+	bottom: 1px;
+	width: 42px;
+	border-radius: 999px;
+	opacity: 0;
+	pointer-events: none;
+	transition:
+		opacity 0.18s ease,
+		transform 0.24s ease;
+	z-index: 1;
+}
+
+.chat-agent-capsule::before {
+	left: 1px;
+	background: linear-gradient(
+		90deg,
+		color-mix(in srgb, var(--primary) 18%, transparent),
+		transparent
+	);
+	transform: translateX(-3px);
+}
+
+.chat-agent-capsule::after {
+	right: 1px;
+	background: linear-gradient(
+		270deg,
+		color-mix(in srgb, var(--primary) 18%, transparent),
+		transparent
+	);
+	transform: translateX(3px);
+}
+
+.chat-agent-capsule-wrap.is-edge-hover-prev .chat-agent-capsule::before,
+.chat-agent-capsule-wrap.is-edge-hover-next .chat-agent-capsule::after {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+.chat-agent-capsule-wrap.is-edge-hover-prev .cas-btn {
+	transform: translateX(1px);
+}
+
+.chat-agent-capsule-wrap.is-edge-hover-next .cas-btn {
+	transform: translateX(-1px);
+}
+
+@keyframes cas-page-enter-next {
+	from {
+		opacity: 0.38;
+		transform: translateX(10px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+@keyframes cas-page-enter-prev {
+	from {
+		opacity: 0.38;
+		transform: translateX(-10px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0) scale(1);
+	}
+}
+
+.chat-agent-capsule-wrap.is-page-motion-next .cas-btn {
+	animation: cas-page-enter-next 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.chat-agent-capsule-wrap.is-page-motion-prev .cas-btn {
+	animation: cas-page-enter-prev 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.chat-agent-capsule::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+/* Hover: container expands + border strengthens */
+.chat-agent-capsule-wrap:hover .chat-agent-capsule {
+	gap: 6px;
+	padding: 6px 20px;
+	border-color: var(--color-border-default);
+}
+
+/* ── Pagination nav arrows — hidden until capsule is hovered ──
+ *
+ * Siblings of .cas-btn in the same flex row. Row cross-size = full agent tab
+ * (padding + avatar + name). Parent align-items:center centers nav in that
+ * height — do not use flex-start / margin-top on the avatar band only. */
+.cas-nav-btn {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 0;
+	height: 24px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--color-text-secondary);
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1;
+	transform: translateY(-2px); /* optical: ‹ › sit low in the em box */
+	cursor: pointer;
+	flex-shrink: 0;
+	opacity: 0;
+	overflow: hidden;
+	pointer-events: none;
+	transition:
+		width 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		margin 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.18s ease,
+		color 0.15s ease;
+}
+
+/* Negative margins cancel the flex gap while collapsed (gap = 4px per side) */
+.cas-nav-prev {
+	margin-right: -4px;
+}
+.cas-nav-next {
+	margin-left: -4px;
+}
+
+.chat-agent-capsule-wrap:hover .cas-nav-btn {
+	width: 20px;
+	height: 36px;
+	opacity: 1;
+	pointer-events: auto;
+	font-size: 18px;
+}
+
+.chat-agent-capsule-wrap:hover .cas-nav-prev {
+	margin-right: 0;
+}
+.chat-agent-capsule-wrap:hover .cas-nav-next {
+	margin-left: 0;
+}
+
+/* Individual chevron hover: color only, no background */
+.chat-agent-capsule-wrap:hover .cas-nav-btn:hover {
+	color: var(--color-text-primary);
+}
+
+/* Disabled: dim + no pointer */
+.chat-agent-capsule-wrap:hover .cas-nav-btn.is-disabled {
+	opacity: 0.22;
+	pointer-events: none;
+}
+
+/* ── Page-dot indicator — sibling of the pill, below wrap on hover ── */
+.cas-page-dots {
+	position: absolute;
+	top: calc(100% + 6px);
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.18s ease 0.08s;
+}
+
+.chat-agent-capsule-wrap:hover .cas-page-dots {
+	opacity: 1;
+}
+
+/* ── "拍了拍你" 气泡 —— agent 回复完成后, 紧贴胶囊下方冒出, 维持 5s 后消失 ──
+ *
+ * wrap 是 width:max-content (= 胶囊宽), left:0/right:0 的容器就等于胶囊宽; 内部气泡
+ * width:fit-content 随文字伸缩, max-width:100% 把上限钉在胶囊宽 (满了就换行). */
+.cas-pat-bubble {
+	position: absolute;
+	top: calc(100% + 7px);
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: flex-start;
+	pointer-events: none;
+	z-index: 2;
+	opacity: 0;
+	transform: translateY(-4px);
+	transition:
+		opacity 0.26s ease,
+		transform 0.26s ease;
+}
+.cas-pat-bubble.is-show {
+	opacity: 1;
+	transform: translateY(0);
+}
+.cas-pat-text {
+	position: relative;
+	box-sizing: border-box;
+	width: fit-content;
+	max-width: 100%;
+	padding: 6px 12px;
+	font-size: 12px;
+	line-height: 1.4;
+	text-align: center;
+	color: var(--color-text-secondary);
+	background: color-mix(in srgb, var(--color-background-base) 90%, transparent);
+	border: 1px solid var(--color-border-default);
+	border-radius: 12px;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+	backdrop-filter: blur(6px);
+	word-break: break-word;
+}
+/* 朝上的小尖角, 指向胶囊第一个头像 (--pat-tail-x 由 JS 测量后注入, 相对气泡左边缘). */
+.cas-pat-text::before {
+	content: "";
+	position: absolute;
+	top: -5px;
+	left: var(--pat-tail-x, 24px);
+	width: 8px;
+	height: 8px;
+	transform: translateX(-50%) rotate(45deg);
+	background: inherit;
+	border-left: 1px solid var(--color-border-default);
+	border-top: 1px solid var(--color-border-default);
+}
+@media (prefers-reduced-motion: reduce) {
+	.cas-pat-bubble {
+		transition: opacity 0.26s ease;
+		transform: none;
+	}
+	.cas-pat-bubble.is-show {
+		transform: none;
+	}
+}
+
+.cas-page-dot {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: var(--color-text-tertiary);
+	transition:
+		background 0.18s ease,
+		transform 0.18s ease;
+}
+
+.cas-page-dot.is-active {
+	background: var(--primary);
+	transform: scale(1.3);
+}
+
+/* ── Individual agent button ──
+ *
+ * Base state: width is intrinsic (24px from avatar-wrap, no explicit width).
+ * Hover state: transitions to a fixed 64px (box-sizing: border-box), which
+ * gives 52px of content width — enough for exactly 5 full-width CJK chars
+ * at 10px font-size.  All buttons end up the same width regardless of name
+ * length; names longer than the content area get an ellipsis. */
+.cas-btn {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0;
+	padding: 0;
+	/* ADR-0019: button 跟 cas-avatar-wrap (32×32) 同尺寸, 不再 overflow:hidden 切 wrap.
+   * 之前默认 24×24, wrap 32 溢出 8px 被切掉, portrait WEBM 头部不可见. */
+	width: 32px;
+	height: 32px;
+	min-height: 32px;
+	max-height: 32px;
+	overflow: hidden;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	cursor: pointer;
+	flex-shrink: 0;
+	transition:
+		width 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		min-height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		max-height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		padding 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		background 0.22s ease,
+		border-radius 0.26s ease,
+		transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* overflow: visible lets the unread dot peek outside the rounded corner.
+ * Fixed 62px = 4 padding-top + 36 avatar + 4 name gap + 14 name + 4 padding-bottom */
+.chat-agent-capsule-wrap:hover .cas-btn {
+	box-sizing: border-box;
+	width: 64px;
+	height: 62px;
+	min-height: 62px;
+	max-height: 62px;
+	overflow: visible;
+	padding: 4px 6px;
+	border-radius: 12px;
+	background: var(--color-divider-subtle);
+}
+
+/* Per-button stronger highlight on individual hover */
+.chat-agent-capsule-wrap:hover .cas-btn:hover {
+	background: var(--color-divider-default);
+}
+
+/* ── Avatar wrapper — drives size transitions ── */
+.cas-avatar-wrap {
+	position: relative;
+	width: 32px;
+	height: 32px;
+	flex-shrink: 0;
+	transition:
+		width 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		height 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* All wrappers grow when the strip is hovered */
+.chat-agent-capsule-wrap:hover .cas-avatar-wrap {
+	width: 44px;
+	height: 44px;
+}
+
+/* ADR-0019 — WEBM avatar fills the wrap exactly. !important overrides the inline
+ * `width/height` <AgentAvatarVideo>'s size prop sets (cas-avatar-wrap drives sizing
+ * here, not the component). 没这条会 anchor 左上 + 溢出 → 视觉上歪. */
+.cas-avatar-wrap > .agent-avatar-video {
+	position: absolute;
+	inset: 0;
+	width: 100% !important;
+	height: 100% !important;
+}
+
+/* Capsule-only avatar framing — the small capsule circle showed faces a bit
+ * too low, so lift + zoom the WEBM layer just here. Scoped to .cas-avatar-wrap
+ * and given higher specificity than the global per-agent rules in
+ * agent-avatar-video.css (the extra [data-agent-id] bumps the weight) so this
+ * wins inside the capsule WITHOUT touching the same component anywhere else
+ * (sidebar / chat / extension / settings keep their own framing). The circular
+ * frame stays 32/44px; only the image inside is scaled/shifted. */
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id] .aav-layer {
+	transform: scale(1.32) translate3d(0, -16%, 0);
+	transform-origin: center top;
+}
+/* Capsule per-agent tweaks (override the uniform rule above; same specificity,
+ * later in source so they win). Still scoped to .cas-avatar-wrap only. */
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="cc-coder"] .aav-layer {
+	transform: scale(1.52) translate3d(0, -48%, 0);
+}
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="lock"] .aav-layer {
+	transform: scale(1.32) translate3d(0, -28%, 0);
+}
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="iro"] .aav-layer {
+	transform: scale(1.32) translate3d(0, -20%, 0);
+}
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="suzu"] .aav-layer {
+	transform: scale(1.38) translate3d(0, -26%, 0);
+}
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="arin"] .aav-layer {
+	transform: scale(1.16) translate3d(0, -24%, 0);
+}
+.cas-avatar-wrap > .agent-avatar-video[data-agent-id="iori"] .aav-layer {
+	transform: scale(1.24) translate3d(0, -9%, 0);
+}
+
+/* Nudge ONLY the capsule's outer pill/border down a few px while keeping the
+ * avatars where they are: move the whole pill down N, then pull the avatar
+ * wrap back up N so its net position is unchanged. (Name label is hover-only,
+ * a few px shift there is invisible.) */
+.chat-agent-capsule {
+	transform: translateY(3px);
+}
+.cas-avatar-wrap {
+	transform: translateY(-3px);
+}
+
+/* ADR-0019 — 选中态绿色环. 原来靠 .cas-avatar 改 background 提示选中, 现在 WEBM
+ * 盖住了背景, 改用 box-shadow ring (不占布局, 不会跟 cas-spinner 的 inset:-3px 撞). */
+.cas-btn.is-selected .cas-avatar-wrap {
+	box-shadow: 0 0 0 2px var(--primary);
+	border-radius: 50%;
+}
+
+/* ── Avatar circle — fills the wrapper ── */
+.cas-avatar {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: var(--prim-color-neutral-300); /* #B3B3B3 — unselected, darker */
+	color: var(--color-text-on-bright-primary); /* #000000 */
+	font-family: var(--mono);
+	font-size: 9px;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	border: none;
+	transition:
+		font-size 0.24s ease,
+		background 0.18s ease;
+}
+
+/* All avatars get bigger font when strip is hovered */
+.chat-agent-capsule-wrap:hover .cas-avatar {
+	font-size: 12px;
+}
+
+/* Selected: brand-color bg + black text */
+.cas-btn.is-selected .cas-avatar {
+	background: var(--primary);
+	color: var(--color-text-on-bright-primary);
+	border: none;
+}
+
+/* ── Loading spinner ── */
+@keyframes cas-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.cas-spinner {
+	position: absolute;
+	inset: -3px;
+	border-radius: 50%;
+	border: 2px solid transparent;
+	border-top-color: rgba(80, 80, 80, 0.85);
+	border-right-color: rgba(80, 80, 80, 0.3);
+	animation: cas-spin 0.72s linear infinite;
+	pointer-events: none;
+}
+
+/* ── Unread dot ── */
+@keyframes cas-unread-pulse {
+	0%,
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.4);
+		opacity: 0.75;
+	}
+}
+
+.cas-unread-dot {
+	position: absolute;
+	top: -2px;
+	right: -2px;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #ef4444;
+	border: 1.5px solid
+		color-mix(in srgb, var(--color-background-base) 90%, transparent);
+	animation: cas-unread-pulse 2s ease-in-out infinite;
+	pointer-events: none;
+}
+
+/* ── Agent name — hidden until the whole strip is hovered ──
+ *
+ * The button is now fixed-width (64px with 6px side padding → 52px content).
+ * The name is therefore always constrained to 52px regardless of text length.
+ * `text-overflow: ellipsis` handles any overflow; the full name is visible
+ * via the ::after tooltip on individual button hover.
+ *
+ * `max-width: 0 → 52px` still drives the smooth horizontal reveal animation;
+ * `max-height` / `opacity` / `transform` handle the vertical slide-in with a
+ * 0.10s delay so space opens before text appears. */
+.cas-name {
+	display: block;
+	flex-shrink: 0;
+	font-size: 10px;
+	font-weight: 500;
+	color: var(--color-text-secondary);
+	white-space: nowrap;
+	width: 52px;
+	max-width: 52px;
+	height: 0;
+	max-height: 0;
+	line-height: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	opacity: 0;
+	margin-top: 0;
+	transition:
+		height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		max-height 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		margin-top 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 0.18s ease 0.06s;
+	pointer-events: none;
+}
+
+/* Name slot grows inside the animating 24→62px tab — no extra document-flow jump */
+.chat-agent-capsule-wrap:hover .cas-name {
+	height: 14px;
+	max-height: 14px;
+	margin-top: 4px;
+	opacity: 1;
+}
+
+/* 当前 Agent + Bus 路由 */
+.chat-agent-detail-bar {
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+	gap: 5px;
+	min-height: 28px;
+	padding: 4px 8px 5px;
+	border-top: 1px solid var(--color-border-default);
+	min-width: 0;
+}
+
+.chat-agent-detail-bar .cp-agent-bar {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+}
+
+.chat-agent-detail-bar .cp-agent-bar-id,
+.chat-agent-detail-bar .cp-agent-bar-id-text,
+.chat-agent-detail-bar .cp-agent-bar-bus,
+.chat-agent-detail-bar .cp-agent-bar-bus-id {
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.chat-agent-detail-label {
+	font-size: 10.5px;
+	color: var(--color-text-tertiary);
+}
+
+.chat-agent-detail-pill {
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 8px;
+	border-radius: 6px;
+	color: var(--color-role-orchestrator);
+	background: var(--color-accent-purple-soft);
+	border: 1px solid
+		color-mix(in srgb, var(--color-role-orchestrator) 28%, transparent);
+}
+
+.chat-agent-detail-bus {
+	flex: 1;
+	min-width: 0;
+	font-family: var(--mono);
+	font-size: 10px;
+	color: var(--color-kind-cli-provider);
+	padding: 4px 8px;
+	border-radius: 6px;
+	border: 1px solid
+		color-mix(in srgb, var(--color-kind-cli-provider) 35%, transparent);
+	background: var(--color-accent-blue-soft);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.chat-agent-detail-bus-arrow {
+	margin-left: 4px;
+	opacity: 0.7;
+}
+
+.chat-agent-detail-actions {
+	display: flex;
+	align-items: center;
+	gap: 2px;
+	margin-left: auto;
+	flex-shrink: 0;
+}
+
+.chat-agent-detail-action {
+	width: 22px;
+	height: 22px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	border-radius: 7px;
+	background: transparent;
+	color: var(--color-text-tertiary);
+	cursor: pointer;
+}
+
+.chat-agent-detail-action:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-secondary);
+}

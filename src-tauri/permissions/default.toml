@@ -1,0 +1,32 @@
+"$schema" = "../gen/schemas/desktop-schema.json"
+
+# App-level permissions for this app's own `#[tauri::command]`s (registered in
+# src/lib.rs via generate_handler!).
+#
+# Why this file exists:
+#   The desktop UI is served from the bundled sidecar's http origin
+#   (http://127.0.0.1:*), so Tauri treats it as a REMOTE origin. `webview/mod.rs`
+#   rejects every custom command from a non-local origin unless an explicit
+#   capability grants it:
+#
+#     if (plugin_command.is_some() || has_app_acl_manifest || !is_local)
+#        && invoke.acl.is_none() { reject("Command ... not allowed by ACL") }
+#
+#   Without grants the native menu bar silently disappears (native-menu-bridge
+#   only console.warn()s), and the other commands below fail on click.
+#
+# Scope note: this grants exactly the six commands the app registers — no
+# plugin capabilities (notably NOT `shell:allow-execute`) are widened here, so
+# the `/preview` game content sharing this origin gains no new privilege.
+
+[[permission]]
+identifier = "allow-ide-app-commands"
+description = "Allows the six custom commands this app registers in src/lib.rs."
+commands.allow = [
+  "set_app_menu",
+  "set_pointer_capture",
+  "fx_trace",
+  "desktop_runtime_snapshot",
+  "open_desktop_runtime_log",
+  "retry_desktop_runtime"
+]

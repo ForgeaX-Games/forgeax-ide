@@ -1,0 +1,28 @@
+.ide-extension-panel {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: hidden;
+}
+
+.ide-extension-panel--placeholder {
+	padding: 16px;
+	font-size: 13px;
+	color: var(--color-text-secondary, #aaa);
+}
+
+.ide-extension-panel-name {
+	font-weight: 700;
+	color: var(--color-text-primary, #eee);
+	margin-bottom: 4px;
+}
+
+.ide-extension-panel-description {
+	margin-bottom: 8px;
+}
+
+.ide-extension-panel-id {
+	font-family: var(--font-mono);
+	font-size: 11px;
+	opacity: 0.7;
+}

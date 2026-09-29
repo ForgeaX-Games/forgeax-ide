@@ -1,6 +1,6 @@
 {
-  "build": {
-    "beforeBuildCommand": null,
-    "frontendDist": "../dist"
-  }
+	"build": {
+		"beforeBuildCommand": null,
+		"frontendDist": "../dist"
+	}
 }

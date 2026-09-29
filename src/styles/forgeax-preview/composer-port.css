@@ -1,0 +1,537 @@
+/**
+ * Composer toolbar layout port — semantic colors from tokens.css
+ */
+
+.composer,
+.studio-shell--preview-skin .composer {
+	position: relative;
+	overflow: visible;
+	z-index: var(--z-overlay);
+	padding: 8px;
+	flex-shrink: 0;
+	background: transparent;
+	border-top: none;
+}
+
+/* The actual card — input area + toolbar as one visual unit */
+.composer-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	min-height: 120px;
+	background: var(--color-background-elevated);
+	border-radius: 18px;
+	overflow: visible;
+}
+
+.composer-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	flex-wrap: nowrap;
+	min-width: 0;
+	overflow: visible;
+}
+
+/* Left group: Upload | @ | Slash | Model */
+.composer-bar .cb-left-group {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	height: 28px;
+	flex-shrink: 0;
+}
+.composer-bar .composer-toolbar-controls {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 4px;
+	min-width: 0;
+	width: 100%;
+}
+/* Summon chip may ellipsis on a narrow dock; upload, slash and model stay
+ * content-sized so the picker width does not jump when a specialist is chosen. */
+.composer-bar .cb-left-group.has-summon-chip {
+	flex: 0 1 auto;
+	min-width: 0;
+}
+.composer-bar .cb-left-group.has-summon-chip .cb-at.has-summon-chip {
+	flex: 0 1 auto;
+	min-width: 47px;
+}
+
+/* Right group: CLI pill | Send */
+.composer-bar .cb-right-group {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	flex-shrink: 0;
+	padding-right: 4px;
+}
+
+.cb-context-ring {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	cursor: default;
+	user-select: none;
+}
+.cb-context-label {
+	font-size: 11px;
+	color: var(--text-muted, #888);
+	line-height: 1;
+}
+
+.composer-bar .cb-at,
+.composer-bar .cb-slash {
+	position: relative;
+	flex: 0 0 28px;
+}
+
+/* The specialist chip is a content button, not an icon button. Keep this
+ * explicit class so the preview skin does not rely on :has() support. */
+.composer-bar .cb-at.has-summon-chip {
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: min(148px, calc(100vw - 140px));
+}
+.composer-bar .cb-at.has-summon-chip > .cb-at-chip {
+	width: fit-content;
+	min-width: 0;
+	max-width: 100%;
+	flex: 0 1 auto;
+}
+.composer-bar .cb-mbsel,
+.composer-bar .mp-root.cb-mbsel {
+	position: relative;
+	flex: 0 0 auto;
+	overflow: visible;
+}
+
+.composer-bar .cb-cli {
+	position: relative;
+	flex: 0 0 auto;
+	overflow: visible;
+}
+
+/* Icon buttons — 28×28, transparent bg, circular */
+.composer-bar .cb-btn {
+	box-sizing: border-box;
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: var(--radius-sm);
+	border: none;
+	background: transparent;
+	color: var(--color-text-primary);
+	transition: background var(--motion-duration-instant)
+		var(--motion-ease-standard);
+}
+
+.composer-bar .cb-btn > svg {
+	width: 16px;
+	height: 16px;
+	stroke-width: 1.75;
+}
+
+.composer-bar .cb-btn:hover:not(:disabled) {
+	background: var(--color-interaction-hover);
+}
+
+.composer-bar .cb-btn > svg {
+	width: 16px;
+	height: 16px;
+	stroke-width: 1.75;
+}
+
+.composer-bar .cb-btn:hover:not(:disabled) {
+	color: var(--color-text-primary);
+	background: var(--color-interaction-hover);
+}
+
+/* ModelPicker "Mode" button — plain text + chevron, pill shape */
+.composer-bar .cb-mbsel .mp-trigger.mp-button {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	height: 28px;
+	min-width: 0;
+	padding: 2px 5px;
+	border-radius: var(--radius-pill);
+	border: none;
+	background: transparent;
+	font-size: 12px;
+	font-weight: 500;
+	font-family: var(--font-sans);
+	line-height: 1;
+	color: var(--color-text-primary);
+	box-shadow: none;
+	white-space: nowrap;
+}
+
+.composer-bar .cb-mbsel .mp-trigger.mp-button:hover:not(:disabled) {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+
+.composer-bar .cb-mbsel .mp-trigger.mp-button.is-open {
+	background: var(--color-interaction-hover);
+}
+
+.composer-bar .cb-mbsel .mp-trigger.mp-button:disabled {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.composer-bar .cb-mbsel .mp-trigger-label {
+	min-width: 36px;
+	max-width: 64px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.composer-bar .cb-mbsel .mp-trigger svg {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+}
+
+.composer-bar .cb-mbsel .mp-menu {
+	position: absolute;
+	top: auto;
+	left: 0;
+	right: auto;
+	bottom: calc(100% + 6px);
+	width: auto;
+	min-width: 180px;
+	max-width: none;
+	z-index: var(--z-top);
+}
+
+/* White provider pill — Figma 137:4056 */
+.composer-bar .cb-cli-btn {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	flex: 0 0 auto;
+	flex-shrink: 0;
+	height: 28px;
+	padding: 10px 10px;
+	border-radius: 36px;
+	background: var(--prim-color-neutral-0);
+	color: var(--color-text-on-bright-primary);
+	font-size: 12px;
+	font-family: var(--font-sans);
+	font-weight: 500;
+	border: none;
+	cursor: pointer;
+}
+
+.composer-bar .cb-cli-btn svg {
+	width: 16px;
+	height: 16px;
+	flex-shrink: 0;
+	color: var(--color-text-on-bright-primary);
+}
+
+.composer-bar .cb-cli-label {
+	flex-shrink: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* Send button — 28×28 lime green circle */
+.composer-bar .cb-send,
+.composer-bar button[type="submit"].cb-send {
+	box-sizing: border-box;
+	width: 28px;
+	height: 28px;
+	flex: 0 0 28px;
+	border-radius: var(--radius-pill);
+	box-shadow: none;
+}
+
+.composer-bar .cb-send svg {
+	width: 16px;
+	height: 16px;
+	stroke-width: 1.9;
+}
+
+/* RichInput — flex-grow inside the card; card provides bg */
+.kbl-rich-input {
+	flex: 1 0 0;
+	min-height: 0;
+	background: transparent;
+}
+
+/* Inside composer-card: no border, no glow on any focus state */
+.composer-card .kbl-rich-input,
+.studio-shell--preview-skin .composer-card .kbl-rich-input {
+	background: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.composer-card .kbl-rich-input:focus,
+.studio-shell--preview-skin .composer-card .kbl-rich-input:focus {
+	border-color: transparent;
+	box-shadow: none;
+	outline: none;
+}
+
+/* Popover menus */
+.cb-at-menu,
+.cb-slash-menu,
+.cb-cli-menu,
+.cb-mbsel-menu {
+	z-index: var(--z-top);
+	max-height: min(420px, calc(100vh - 220px));
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	box-sizing: border-box;
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--color-border-default);
+	background: var(--color-background-elevated);
+	box-shadow:
+		inset 0 1px var(--color-divider-default),
+		0 0 0 1px color-mix(in srgb, var(--color-brand-primary) 10%, transparent),
+		0 20px 48px var(--color-overlay-modal);
+}
+
+.cb-mbsel-item {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	overflow: visible;
+	gap: 2px;
+	padding: 5px 8px;
+	line-height: 1.15;
+	flex-wrap: nowrap;
+}
+
+.cb-mbsel-main {
+	display: flex;
+	align-items: baseline;
+	gap: 5px;
+	width: 100%;
+	min-width: 0;
+}
+
+.cb-mbsel-meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 3px;
+	min-width: 0;
+	margin-left: 0;
+	overflow: visible;
+}
+
+.cb-mbsel-vendor {
+	flex: 1 1 auto;
+	min-width: 0;
+	max-width: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cb-mbsel-sep,
+.cb-mbsel-channel {
+	flex: 0 0 auto;
+}
+
+.cb-mbsel-models,
+.cb-mbsel-roles {
+	display: inline-flex;
+	flex: 0 1 auto;
+	min-width: 0;
+	max-width: 100%;
+	flex-wrap: wrap;
+	overflow: visible;
+	gap: 3px;
+	margin: 0;
+	padding-left: 0;
+	border-left: none;
+}
+
+.cb-mbsel-model,
+.cb-mbsel-role {
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+.cb-mbsel-arrow {
+	margin-left: auto;
+}
+
+.cb-at-menu,
+.cb-slash-menu {
+	bottom: calc(100% + 8px);
+	left: 0;
+}
+
+.cb-mbsel-menu,
+.cb-cli-menu {
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	bottom: 44px;
+	width: auto;
+	min-width: 0;
+	max-width: none;
+	padding-bottom: 10px;
+}
+
+.cb-at-menu button:hover,
+.cb-slash-menu button:hover,
+.cb-cli-menu button:hover:not(:disabled),
+.cb-mbsel-menu button:hover:not(:disabled) {
+	background: linear-gradient(
+		90deg,
+		var(--color-interaction-selected-brand),
+		var(--color-interaction-hover)
+	);
+}
+
+/* ── Message queue (Cursor-style) ─────────────────────────────────────── */
+/* Pending chip strip above the input — queued sends waiting for the current
+ * turn to finish. */
+.composer-queue {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 6px 8px 2px;
+	min-width: 0;
+}
+
+.composer-queue-head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 11px;
+	line-height: 1.4;
+	color: var(--color-text-secondary);
+}
+
+.composer-queue-tag {
+	font-weight: 600;
+	color: var(--color-brand-primary);
+}
+
+.composer-queue-sub {
+	opacity: 0.7;
+}
+
+.composer-queue-clear {
+	margin-left: auto;
+	border: none;
+	background: transparent;
+	color: var(--color-text-secondary);
+	cursor: pointer;
+	font-size: 11px;
+	padding: 2px 6px;
+	border-radius: var(--radius-pill);
+}
+
+.composer-queue-clear:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+
+.composer-queue-chip {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	padding: 4px 6px 4px 8px;
+	border-radius: var(--radius-md, 10px);
+	background: color-mix(in srgb, var(--color-brand-primary) 8%, transparent);
+	border: 1px solid
+		color-mix(in srgb, var(--color-brand-primary) 22%, transparent);
+	font-size: 12px;
+	color: var(--color-text-primary);
+}
+
+.composer-queue-idx {
+	flex: 0 0 auto;
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: color-mix(in srgb, var(--color-brand-primary) 30%, transparent);
+	color: var(--color-text-primary);
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.composer-queue-text {
+	flex: 1 1 auto;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Per-chip hover actions: edit (✎) · send-now (↑) · delete (🗑). Mirrors the
+ * Cursor queued-row affordances. Faded by default, full-opacity on row hover. */
+.composer-queue-act {
+	flex: 0 0 auto;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: transparent;
+	color: var(--color-text-secondary);
+	cursor: pointer;
+	line-height: 1;
+	padding: 3px;
+	border-radius: var(--radius-pill);
+	opacity: 0.55;
+}
+
+.composer-queue-chip:hover .composer-queue-act {
+	opacity: 1;
+}
+
+.composer-queue-act:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+
+/* Send-now arrow gets the brand accent on hover — it's the primary action. */
+.composer-queue-now:hover {
+	background: color-mix(in srgb, var(--color-brand-primary) 22%, transparent);
+	color: var(--color-brand-primary);
+}
+
+.composer-queue-x:hover {
+	background: color-mix(
+		in srgb,
+		var(--color-status-error, #e5484d) 20%,
+		transparent
+	);
+	color: var(--color-status-error, #e5484d);
+}
+
+/* Interrupt-send (steer) button — distinct accent from the plain send/stop. */
+.composer-bar .cb-send.cb-interrupt {
+	background: color-mix(in srgb, var(--color-brand-primary) 18%, transparent);
+	color: var(--color-brand-primary);
+}
+
+.composer-bar .cb-send.cb-interrupt:hover {
+	background: color-mix(in srgb, var(--color-brand-primary) 30%, transparent);
+}

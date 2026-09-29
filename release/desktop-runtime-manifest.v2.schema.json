@@ -1,61 +1,90 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://forgeax.dev/contracts/desktop-runtime-manifest.v2.schema.json",
-  "title": "ForgeaX IDE Desktop Runtime Manifest v2",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["schema", "algorithm", "platform", "targetTriple", "inputs", "ports", "files", "digest"],
-  "properties": {
-    "schema": { "const": "forgeax-ide-desktop-runtime/v2" },
-    "algorithm": { "const": "sha256" },
-    "platform": { "enum": ["macos-arm64", "macos-x64", "windows-x64"] },
-    "targetTriple": { "enum": ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-pc-windows-msvc"] },
-    "inputs": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["common", "target"],
-      "properties": {
-        "common": { "$ref": "#/$defs/artifactReference" },
-        "target": { "$ref": "#/$defs/artifactReference" }
-      }
-    },
-    "ports": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["server", "engine"],
-      "properties": {
-        "server": { "const": 18810 },
-        "engine": { "const": 15273 }
-      }
-    },
-    "files": {
-      "type": "array",
-      "minItems": 1,
-      "items": { "$ref": "#/$defs/file" }
-    },
-    "digest": { "$ref": "#/$defs/sha256" }
-  },
-  "$defs": {
-    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-    "artifactReference": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["artifactId", "digest"],
-      "properties": {
-        "artifactId": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*/v[1-9][0-9]*$" },
-        "digest": { "$ref": "#/$defs/sha256" }
-      }
-    },
-    "file": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["path", "sha256", "size", "executable"],
-      "properties": {
-        "path": { "type": "string", "minLength": 1 },
-        "sha256": { "$ref": "#/$defs/sha256" },
-        "size": { "type": "integer", "minimum": 0 },
-        "executable": { "type": "boolean" }
-      }
-    }
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://forgeax.dev/contracts/desktop-runtime-manifest.v2.schema.json",
+	"title": "ForgeaX IDE Desktop Runtime Manifest v2",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"algorithm",
+		"platform",
+		"targetTriple",
+		"inputs",
+		"portPolicy",
+		"files",
+		"digest"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-desktop-runtime/v2" },
+		"algorithm": { "const": "sha256" },
+		"platform": { "enum": ["macos-arm64", "macos-x64", "windows-x64"] },
+		"targetTriple": {
+			"enum": [
+				"aarch64-apple-darwin",
+				"x86_64-apple-darwin",
+				"x86_64-pc-windows-msvc"
+			]
+		},
+		"inputs": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["common", "target"],
+			"properties": {
+				"common": { "$ref": "#/$defs/artifactReference" },
+				"target": { "$ref": "#/$defs/artifactReference" }
+			}
+		},
+		"portPolicy": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"kind",
+				"serverBase",
+				"engineBase",
+				"guardBase",
+				"maximumOffset",
+				"overrideEnvironment"
+			],
+			"properties": {
+				"kind": { "const": "guarded-paired-offset" },
+				"serverBase": { "const": 18810 },
+				"engineBase": { "const": 15273 },
+				"guardBase": { "const": 25273 },
+				"maximumOffset": { "const": 128 },
+				"overrideEnvironment": { "const": "FORGEAX_DESKTOP_PORT_OFFSET" }
+			}
+		},
+		"files": {
+			"type": "array",
+			"minItems": 1,
+			"items": { "$ref": "#/$defs/file" }
+		},
+		"digest": { "$ref": "#/$defs/sha256" }
+	},
+	"$defs": {
+		"sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+		"artifactReference": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["artifactId", "digest"],
+			"properties": {
+				"artifactId": {
+					"type": "string",
+					"pattern": "^[a-z0-9][a-z0-9._-]*/v[1-9][0-9]*$"
+				},
+				"digest": { "$ref": "#/$defs/sha256" }
+			}
+		},
+		"file": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["path", "sha256", "size", "executable"],
+			"properties": {
+				"path": { "type": "string", "minLength": 1 },
+				"sha256": { "$ref": "#/$defs/sha256" },
+				"size": { "type": "integer", "minimum": 0 },
+				"executable": { "type": "boolean" }
+			}
+		}
+	}
 }

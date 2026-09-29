@@ -1,83 +1,149 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/benchmark-run.v1.schema.json",
-  "title": "ForgeaX IDE Release Benchmark Run v1",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["schema", "source", "identity", "wallClockMs", "runnerTotalMs", "jobs", "stages", "artifacts", "installerBytes"],
-  "properties": {
-    "schema": { "const": "forgeax-ide-release-benchmark-run/v1" },
-    "source": { "$ref": "#/$defs/source" },
-    "identity": { "$ref": "#/$defs/identity" },
-    "wallClockMs": { "type": "number", "exclusiveMinimum": 0 },
-    "runnerTotalMs": { "type": "number", "exclusiveMinimum": 0 },
-    "jobs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/job" } },
-    "stages": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/stage" } },
-    "artifacts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/artifact" } },
-    "installerBytes": { "type": "integer", "minimum": 1 }
-  },
-  "$defs": {
-    "source": {
-      "type": "object", "additionalProperties": false,
-      "required": ["repository", "runId", "runAttempt", "url", "headSha"],
-      "properties": {
-        "repository": { "const": "ForgeaX-Games/forgeax-ide" },
-        "runId": { "type": "integer", "minimum": 1 },
-        "runAttempt": { "type": "integer", "minimum": 1 },
-        "url": { "type": "string", "format": "uri" },
-        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
-      }
-    },
-    "identity": {
-      "type": "object", "additionalProperties": false,
-      "required": ["version", "ideRevision", "integrationRevision", "revisionBranch", "sidecarManifestUrl", "sidecarManifestSha256", "mode", "workflowDefinitionRevision"],
-      "properties": {
-        "version": { "type": "string" },
-        "ideRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
-        "integrationRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
-        "revisionBranch": { "type": "string" },
-        "sidecarManifestUrl": { "type": "string", "format": "uri" },
-        "sidecarManifestSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
-        "mode": { "const": "dry-run" },
-        "workflowDefinitionRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
-      }
-    },
-    "step": {
-      "type": "object", "additionalProperties": false,
-      "required": ["name", "conclusion", "durationMs"],
-      "properties": { "name": { "type": "string" }, "conclusion": { "const": "success" }, "durationMs": { "type": "number", "minimum": 0 } }
-    },
-    "job": {
-      "type": "object", "additionalProperties": false,
-      "required": ["name", "runnerLabels", "durationMs", "steps"],
-      "properties": {
-        "name": { "type": "string" },
-        "runnerLabels": { "type": "array", "items": { "type": "string" } },
-        "durationMs": { "type": "number", "exclusiveMinimum": 0 },
-        "steps": { "type": "array", "items": { "$ref": "#/$defs/step" } }
-      }
-    },
-    "output": {
-      "type": "object", "additionalProperties": false,
-      "required": ["label", "path", "exists", "files", "symlinks", "bytes"],
-      "properties": {
-        "label": { "type": "string" }, "path": { "type": "string" }, "exists": { "type": "boolean" },
-        "files": { "type": "integer", "minimum": 0 }, "symlinks": { "type": "integer", "minimum": 0 }, "bytes": { "type": "integer", "minimum": 0 }
-      }
-    },
-    "stage": {
-      "type": "object", "additionalProperties": false,
-      "required": ["stage", "platform", "targetTriple", "durationMs", "outputs"],
-      "properties": {
-        "stage": { "type": "string" }, "platform": { "type": "string" },
-        "targetTriple": { "type": ["string", "null"] }, "durationMs": { "type": "number", "exclusiveMinimum": 0 },
-        "outputs": { "type": "array", "items": { "$ref": "#/$defs/output" } }
-      }
-    },
-    "artifact": {
-      "type": "object", "additionalProperties": false,
-      "required": ["name", "sizeBytes"],
-      "properties": { "name": { "type": "string" }, "sizeBytes": { "type": "integer", "minimum": 1 } }
-    }
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/benchmark-run.v1.schema.json",
+	"title": "ForgeaX IDE Release Benchmark Run v1",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"source",
+		"identity",
+		"wallClockMs",
+		"runnerTotalMs",
+		"jobs",
+		"stages",
+		"artifacts",
+		"installerBytes"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-release-benchmark-run/v1" },
+		"source": { "$ref": "#/$defs/source" },
+		"identity": { "$ref": "#/$defs/identity" },
+		"wallClockMs": { "type": "number", "exclusiveMinimum": 0 },
+		"runnerTotalMs": { "type": "number", "exclusiveMinimum": 0 },
+		"jobs": {
+			"type": "array",
+			"minItems": 1,
+			"items": { "$ref": "#/$defs/job" }
+		},
+		"stages": {
+			"type": "array",
+			"minItems": 1,
+			"items": { "$ref": "#/$defs/stage" }
+		},
+		"artifacts": {
+			"type": "array",
+			"minItems": 1,
+			"items": { "$ref": "#/$defs/artifact" }
+		},
+		"installerBytes": { "type": "integer", "minimum": 1 }
+	},
+	"$defs": {
+		"source": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["repository", "runId", "runAttempt", "url", "headSha"],
+			"properties": {
+				"repository": { "const": "ForgeaX-Games/forgeax-ide" },
+				"runId": { "type": "integer", "minimum": 1 },
+				"runAttempt": { "type": "integer", "minimum": 1 },
+				"url": { "type": "string", "format": "uri" },
+				"headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+			}
+		},
+		"identity": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"version",
+				"ideRevision",
+				"integrationRevision",
+				"revisionBranch",
+				"sidecarManifestUrl",
+				"sidecarManifestSha256",
+				"mode",
+				"workflowDefinitionRevision"
+			],
+			"properties": {
+				"version": { "type": "string" },
+				"ideRevision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+				"integrationRevision": {
+					"type": "string",
+					"pattern": "^[0-9a-f]{40}$"
+				},
+				"revisionBranch": { "type": "string" },
+				"sidecarManifestUrl": { "type": "string", "format": "uri" },
+				"sidecarManifestSha256": {
+					"type": "string",
+					"pattern": "^[0-9a-f]{64}$"
+				},
+				"mode": { "const": "dry-run" },
+				"workflowDefinitionRevision": {
+					"type": "string",
+					"pattern": "^[0-9a-f]{40}$"
+				}
+			}
+		},
+		"step": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["name", "conclusion", "durationMs"],
+			"properties": {
+				"name": { "type": "string" },
+				"conclusion": { "const": "success" },
+				"durationMs": { "type": "number", "minimum": 0 }
+			}
+		},
+		"job": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["name", "runnerLabels", "durationMs", "steps"],
+			"properties": {
+				"name": { "type": "string" },
+				"runnerLabels": { "type": "array", "items": { "type": "string" } },
+				"durationMs": { "type": "number", "exclusiveMinimum": 0 },
+				"steps": { "type": "array", "items": { "$ref": "#/$defs/step" } }
+			}
+		},
+		"output": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["label", "path", "exists", "files", "symlinks", "bytes"],
+			"properties": {
+				"label": { "type": "string" },
+				"path": { "type": "string" },
+				"exists": { "type": "boolean" },
+				"files": { "type": "integer", "minimum": 0 },
+				"symlinks": { "type": "integer", "minimum": 0 },
+				"bytes": { "type": "integer", "minimum": 0 }
+			}
+		},
+		"stage": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"stage",
+				"platform",
+				"targetTriple",
+				"durationMs",
+				"outputs"
+			],
+			"properties": {
+				"stage": { "type": "string" },
+				"platform": { "type": "string" },
+				"targetTriple": { "type": ["string", "null"] },
+				"durationMs": { "type": "number", "exclusiveMinimum": 0 },
+				"outputs": { "type": "array", "items": { "$ref": "#/$defs/output" } }
+			}
+		},
+		"artifact": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["name", "sizeBytes"],
+			"properties": {
+				"name": { "type": "string" },
+				"sizeBytes": { "type": "integer", "minimum": 1 }
+			}
+		}
+	}
 }

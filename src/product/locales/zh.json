@@ -1,0 +1,1902 @@
+{
+	"common": {
+		"ok": "确定",
+		"cancel": "取消",
+		"close": "关闭",
+		"save": "保存",
+		"reset": "重置",
+		"delete": "删除",
+		"confirm": "确认",
+		"loading": "加载中…",
+		"error": "错误",
+		"retry": "重试",
+		"today": "今天",
+		"yesterday": "昨天"
+	},
+	"statusBar": {
+		"diagnostics": {
+			"title": "诊断",
+			"tooltip": "诊断 · 设备与运行时状态",
+			"checking": "检测中…",
+			"webgpuUnavailable": "WebGPU 不可用",
+			"unknownDevice": "未知设备",
+			"cores": "核",
+			"device": "设备",
+			"memory": "内存",
+			"unavailable": "不可用",
+			"engine": "引擎",
+			"processMemory": "进程内存",
+			"uptime": "运行时长",
+			"wsConnections": "WS 连接",
+			"project": "项目",
+			"scene": "当前场景",
+			"assets": "资产"
+		}
+	},
+	"onboarding": {
+		"step": {
+			"welcome": "欢迎 · 语言 · 连接模型",
+			"project": "选择游戏",
+			"home": "进入首页"
+		},
+		"welcome": {
+			"title": "欢迎来到 Forgeax Studio！",
+			"lead": "只需要告诉 Forge “做一个 xxx 的游戏”，它会自动计划、写代码并且实时向你展示正在创作的游戏。",
+			"language": "界面语言"
+		},
+		"connect": {
+			"title": "连接一个模型",
+			"hint": "任选一种方式连接，之后都能在设置里修改。",
+			"keyTitle": "使用 API Key",
+			"keySub": "任意 OpenAI 兼容端点（官方 / OpenRouter / 私有代理）。",
+			"cliTitle": "使用本地 CLI",
+			"cliSub": "可以连接本地 claude-code / codex / cursor-agent 使用。",
+			"cliStatus": {
+				"loading": "检测中…",
+				"ok": "可连接",
+				"down": "不可用",
+				"unknown": "未检测到"
+			}
+		},
+		"collapse": "收起",
+		"connected": {
+			"key": "API Key",
+			"cli": "本地 CLI · {{cli}}"
+		},
+		"check": {
+			"checking": "正在检测连接…",
+			"ok": "连接成功：{{list}}。即将进入下一步…",
+			"fail": "连接失败，请检查你配置的连接方式是否正确。",
+			"failEmpty": "请填写 Base URL 和 API Key。",
+			"failNeedSelect": "请先选择一种连接方式（API Key 或本地 CLI）。",
+			"failLive": "API 测试联通失败，请检查您的 base URL 或 API key。",
+			"failCli": "连接失败，本地 CLI · {{cli}} 是否已安装并正常启动，安装教程："
+		},
+		"next": "下一步",
+		"nextCountdown": "下一步（{{n}}）",
+		"back": "上一步",
+		"skip": "跳过设置",
+		"project": {
+			"title": "选择你的游戏",
+			"name": "游戏名称",
+			"namePlaceholder": "可选；留空则自动命名为 untitled-1",
+			"nameRequired": "请填写项目名称（≥1 位，小写字母/数字/连字符）。",
+			"willCreate": "将创建游戏：{{name}}",
+			"busy": {
+				"new": "正在创建项目…",
+				"template": "正在从模板复制项目…（可能需要几秒）",
+				"open": "正在打开目录…"
+			},
+			"newTitle": "新建空项目",
+			"newDesc": "使用默认模板新建一个空游戏。",
+			"newCta": "新建",
+			"existingTitle": "打开已有项目",
+			"existingDesc": "已有 {{count}} 个游戏——直接选择一个进入。",
+			"existingOpen": "打开",
+			"openTitle": "打开目录",
+			"openDesc": "选择任意目录作为游戏目录。空目录会自动初始化。",
+			"openCta": "选择目录",
+			"errNotGame": "所选目录不是游戏项目，且不是空目录。请选空文件夹（将自动初始化），或选已有 forge.json / main.ts 的目录。",
+			"sampleTitle": "从模板创建",
+			"sampleDesc": "以一个内置游戏为模板创建新游戏。",
+			"sampleCta": "选择模板",
+			"select": "选择",
+			"footer": "选择任一方式后会创建或打开游戏并进入首页。"
+		},
+		"template": {
+			"title": "选择一个内置模板",
+			"loading": "正在加载模板…",
+			"empty": "没有可用的内置模板。",
+			"picked": "已选",
+			"cancel": "取消",
+			"confirm": "确认"
+		},
+		"tour": {
+			"footer": {
+				"anchor": "底部状态栏 · 内容浏览器与信息",
+				"body": "屏幕最底部这条状态栏汇集了默认收起的工具面板：点开「内容浏览器」，项目里的文件、场景和美术资产都能在这里集中管理、搜索与导入，是你的资源中心；点开「信息」，则能查看运行、编辑与引擎的实时日志。平时它们收起在这里不占地方，需要时向上展开。"
+			},
+			"preview": {
+				"anchor": "预览视口",
+				"body": "游戏的实时画面就在这里。AI 每改动一次代码，画面会在几秒内热更新，你随时可以直接试玩、观察效果。"
+			},
+			"hierarchy": {
+				"anchor": "场景大纲 · 物体属性",
+				"body": "上半部的「场景物大纲」像图层树一样管理场景中的所有物体（显隐、锁定、层级）；选中某个物体后，下半部的「物体属性」里就能调整它的位置、组件与各项参数。"
+			},
+			"topbar": {
+				"anchor": "顶栏菜单与发布",
+				"body": "文件、编辑、窗口、构建、选择、帮助等项目级操作都在顶栏；右上角的「发布」按钮可以把做好的游戏一键打包上线。"
+			},
+			"chat": {
+				"anchor": "★ 从这里开始做游戏",
+				"body": "这是你和 AI 团队对话协作的地方。在最下方的输入框里，用一句话描述想做的游戏（例如「做一个俯视角割草生存游戏」），回车发送，Forge 就会带领各位 Agent 开始为你创作。"
+			},
+			"prev": "上一个",
+			"skip": "跳过",
+			"next": "下一个",
+			"done": "完成"
+		},
+		"nudge": {
+			"title": "发出你的第一条消息",
+			"body": "在右侧对话框描述你想做的游戏，就能在 Preview 看到它跑起来。",
+			"gotIt": "知道了",
+			"connectTitle": "先连接一个模型再发送",
+			"connectSub": "你的消息已保留。选一个来源，连接后会自动帮你把它发出去。",
+			"connectKey": "填入 API Key",
+			"connectCli": "使用本地 CLI",
+			"connectCancel": "暂不"
+		}
+	},
+	"lang": {
+		"auto": "自动",
+		"switcherTitle": "Agent 回复语言",
+		"followInput": "跟随我的输入",
+		"followInputDesc": "Agent 用你输入的语言回复。"
+	},
+	"settings": {
+		"title": "设置",
+		"subtitle": "configure forgeax · extensions · keys · account",
+		"providers": {
+			"hint": "连接一个模型来源：LiteLLM 代理或本地 CLI。",
+			"activeBanner": "当前使用：{{source}}",
+			"setActive": "设为使用",
+			"inUse": "当前使用",
+			"switched": "已切换模型来源：{{source}}",
+			"native": {
+				"title": "ForgeaX 内核(原生)",
+				"hint": "内置的 ForgeaX 内核 —— 默认、旗舰对话路径。进程内运行,使用你在下方配置的任意模型凭据(LiteLLM 代理,或 ANTHROPIC / OPENAI / GEMINI 直连 key)。",
+				"badge": "原生",
+				"useReason": "请先配置一个模型凭据 —— LiteLLM 代理,或 ANTHROPIC / OPENAI / GEMINI key。"
+			},
+			"api": {
+				"title": "LiteLLM 代理",
+				"hint": "指向你的 LiteLLM 代理：填 Base URL 与 Key。模型目录和原生 ForgeaX 内核都走它（Key 会镜像到 ANTHROPIC_*，让 forgeax-core 直连该代理）。"
+			},
+			"cli": {
+				"title": "本地 CLI",
+				"hint": "检测本地已安装的 claude-code / codex / cursor-agent / codebuddy / kimi-code / DeepSeek Harness，并可运行 Test。",
+				"healthy": "健康",
+				"unavailable": "不可用",
+				"useReason": "该 CLI 当前不可用，无法设为使用"
+			},
+			"test": "测试"
+		},
+		"groups": {
+			"ai": "AI",
+			"system": "系统",
+			"about": "关于",
+			"other": "其他"
+		},
+		"nav": {
+			"providers": "模型",
+			"agents": "智能体",
+			"about": "关于"
+		},
+		"navAria": "设置分区导航",
+		"agents": {
+			"hint": "用户只与 ForgeaX 对话。主智能体切换已移除；全部默认启用。",
+			"missingFromCatalog": "目录中缺少此 agent（/api/agents 未返回）",
+			"incompleteCatalogEntry": "目录项缺少 naming.title / name",
+			"rosterGaps": "编制布局中有 agent 未出现在目录：{{ids}}",
+			"detail": {
+				"back": "返回",
+				"tabPersona": "人设",
+				"tabMemory": "记忆",
+				"tabSkills": "技能",
+				"tabTools": "工具",
+				"save": "保存",
+				"discard": "丢弃更改",
+				"saved": "已保存",
+				"addMemory": "+ 添加记忆",
+				"addSkill": "+ 添加技能",
+				"addTool": "+ 添加工具",
+				"file": "文件名",
+				"skillId": "技能 ID",
+				"toolId": "工具 ID",
+				"desc": "描述",
+				"body": "正文",
+				"emptyMemory": "还没有长期记忆。",
+				"emptySkills": "还没有技能。",
+				"emptyTools": "还没有工具。",
+				"remove": "删除"
+			}
+		},
+		"closeEsc": "关闭 · Esc",
+		"closeAria": "关闭设置",
+		"noSections": "没有注册的 settings sections.",
+		"noSectionsHint1": "没有注册的 settings sections.",
+		"noSectionsHint2": "useSettingsSection({ id, label, node }) 在任意组件里挂载一项即可。",
+		"language": {
+			"label": "语言",
+			"description": "界面语言。控制所有 UI 文案、Agent 目录展示语言，以及 Agent 回复所用语言。",
+			"selectAria": "选择界面语言"
+		},
+		"memory": {
+			"label": "记忆",
+			"toggle": "记忆",
+			"masterLabel": "自动记忆沉淀",
+			"masterHint": "关闭后所有内核都不再沉淀记忆；开启后按下方各内核设置生效。",
+			"byKernel": "按内核",
+			"noKernels": "没有已注册的内核",
+			"lowestTokenUsage": "Token 消耗最少",
+			"additionalTokenCost": "会额外消耗少量 Token",
+			"additionalTokenHint": "{{kernel}} 的记忆沉淀会额外消耗少量 Token。如不需要，可在此关闭。"
+		},
+		"kernelPermissions": {
+			"title": "每个内核的权限档位",
+			"hint": "默认全部以「{{mode}}」启动。改这里只影响基线放行姿态；permissions.deny 规则与 hook 拦截仍然生效。",
+			"followDefault": "跟随默认（{{mode}}）",
+			"singleGearHint": "{{kernel}} 只支持这一档：这是它 headless 形态的真实能力，收窄请用 deny 规则或 hook。",
+			"denyStillApplies": "即便是全权限档，deny 规则、受保护路径与 PreToolUse hook 仍会拦下操作。",
+			"mode": {
+				"gated": "逐项审批",
+				"autoEdits": "自动编辑",
+				"planning": "只读规划",
+				"unrestricted": "全权限（危险）"
+			},
+			"riskyGearHint": "{{kernel}} 在低于「全权限」的档位下，携带项目 MCP 的轮次可能卡住等审批（这是该内核的真实限制，我们不再替你偷偷抬档）。"
+		},
+		"env": {
+			"saved": "已写入 {{count}} 个变量到 .env（重启 stack 后生效）"
+		},
+		"refresh": "刷新",
+		"readonly": "只读",
+		"readFailed": "读取失败:{{error}}",
+		"apiKeys": {
+			"llmHint": "forgeax/.env;重启 stack 后生效",
+			"anthropicPlaceholder": "sk-ant-... 或 Azure key",
+			"multimodalTitle": "多模态 Keys",
+			"multimodalHint": "image-gen / video-gen / 多模代理 · character 等扩展使用",
+			"arkImageLabel": "ARK_IMAGE_KEY (Seedream 立绘)",
+			"arkVideoLabel": "ARK_VIDEO_KEY (Seedance 视频)"
+		},
+		"models": {
+			"title": "模型",
+			"hint": "改 FORGEAX_MODEL（重启 stack 后生效）",
+			"current": "当前",
+			"helpPrefix": "所有 LLM 凭证从",
+			"helpAdapter": "读取；按 model id 模式自动选 adapter",
+			"helpProxyPrefix": "配了",
+			"helpProxySuffix": "时全部走代理。"
+		},
+		"modelLab": {
+			"hint": "一次性测模型 · 调温度 / top_p / max_tokens · 走 /api/llm/test → lib/llm-gateway → LiteLLM 代理",
+			"systemPromptOptional": "System prompt (可选)",
+			"modelsLabel": "Models — 勾选要并行测试的模型(已选 {{count}})",
+			"running": "运行中… ({{count}} rows)",
+			"cancelAll": "中止全部",
+			"hideUnavailable": "隐藏不可用",
+			"exportCsvTitle": "导出当前结果为 CSV(同时写到剪贴板)",
+			"streamNote": "/api/llm/test-stream (SSE · TTFT 取首个 chunk)",
+			"emptyHint": "勾选模型后点 \"Run all\"。",
+			"allFiltered": "所有 row 已被 \"隐藏不可用\" 过滤。"
+		},
+		"cliProviders": {
+			"hint": "多 cli 后端 — agent 由 marketplace/manifest.json#agents[].provider 路由",
+			"none": "无注册的 provider — 检查 server 启动日志。",
+			"healthy": "健康 ✓",
+			"unavailable": "不可用 ✗",
+			"testing": "测试中…",
+			"snapshotAge": "快照 · {{seconds}}s 前"
+		},
+		"workspace": {
+			"resetSessionsTitle": "重置 session",
+			"resetSessionsHint": "清空 team/sessions/* — 保留 agent 配置 / marketplace / games",
+			"resetSessionsBtn": "清空所有 session 历史",
+			"resetSessionsConfirm": "确认清空所有 session（含 sub-agent 历史）?",
+			"resetSessionsDone": "已删除 {{count}} 个 session 目录，已新建空 session",
+			"resetSessionsTimeout": "重置 session 超时（30s）",
+			"resetGamesTitle": "重置 GAMES",
+			"resetGamesHint": "删除所有用户创建的游戏(.forgeax/games/ 下的真实目录)— 保留 packages/games 的官方案例",
+			"resetGamesBtn": "删除所有我创建的游戏",
+			"resetGamesHelp": "只删 .forgeax/games/ 下的真实目录(你创建的游戏);符号链接的官方案例(cow-survivor / fps 等)原样保留。此操作不可撤销。",
+			"resetGamesConfirm": "确认删除所有你创建的游戏?官方案例(cow-survivor/fps 等)会保留。\n\n会删除 .forgeax/games/ 下的真实目录(你创建的游戏);符号链接的官方案例不动。此操作不可撤销。",
+			"resetGamesDone": "已删除 {{count}} 个用户游戏",
+			"resetGamesDoneSwitched": "已删除 {{count}} 个用户游戏，已切到 {{slug}}",
+			"resetGamesTimeout": "重置 GAMES 超时（30s）",
+			"pathsTitle": "路径 / 端口"
+		},
+		"account": {
+			"title": "账号",
+			"hint": "云同步 / 订阅 / 分享设置 (规划中)",
+			"notLoggedIn": "未登录",
+			"intro": "云端账号体系尚在规划中。本地 forgeax-studio 完全离线可用,云端功能后续解锁:",
+			"feature1": "多设备同步 game/agent",
+			"feature2": "云端 model gateway · 共享 LLM key 池",
+			"feature3": "订阅 · token 配额"
+		},
+		"about": {
+			"hint": "版本 · 路径 · 链接",
+			"productName": "ForgeaX Studio",
+			"connecting": "连接中…",
+			"repoLabel": "仓库：",
+			"projectRoot": "项目根目录：",
+			"envFile": "环境文件：",
+			"studioPorts": "Studio 端口：",
+			"studioPortsValue": "UI :{{ui}} · Server :{{server}} · Engine :{{engine}}",
+			"mainBranch": "main",
+			"pathsTitle": "路径 / 端口",
+			"versionLabel": "版本:",
+			"commitLabel": "提交:",
+			"versionSchemeLabel": "版本号方案",
+			"totalCommits": "累计 commits:",
+			"versionScheme": "版本号方案",
+			"versionSchemeDetail": "— 0 = pre-1.0 epoch · M.D = main 最新 commit 月.日 · N = main 累计 commit。",
+			"versionSchemeSee": "详情见"
+		},
+		"changelog": {
+			"title": "更新日志",
+			"hint": "版本迭代记录 · 来源 CHANGELOG.md",
+			"empty": "CHANGELOG.md 还没有版本段落。"
+		},
+		"shortcuts": {
+			"title": "快捷键",
+			"hint": "只读 · 当前不可自定义",
+			"platformAria": "快捷键显示平台",
+			"platformMac": "Mac",
+			"platformWin": "Win",
+			"introBlenderPrefix": "Blender 风的",
+			"introBlenderSuffix": "组合 — 避开浏览器 Ctrl+1/2/3 切 tab / Ctrl+J 下载 / Ctrl+B 收藏栏。",
+			"introImeSafe": "中文输入法安全",
+			"introImePrefix": ":组词状态",
+			"introImeSuffix": "或 keyCode 229 自动跳过;聚焦在 input/textarea/可编辑元素上时也不触发(Esc / Ctrl+/ 是例外)。",
+			"introReadonlyPrefix": "当前为",
+			"introReadonlySuffix": "展示,后续会开放自定义。",
+			"groups": {
+				"layout": "布局",
+				"mode": "顶部模式",
+				"edit": "编辑",
+				"overlay": "浮层",
+				"focus": "聚焦",
+				"general": "通用"
+			}
+		},
+		"usage": {
+			"title": "用量",
+			"hint": "根据 ledger hook:assistantMessage 事件聚合 · 仅统计本机会话",
+			"totalCalls": "总调用",
+			"inputTokens": "输入 tokens",
+			"outputTokens": "输出 tokens",
+			"sessions": "sessions",
+			"calls": "调用",
+			"input": "输入",
+			"output": "输出",
+			"byModel": "按模型",
+			"noData": "暂无 usage 数据 — assistant 还没回过任何 token。",
+			"byDay": "按日期 (UTC)",
+			"scanned": "已扫描 {{sessions}} 个会话中的 {{events}} 条账本事件。"
+		},
+		"sections": {
+			"extensions": "扩展",
+			"fxpackImport": ".fxpack 导入",
+			"forkRecord": "Fork & 录制",
+			"upload": "上传",
+			"feedbackDelivery": "反馈交付"
+		},
+		"extensions": {
+			"colId": "ID",
+			"colName": "名称",
+			"colDesc": "描述",
+			"colVersion": "版本"
+		},
+		"upload": {
+			"title": "上传",
+			"hint": "把当前项目的 .forgeax 创作内容上传到 GitHub 仓（聊天里的 /upload 命令等效）。",
+			"tokenPlaceholder": "粘贴 GitHub token（经典或 fine-grained，共享或个人）",
+			"tokenNotSetHint": "已内置共享 token · 粘贴自己的 token 可覆盖",
+			"resetTokenTitle": "清除覆盖，恢复内置共享 token",
+			"repoHelp": "默认传到共享仓；也可以改成任何你的 token 有写权限的仓（如自己账号下的仓）。分支默认 main。",
+			"btnIdle": "上传到 GitHub",
+			"btnPlanning": "检查中…",
+			"btnPushing": "上传中…",
+			"tokenHintPrefix": "提示：已内置共享 token，直接点按钮即可上传。想传到自己的仓？",
+			"tokenHintLink": "创建自己的个人 token ↗",
+			"tokenHintSuffix": "（勾选 repo 权限即可，页面已预填），粘贴到上方 token 栏并 Save 覆盖默认值。",
+			"planSummary": "将压缩 {{count}} 个文件（{{bytes}}）并上传为",
+			"planPath": "的 {{namespace}}/data/<上传时间>/ 快照目录",
+			"skippedSymlinks": "已跳过 {{count}} 个软链目录（样例游戏，不上传）",
+			"skippedLarge": "已跳过 {{count}} 个超大文件",
+			"secretBlocked": "⛔ 检测到 {{count}} 处疑似密钥，已阻止上传：{{samples}}",
+			"tokenMissingTitle": "⛔ 还没配置 token，三步搞定：",
+			"tokenMissingStep1Before": "1. 向管理员索取共享 token，或 ",
+			"tokenMissingStep1Link": "创建自己的个人 token ↗",
+			"tokenMissingStep1After": "（需对目标仓有写权限）",
+			"tokenMissingStep2": "2. 粘贴到上方 FORGEAX_UPLOAD_GITHUB_TOKEN，点 Save",
+			"tokenMissingStep3": "3. 回来重新点「上传到 GitHub」",
+			"empty": "没有可上传的内容",
+			"confirm": "确认上传",
+			"cancel": "取消",
+			"skippedSame": "内容与最近一次上传完全一致，未新建版本",
+			"viewExisting": "查看已有快照",
+			"uploaded": "已上传 {{count}} 个文件的压缩包（{{sourceBytes}} → {{archiveBytes}}）",
+			"viewSnapshot": "查看本次快照",
+			"allVersions": "全部版本",
+			"failed": "上传失败：{{error}}",
+			"copyUrl": "复制地址",
+			"copied": "已复制"
+		},
+		"feedbackDelivery": {
+			"title": "反馈交付",
+			"hint": "配置页面反馈的诊断归档与 GitHub Issue 交付。保存后会自动重试此前失败的反馈。",
+			"tokenPlaceholder": "已内置组织共享 token；粘贴新 token 可覆盖",
+			"resetTokenTitle": "清除覆盖，恢复内置组织共享 token",
+			"modelPlaceholder": "可选：forgeax-cli 整理反馈时使用的模型",
+			"help": ".forgeax 诊断数据会排除凭证、缓存和超大文件，在临时副本中脱敏并通过敏感信息扫描后，以 tar.gz 上传到 Forgeax-Data；Issue 提交到 forgeax-issues。"
+		},
+		"drawer": {
+			"relTimeJustNow": "刚刚",
+			"relTimeSecondsAgo": "{{seconds}} 秒前",
+			"relTimeMinutesAgo": "{{minutes}} 分钟前",
+			"title": "系统设置",
+			"closeTitle": "关闭 (Esc)",
+			"apiKeysTitle": "API Keys（写入 forgeax/.env）",
+			"apiKeysHint": "重启 stack 后生效（FORGEAX_PROJECT_ROOT=forgeax bash run.sh）",
+			"anthropicKeyPlaceholder": "sk-ant-... 或 Azure Cognitive Services key",
+			"anthropicBaseUrlPlaceholder": "https://api.anthropic.com 或 Azure endpoint",
+			"openaiKeyLabel": "OPENAI_API_KEY (可选)",
+			"geminiKeyLabel": "GEMINI_API_KEY (可选)",
+			"modelTitle": "模型",
+			"modelHint": "改 FORGEAX_MODEL（重启 stack 后生效）",
+			"modelCurrent": "当前",
+			"modelHelpPrefix": "所有 LLM 凭证从",
+			"modelHelpAdapter": "读取；按 model id 模式自动选 adapter。",
+			"modelHelpProxyPrefix": "配了",
+			"modelHelpProxySuffix": "时全部走代理。",
+			"cliProvidersHint": "多 cli 后端 — agent 由 marketplace/manifest.json#agents[].provider 路由",
+			"cliProvidersNone": "无注册的 provider — 检查 server 启动日志。",
+			"providerHealthy": "健康 ✓",
+			"providerUnavailable": "不可用 ✗",
+			"providerTesting": "测试中…",
+			"snapshot": "快照 ·",
+			"resetSessionsTitle": "重置 session",
+			"resetSessionsHint": "清空 .forgeax/.../team/sessions/* — 保留 agent 配置 / marketplace / games",
+			"resetSessionsBtn": "清空所有 session 历史",
+			"resetSessionsHelp": "用于「chat 卡了 / 状态混乱时」干净重启；下次发消息会建一个新主 session。",
+			"resetSessionsConfirm": "确认清空所有 session（含 sub-agent 历史）？\n\n会删除 .forgeax/.../team/sessions/* 整个目录。\n下次 chat 会自动新建主 agent session；agent 配置/marketplace/games 都保留。",
+			"resetSessionsDone": "已删除 {{count}} 个 session 目录",
+			"aboutTitle": "关于",
+			"aboutHint": "路径 + 版本",
+			"envNotSet": "未设置",
+			"savedMasked": "已保存 {{masked}} · 输入新值可覆盖",
+			"hide": "隐藏",
+			"show": "显示",
+			"noChanges": "没有改动",
+			"enterNewKeyHint": "在上方输入新 key 后保存"
+		}
+	},
+	"bus": {
+		"title": "Bus 扩展总览",
+		"refresh": "刷新",
+		"refreshTitle": "重新拉取 /api/extensions/list",
+		"mdFocusKind": "单击聚焦 {{kind}} kind",
+		"healthOverview": "健康总览",
+		"registered": "注册",
+		"mdSummaryLoading": "6 kind 健康状态加载中…",
+		"mdClearFilter": "单击清空 kind 过滤",
+		"filterByKind": "按 kind 过滤",
+		"kbdNavChips": "←→ / Home / End 键盘导航",
+		"chipSolo": "单击：仅看 {{kind}} · {{count}} 个",
+		"chipHide": "单击：隐藏 {{kind}}",
+		"chipShow": "单击：再次显示 {{kind}}",
+		"chipToggleHint": "←→ 切换",
+		"searchPlaceholder": "按 id / 名称搜索（例如 anim / character）…",
+		"reset": "清空",
+		"resetTitle": "清空 kind 过滤 + 搜索",
+		"requestFailed": "请求失败：{{err}} · 检查 /api/extensions/list 是否可达",
+		"emptyNoExtensions": "bus 未加载任何 extension — 检查 marketplace scan 路径",
+		"emptyNoMatch": "无匹配 — 检查搜索词或重启过滤",
+		"rowKbdTitle": "↑↓ / Home / End 行键盘导航 · Enter / Space 展开",
+		"rowKbdLabel": "行键盘导航 · {{n}} rows · Enter 展开",
+		"footnoteSource": "来源：",
+		"footnoteExpanded": "已展开",
+		"footnoteBroken": "broken[] 字段尚未由 server 暴露（P3 颗粒）",
+		"footnoteRowHint": "点行 / ↑↓ 切行 / Enter 展开详情",
+		"kindTagFlashTitle": "单击：在左侧 BUS KINDS 闪烁 {{kind}} 胶囊（同 P3.38 反向 echo 通路）",
+		"expand": "展开",
+		"versionThSub": "0.0.x = manifest 占位 · 0.1+ = 正式版本",
+		"rowTitleCollapse": "点击折叠 · ↑↓ 切行 · Enter 折叠",
+		"rowTitleExpand": "点击展开详情 · ↑↓ 切行 · Enter 展开",
+		"verBumpedTitle": "manifest v{{ver}} bumped · 已 bump 过 0.0.x 占位语义 · 这是真版本",
+		"copied": "已复制",
+		"manifestCopiedTitle": "✓ 已复制路径到剪贴板",
+		"manifestCopyTitle": "点击复制路径到剪贴板 · 粘贴到终端或编辑器可直达 forgeax-extension.json",
+		"detailKindSoloTitle": "点击仅显示 {{kind}} 类的扩展 · 顶部过滤行的 ✕ 按钮可清除筛选",
+		"versionCopiedTitle": "✓ 已复制版本号到剪贴板",
+		"versionCopyTitle": "点击复制版本号 · 可粘贴到 changelog / shell / commit message",
+		"uiFrontendTitle": "entry.frontend · 此扩展的 React 面板源码 (相对 extension 目录) · extension tab 点开后由 Sidebar 通过 PLUGIN_PANEL_LOADERS 动态 import",
+		"entryOpenPageTitle": "打开 Page {{pageId}} · 渲染 {{path}}",
+		"backlinkAgent": "在 Sidebar 高亮",
+		"backlinkAgentTitle": "在 Sidebar AGENTS 区高亮 {{id}} 对应卡片",
+		"backlinkPage": "打开 Page",
+		"backlinkPageTitle": "打开 Page {{pageId}}",
+		"backlinkKind": "闪烁 BUS KINDS",
+		"backlinkKindTitle": "在 Sidebar 底部 BUS KINDS footer 闪烁 {{kind}} 胶囊 1.5s — 余光确认这颗 extension 在 chrome 边缘的 kind 归属",
+		"detailNoteBroken": "broken[] 字段尚未由 server 暴露 — 等 P3 颗粒补",
+		"tallyCliTitle": "本扩展作为 cliProvider 注册 (1 = 是 / 0 = 否)",
+		"tallySkillTitle": "本扩展向 Bus 注册的 skill 数 (Bus.skills[])",
+		"tallyToolTitle": "本扩展向 Bus 注册的 tool 数 (Bus.tools[])",
+		"tallyEventTitle": "本扩展向 Bus 注册的 event schema 数 (Bus.events[])",
+		"provTallyEmptyTitle": "本扩展未向 Bus 暴露 cliProvider/skill/tool/event — 通常是 kind=extension 的纯前端扩展 (panel 自己跑)",
+		"provTallyTitle": "本扩展向 Bus 提供 {{n}} 个 provider 入口 (cli+skill+tool+event 合计)",
+		"provTallyNote": "无 provides · 纯前端 / placeholder",
+		"provAiFlagTitle": "exposedToAI=true · AI agent 可直接调用",
+		"kindDescExtension": "贡献 Page 或能力的扩展",
+		"kindDescAgent": "可被 sub-agent 路由召唤的角色（cc-coder 系列等）",
+		"kindDescCliProvider": "CLI runner 适配器（claude-code / codex / cursor-agent / forgeax）",
+		"kindDescModelBinding": "text/multimodal channel 厂商绑定（anthropic-text / openai 等）",
+		"kindDescSkill": "slash 命令 + persona（/make-game-design 等）",
+		"kindDescTool": "纯 tool（balance:resim 等）— 不带 UI / agent",
+		"kindDescUnknown": "(未分类 kind)"
+	},
+	"composer": {
+		"cliButtonOverrideDown": "⚠ {{provider}} 当前不可用 — 请选择 'forgeax' 或其他健康的 provider，否则回合会报错。",
+		"cliButtonForgeaxNative": "Provider — forgeax (原生 · 消息直发 Session/EventBus)",
+		"queuedCount": "已排队 {{count}}",
+		"queueSub": "当前回复结束后依次发送",
+		"clearQueueTitle": "清空队列",
+		"clearQueue": "清空",
+		"queueEditAria": "编辑这条排队消息",
+		"queueEditTitle": "编辑 — 取回到输入框",
+		"queueSendNowAria": "立即发送这条排队消息",
+		"queueSendNowStreamingTitle": "立即发送 — 打断当前回复，优先处理这条",
+		"queueSendNowTitle": "立即发送这条",
+		"queueRemoveAria": "移除这条排队消息",
+		"queueRemoveTitle": "移除",
+		"placeholderStreaming": "回复进行中 — 可继续输入,[Enter] 排队,当前回复结束后依次发送",
+		"placeholderStreamingInterrupt": " · ⚡ 打断并立即发送",
+		"placeholderOverrideDownSuffix": " ⚠ (不可用)",
+		"imageUpload": "添加任意文件 — 图片/PDF 直达模型,其它文件存给 agent 自行解析;也可直接粘贴/拖拽到输入框",
+		"fileTooLarge": "{{name}}:内容太大 — 超过 {{limit}} 上限",
+		"comingSoon": "即将上线",
+		"mentionAgentTitle": "选择建议召唤的专家（{{count}} 位可选）— Forge 会在合适时考虑派单",
+		"mentionSoon": "@ 提示 — 即将上线",
+		"agentItemInBusTitle": "{{name}} · {{role}} · 同时位于 bus host — 选择为 Forge 可考虑派单的专家",
+		"agentItemTitle": "{{name}} · {{role}} — 选择为 Forge 可考虑派单的专家",
+		"viewInBusAria": "在 Bus 详情查看 {{extension}}",
+		"viewInBusTitle": "在 Bus 详情查看 {{extension}} →",
+		"atFoot": "↑↓ 选择专家 · ⏎ 确定 · Esc 关闭",
+		"summonChipClear": "清除已选专家",
+		"summonChipTitle": "建议召唤的专家：{{name}} — Forge 会在合适时考虑派单",
+		"busSkillsTitle": "Bus skills ({{count}}) — 单击选触发命令插入到输入框",
+		"slashSoon": "斜杠命令 — 即将上线",
+		"slashItemDescTitle": "{{name}} · {{extension}}\n{{desc}}\n— 单击插入 {{trigger}}",
+		"slashItemTitle": "{{name}} · {{extension}} — 单击插入 {{trigger}}",
+		"slashFoot": "↑↓ 选 · ⏎ 插入触发 · → 跳 Bus 详情 · Esc 关闭",
+		"modelDisabledProvider": "当前走 {{provider}} 渠道,该 provider 自己决定模型;切到 forgeax 或 claude-code 渠道才能改 agent.json::models.model",
+		"modelDisabledNoAgent": "还没选 agent — 无法读 agent.json",
+		"modelDisabledBooting": "forgeax session 还在 boot",
+		"modelTriggerTitle": "当前 agent ({{agent}}) → agent.json::models.model",
+		"cliDescForgeax": "原生内核 · 直连 Session/EventBus（默认）",
+		"cliDescClaudeCode": "Anthropic the reference agent CLI CLI",
+		"cliDescCodex": "OpenAI Codex CLI",
+		"cliDescCursor": "Cursor Agent CLI",
+		"cliDescCodebuddy": "a peer agent CLI Code CLI",
+		"cliDescKimiCode": "月之暗面 Kimi Code CLI",
+		"cliDescDeepSeekHarness": "DeepSeek Harness CLI · 模型由其 profile 管理",
+		"cliBusPillTitle": "bus extension: {{extension}} · 单击在 Bus 详情查看 →",
+		"interruptTitle": "打断当前回复并立即发送（steer）",
+		"queueSendTitle": "排队发送 — 当前回复结束后依次执行（[Enter]）",
+		"stopTitle": "停止当前回复（不影响已排队消息）",
+		"sendNoSession": "session 还在加载 — 稍等一秒；如果一直卡住，看右下角 server 是否 down",
+		"sendNoAgent": "还没选 agent — 等 AgentSwitcher 列表加载（通常 <1s），或手动点上方 agent 头像",
+		"send": "发送"
+	},
+	"reference": {
+		"send_to_chat": "引用到 Chat",
+		"file": "文件",
+		"file_ref": "文件引用",
+		"path": "路径",
+		"chip_hint": "单击 chip 可删除 / hover 查看详情",
+		"copy_file_name": "复制文件名",
+		"directory": "目录",
+		"dir_ref": "目录引用",
+		"dir_name": "目录名",
+		"workshop_extension": "工坊扩展",
+		"workshop_extension_ref": "工坊扩展引用",
+		"current_game": "当前 game",
+		"current_game_ref": "当前 game 引用",
+		"path_prefix": "路径前缀",
+		"console_log": "控制台日志",
+		"console_log_line": "控制台日志行",
+		"copy_log_line": "复制日志行",
+		"game_ref": "game 引用",
+		"copy_slug": "复制 slug",
+		"session_ref": "Session 引用",
+		"copy_session_id": "复制 session id",
+		"chat_ref": "对话引用",
+		"chat_message_ref": "对话消息引用",
+		"copy_message": "复制消息",
+		"user_message_ref": "用户消息引用",
+		"bus_extension": "Bus 扩展",
+		"bus_extension_ref": "Bus 扩展引用",
+		"copy_extension_id": "复制 extension id",
+		"scene_entity": "场景实体",
+		"source": "源",
+		"components": "组件",
+		"asset": "资产",
+		"workspace": "工作区",
+		"workspace_ref": "工作区引用",
+		"workspace_context_hint": "右键可重命名或删除此工作区",
+		"component_property": "组件属性"
+	},
+	"extension": {
+		"editorPlaceholder": "// 点左侧 Agents 卡片下的产物文件 → 这里实时显示内容。\n// 例如：Iori 的 card-roguelike_pillar.md / Suzu 的 *_design.md。",
+		"previewMarkdownTitle": "预览（渲染 markdown）",
+		"preview": "预览",
+		"sourceEditableTitle": "源码（可编辑）",
+		"source": "源码",
+		"saveShortcutTitle": "Cmd/Ctrl+S 保存",
+		"noUnsavedChanges": "无未保存改动",
+		"saving": "保存中…",
+		"saveFailed": "保存失败",
+		"resizeBottomPanelTitle": "拖拽调整底部面板高度",
+		"openFailed": "打开失败",
+		"binaryNotPreviewable": "不支持预览的二进制文件",
+		"downloadOriginal": "下载原文件",
+		"model3dLoadFailed": "3D 预览加载失败",
+		"loading3dViewer": "加载 3D 预览器…",
+		"clearConsole": "清空 console",
+		"clearNetwork": "清空 network",
+		"ledgerEmpty": "暂无活动 — 让 Forge 派 Iori/Suzu 立柱写设计后这里会显示",
+		"lockedBy": "正在被 {{agent}} {{op}} 中",
+		"editing": "正在编辑",
+		"consoleEmpty": "暂无 console 输出 — 游戏 console.log/warn/error 会在这里实时显示",
+		"networkEmpty": "暂无网络请求 — 游戏的 fetch / XHR / WebSocket 会在这里实时显示",
+		"galleryTitle": "Page · 扩展页",
+		"loadingExtensionList": "加载 extension 列表…",
+		"gallerySub": "选择扩展并打开它贡献的 Page",
+		"bumpedStatsSuffix": "bumped (manifest version 非 0.0.x 占位)",
+		"implementedEntryCount": "实装入口数量",
+		"positionDecidesOrder": "manifest extension.position 决定排序",
+		"bumpedPastPlaceholder": "已 bump 过 0.0.x 占位语义",
+		"verTagBumped": "已 bump · 实装中 (非 0.0.x 占位)",
+		"verTagPlaceholder": "占位语义版本 · 后续实装会 bump",
+		"wipTagTitle": "experimental — manifest 标 experimental:true · 真实现待 Phase 4+",
+		"toolsExposedToAi": "由本 extension extension 暴露给 AI",
+		"agentsLoadFailed": "加载 agents 失败",
+		"agentsTitle": "Agents · 协作团队",
+		"agentsEmpty": "暂无 agents — 发送消息后 Forge 会自动派遣团队成员",
+		"agentDisabledTitle": "已在设置中停用（不参与协作/派遣）",
+		"agentDetailTitle": "单击进入 Agent 详情（产出物 / 长期记忆 / Skills）",
+		"disabledBadge": "已停用",
+		"noProducedFiles": "暂无产物文件",
+		"subagentsHint": "下挂 {n} 个专科 · 跟主 agent 说就行（点开仅查看 Persona）",
+		"skinGroupHint": "仅作用于聊天语气 · 单击切换皮肤 · 双击进 Persona 编辑",
+		"skinChipTitle": "单击切换 · 双击进 Persona 编辑",
+		"providerCodersHint": "下挂 {n} 个 CLI 驱动 · 点击切换驱动 + 进 Persona 编辑"
+	},
+	"gameSwitcher": {
+		"activateFailedTitle": "切换游戏未完全生效",
+		"activateFailedBody": "未切换到 {{slug}}；服务端权威仍是 {{activeSlug}}（{{message}}）。",
+		"activatePartialBody": "已切换到 {{slug}}，但后续运行环境尚未完全就绪（{{message}}）。",
+		"activateUnknownBody": "无法确认是否已切换到 {{slug}}（{{message}}）。请先查看当前游戏状态，不要重复切换。",
+		"deleteConfirm": "确认删除 games/{{slug}}/ ？此操作不可撤销。",
+		"deleteFailedTitle": "删除失败",
+		"switchTooltip": "切换游戏（每个游戏 = 一个 game）",
+		"listTitle": "打开游戏",
+		"newGameTooltip": "在 .forgeax/games/<slug>/ 新建一个游戏（Iori/Suzu 设计 + Forge 写代码）",
+		"newGame": "新建 game",
+		"empty": "暂无 game · 点上方 + 新建",
+		"switchToTooltip": "切到 games/{{slug}}/",
+		"gameMeta": "更新于 {{time}} 前",
+		"newSessionTooltip": "为 {{slug}} 新建会话",
+		"deleteTooltip": "删除 game",
+		"unpin": "取消固定 — 跟随最新",
+		"slugError": "slug: 1-41 字符 / 小写 ASCII / 数字 / 连字符",
+		"kickoffMessage": "刚创建了 games/{{slug}}/，brief：{{brief}}。请走完 Iori → Suzu → 你自己写代码的流水线。",
+		"modalTitle": "新建游戏",
+		"slugLabel": "slug（游戏目录名）",
+		"nameLabel": "显示名（可选）",
+		"namePlaceholder": "留空用 slug",
+		"templateLabel": "模板",
+		"templateLoading": "正在加载模板…",
+		"templateEmpty": "暂无可用模板，将使用默认模板。",
+		"briefLabel": "brief（可选 — 留下 Forge 立刻派 Iori 立柱）",
+		"briefPlaceholder": "e.g. 2D 卡牌肉鸽，每局 5-10 分钟，攒套牌轰爽快感",
+		"creating": "创建中...",
+		"create": "创建"
+	},
+	"rewind": {
+		"confirmTitle": "回退到这条消息?",
+		"computingDiff": "正在计算文件差异…",
+		"noFileChanges": "此后没有文件变更 —— 只会回退会话。",
+		"codeWillRevertPrefix": "代码将回退",
+		"codeWillRevertSuffix": "个文件",
+		"binaryLargeNote": "(含 {{count}} 个二进制/大文件)",
+		"revertCodeAndConversation": "回退代码和会话",
+		"revertConversationOnly": "仅回退会话",
+		"revertCodeOnly": "仅回退代码",
+		"confirmHint": "回退后可一键恢复;发出新消息后定格。",
+		"restoreFailed": "恢复失败",
+		"inlinePlaceholder": "编辑后回车发送 · 从这里重新开始",
+		"resendFromHere": "从这里重新发送",
+		"redoCheckpoint": "Redo checkpoint",
+		"editAndSendFromHere": "从这里编辑并发送",
+		"cancelEdit": "取消编辑",
+		"sendWillRevertTitle": "发送将回退文件?",
+		"revertAndSend": "回退并发送",
+		"revertedHere": "⟲ 已回退到此处",
+		"revertedHereCodeOnly": "⟲ 已回退到此处(仅代码)",
+		"redoCheckpointRestore": "Redo checkpoint · 恢复",
+		"keptDirtyFiles": "保留了你手动改的 {{count}} 个文件",
+		"revertTheseFilesToo": "这些文件也回退",
+		"overwroteDirtyFiles": "已覆盖 {{count}} 个手动改动的文件",
+		"undo": "撤销"
+	},
+	"sidebar": {
+		"expandSidebar": "展开侧栏",
+		"collapseSidebar": "折叠侧栏",
+		"extensionExtensionsHint": "Page 扩展 (bus-sourced · ←→ 切换)",
+		"tabTooltip": "{{label}} · {{id}} · ←→ 切换 tab",
+		"inSeparateWindow": "已在独立窗口",
+		"redockToMainWindow": "收回主窗",
+		"popOutToSeparateWindow": "弹出为独立窗口",
+		"inDockPanel": "已在 Dock 面板",
+		"providesToolsTooltip": "{{count}} tools · AI agent 可调用：{{list}}",
+		"providesNoTools": "此扩展未向 AI agent 暴露 tools",
+		"providesEventsTooltip": "{{count}} events · bus 上 emit：{{list}}",
+		"providesNoEvents": "此扩展未向 bus emit events",
+		"providesSkillsTooltip": "{{count}} skills · 注入 chat composer：{{list}}",
+		"providesNoSkills": "此扩展未声明 skills",
+		"familyTooltip": "Bus 上共 {{count}} 个 extension 扩展 — 单击在 Bus 详情按 kind=extension 过滤 →",
+		"openInBusTooltip": "切换到 Bus tab (⌘3) 并自动展开 {{id}} 详情行",
+		"openInBusDetail": "在 Bus 详情查看 →",
+		"pluginAuthor": "插件制作",
+		"pluginStore": "插件商店",
+		"editor": "编辑器",
+		"morePlugins": "更多插件",
+		"extensionsHint": "页面与扩展",
+		"morePluginsHint": "打开更多插件菜单",
+		"searchPlugins": "搜索插件…",
+		"noMatchingPlugins": "没有匹配的插件",
+		"pinPlugin": "置顶到侧栏",
+		"unpinPlugin": "取消置顶",
+		"categories": {
+			"3D": "3D",
+			"2D": "2D",
+			"general": "通用"
+		},
+		"plugins": {
+			"skill": "技能特效",
+			"gen3d": "3D角色",
+			"lowpoly3d": "3D低多边形",
+			"character": "角色编辑",
+			"items": "道具图标",
+			"animation": "动画设计",
+			"sceneAssets2d": "2D场景资产",
+			"ui": "UI设计",
+			"narrative": "叙事设计",
+			"reel": "影游工坊",
+			"gameVideo": "视频游戏",
+			"audio": "音乐音效",
+			"sceneGenerator": "场景生成"
+		}
+	},
+	"trust": {
+		"import": {
+			"title": "导入 .fxpack",
+			"hint": "本机绝对路径 — 浏览器侧暂不上传二进制"
+		},
+		"inspect": {
+			"button": "检查",
+			"inProgress": "检查中…",
+			"help": "ADR-0014 默认拒绝 · 未签名包在确认前不能 install。Inspect 不写盘,只读 manifest 和权限。",
+			"failed": "检查失败"
+		},
+		"panel": {
+			"title": "信任面板",
+			"signed": "已签名",
+			"unsigned": "未签名 · 请确认来源"
+		},
+		"untitled": "(无标题)",
+		"permissions": {
+			"title": "权限声明",
+			"hint": "manifest.permissions[] · 安装后由 host 信任,运行时强制将在后续版本接入",
+			"none": "无权限声明 — 这个包不会主动访问 fs / net。",
+			"empty": "(无)"
+		},
+		"conflicts": {
+			"title": "冲突",
+			"hint": "本机已存在同 id",
+			"entry": "已在 {{origin}} v{{oldVersion}} → 新包 v{{newVersion}}"
+		},
+		"warnings": {
+			"title": "警告",
+			"count": "{{count}} 条"
+		},
+		"install": {
+			"title": "安装",
+			"hint": "复制到 destRoot/.forgeax/extensions/<id>/ · 自动 reload",
+			"userRootPlaceholder": "通常: ~ (写入 ~/.forgeax/extensions/)",
+			"projectRootPlaceholder": "当前 project root",
+			"originUser": "用户安装 · ~/.forgeax",
+			"originProject": "项目专属 · 当前项目",
+			"unsignedAck": "我了解此包未签名,来源由我自己负责",
+			"button": "安装",
+			"inProgress": "安装中…"
+		},
+		"result": {
+			"title": "安装结果",
+			"reloadTriggered": "reload 已触发",
+			"empty": "(无)"
+		},
+		"policy": {
+			"skip": "skip · 保留旧版(默认)",
+			"overwrite": "overwrite · 覆盖旧版",
+			"rename": "rename · 新版改名 <id>-<ts>"
+		}
+	},
+	"author": {
+		"fork": {
+			"title": "Fork extension",
+			"hint": "把现有 extension 拷到用户或项目 extension 目录,接下来 chat-driven vibe-edit",
+			"sourceLabel": "源",
+			"selectPlaceholder": "— 选择 —",
+			"newIdLabel": "新 id",
+			"destinationOriginLabel": "目标位置",
+			"originUser": "用户安装 · ~/.forgeax (推荐)",
+			"originProject": "项目专属",
+			"copying": "复制中…",
+			"refresh": "刷新清单",
+			"refreshTitle": "重新拉 /api/extensions/manifests",
+			"doneBadge": "已 fork ✓",
+			"doneHelp": "已自动 reload — sidebar 应该看到新版本。",
+			"note": "fork 仅复制源目录(含 prompt / handlers / config)。manifest.id 改写、displayName 加 \"(我的)\" 后缀。用户安装版本优先于内置版本,所以 fork 会立即在 sidebar 替换原版。"
+		},
+		"record": {
+			"title": "录制为 skill",
+			"hint": "把最近 N 个 ledger 事件抽象成 skill — backend 已就绪,UI 走 chat 流",
+			"backendPre": "backend 路径",
+			"backendMid": "已实现(deterministic + LLM 蒸馏两种模式),但需要选定 ledger 事件子集",
+			"backendMid2": "— 这一步当前由",
+			"backendMid3": "skill 在 chat 中驱动。在主聊天框输入",
+			"backendPost": "即可启动录制流。",
+			"draftPre": "手写 skill 草稿:",
+			"draftMid": "。完整 record-as-skill 见",
+			"draftPost": "。"
+		}
+	},
+	"boot": {
+		"theme": {
+			"title": "主题",
+			"hint": "开机动画风格 · 刷新生效"
+		},
+		"copy": {
+			"title": "文案",
+			"hint": "标题 / 副标题 — 留空恢复默认",
+			"titleLabel": "标题",
+			"subtitleLabel": "副标题"
+		},
+		"components": {
+			"title": "组件",
+			"hint": "单独开关进度条 / bus 库存行",
+			"showProgressBar": "显示进度条",
+			"showProgressBarHint": "（React 启动进度 · 平时 ~1s 走完）",
+			"showBusInventory": "显示 bus 扩展总数",
+			"showBusInventoryHint": "（拉一次 /api/extensions/list · 调试用）"
+		},
+		"apply": {
+			"title": "应用 / 重置",
+			"reloadTooltip": "刷新页面 · 让 splash 重新渲染",
+			"reloadButton": "应用并刷新预览",
+			"resetTooltip": "恢复 classic-lime + 默认文案",
+			"resetButton": "恢复默认",
+			"apiHintBefore": "AI 在 ChatPanel 也可以 POST",
+			"apiHintAfter": "修改"
+		}
+	},
+	"chat": {
+		"systemLine": {
+			"collapse": "收起",
+			"expand": "展开",
+			"expandAll": "展开全部"
+		},
+		"empty": {
+			"title": "开始对话",
+			"subtitle": "告诉 FORGE 你想做什么游戏 —— 例如 \"在 games/gta-2.5d/main.ts 里写一个旋转立方体\"。"
+		},
+		"loadEarlier": {
+			"tooltip": "上滑到顶部会自动加载更早的消息;也可点此加载",
+			"label": "上滑加载更早的 {{count}} 条消息"
+		},
+		"editMessage": "点击编辑这条消息",
+		"rewindHere": {
+			"tooltip": "回到这里(checkpoint 回退)",
+			"label": "回到这里"
+		},
+		"jumpLatest": {
+			"tooltip": "滚动到最新消息",
+			"unread": "{{count}} 条新消息"
+		}
+	},
+	"gameDirectory": {
+		"openTitle": "打开游戏目录"
+	},
+	"dashboard": {
+		"busKindRegistering": "{{kind}} · 扩展登记中…",
+		"clickToBusAdmin": "单击 → Bus admin →",
+		"clickToBusDetail": "单击切到 Bus 详情 →",
+		"brandTotalTitle": "{{count}} sessions · 30s 自动刷新",
+		"closeTitle": "关闭 · Esc",
+		"navItemTitleWithCount": "{{label}} · {{count}} 项 · ↑↓ 切换子页",
+		"navItemTitle": "{{label}} · ↑↓ 切换子页"
+	},
+	"pulse": {
+		"res": {
+			"title": {
+				"loading": "服务器资源 · 加载中…",
+				"down": "服务器资源 · /api/health 拉不到（server down？）",
+				"ok": "服务器资源 · 内存 {{mem}}MB · 运行 {{uptime}} · {{ws}} 个 WS 客户端 · 每 5s 刷新"
+			}
+		},
+		"mb": {
+			"title": {
+				"some": "Model bindings · {{count}} on bus · 单击下钻 Bus admin →",
+				"none": "Model bindings · 0 extensions · 单击进入 Bus admin",
+				"down": "Model bindings · Bus 列表暂不可读",
+				"loading": "Model bindings · loading…"
+			}
+		},
+		"skill": {
+			"title": {
+				"some": "Skills · {{count}} on bus · 单击下钻 Bus admin →",
+				"none": "Skills · 0 extensions · 单击进入 Bus admin",
+				"down": "Skills · Bus 列表暂不可读",
+				"loading": "Skills · loading…"
+			}
+		},
+		"tool": {
+			"title": {
+				"some": "Tools · {{count}} on bus · 单击下钻 Bus admin →",
+				"none": "Tools · 0 extensions · 单击进入 Bus admin",
+				"down": "Tools · Bus 列表暂不可读",
+				"loading": "Tools · loading…"
+			}
+		},
+		"agent": {
+			"title": {
+				"some": "Agents · {{count}} on bus · 单击下钻 Bus admin →",
+				"none": "Agents · 0 extensions · 单击进入 Bus admin",
+				"down": "Agents · Bus 列表暂不可读",
+				"loading": "Agents · loading…"
+			}
+		}
+	},
+	"sessionSwitcher": {
+		"justNow": "刚刚",
+		"minutesAgo": "{{min}} 分钟前",
+		"yesterdayTime": "昨天 {{time}}",
+		"daysAgo": "{{dayDiff}} 天前",
+		"deleteConfirm": "确认删除该 session?\nserver 上的 session 目录 + ledger 都会一起 rm。",
+		"triggerActive": "当前 session: {{label}}",
+		"triggerEmpty": "session 列表 (boot 中或服务器空)",
+		"newSessionTitle": "新建一个 session（POST /api/sessions · scheduler 自动 start）",
+		"newSession": "新建 session",
+		"projectBound": "项目 {{slug}}",
+		"projectUnbound": "未绑定项目",
+		"empty": "暂无 session · 点 + 新建",
+		"lastActive": "最后活跃 {{time}}",
+		"deleteTitle": "删除 session（DELETE /api/sessions/:sid · ledger 一起清）"
+	},
+	"sessionTabs": {
+		"newSession": "新建对话",
+		"untitled": "新对话",
+		"history": "历史对话",
+		"historyTitle": "历史对话",
+		"closeTab": "删除对话「{{label}}」",
+		"closeConfirm": "确认删除对话「{{label}}」？\n服务端 session 目录和 ledger 会一并删除。",
+		"empty": "暂无对话"
+	},
+	"sessionTime": {
+		"justNow": "刚刚",
+		"todayTime": "今天 {{time}}",
+		"yesterdayTime": "昨天 {{time}}",
+		"weekdayTime": "{{weekday}} {{time}}",
+		"dateThisYear": "{{month}} 月 {{day}} 日",
+		"dateOtherYear": "{{year}} 年 {{month}} 月 {{day}} 日"
+	},
+	"store": {
+		"openFile": {
+			"notInWorkspace": "无法打开「{{path}}」\n\n这个文件不在可编辑游戏目录内（通常是引擎 / 依赖库的只读源码，agent 只是读取过它）。\nStudio 只能打开 .forgeax/games/** 和 packages/** 下的文件。",
+			"serverDetail": "\n\n服务端: {{serverMsg}}",
+			"notFound": "文件不存在:「{{path}}」\n\n可能已被移动 / 重命名 / 删除,或这个游戏的入口文件其实是别的名字(例如 main.ts 而非 index.ts)。",
+			"failed": "无法打开「{{path}}」:{{status}} {{statusText}}"
+		},
+		"createSession": {
+			"failedTitle": "新建 session 失败"
+		},
+		"closeSession": {
+			"failedTitle": "删除对话失败",
+			"failedBody": "对话已保留。{{message}}"
+		},
+		"loop": {
+			"started": "🔁 长程任务 `{{daemonId}}` 已起 · 每 {{intervalSec}}s 跑一拍 · 在 Dashboard → Agents Hub 看进展 + 截图墙 · 在这条 ChatPanel 看每拍历史",
+			"createFailed": "❌ 创建长程任务失败: {{error}}",
+			"networkError": "❌ 网络错误创建长程任务: {{message}}"
+		},
+		"tool": {
+			"invalidJson": "❌ /tool 参数不是合法 JSON: {{message}}",
+			"networkError": "❌ /tool 网络错误: {{message}}"
+		},
+		"command": {
+			"networkError": "❌ /{{cmdName}} 网络错误: {{message}}"
+		},
+		"noAgentSelected": "⚠ 还没选 agent —— 等 AgentSwitcher 列表加载（一般 <1s），或手动点上面的 agent 头像。",
+		"steer": {
+			"sendFailed": "❌ 打断发送失败: {{message}}"
+		}
+	},
+	"topbar": {
+		"chatToggle": {
+			"expand": "展开对话流",
+			"collapse": "折叠对话流"
+		},
+		"package": {
+			"title": "打包成独立游戏",
+			"noGame": "先选择或创建一个游戏再打包。",
+			"failed": "打包失败",
+			"unknownError": "未知错误",
+			"done": "已打包「{{slug}}」({{platform}})",
+			"exportDir": "导出目录：",
+			"runLocally": "本地运行：",
+			"webgpuHint": "WebGPU 需在 localhost 或 HTTPS 下打开。",
+			"menuTitle": "打包游戏",
+			"platformWeb": "Web (静态站点)",
+			"platformWindows": "Windows (.exe)",
+			"platformMac": "macOS (.app 启动器)",
+			"platformAndroid": "Android (工程导出)",
+			"platformIos": "iOS (工程导出)",
+			"rebuildEngine": "重新编译引擎核心",
+			"rebuildEngineHint": "开发者模式：重新编译 Rust→WASM 引擎核心 (wgpu-wasm)",
+			"engineRoot": "引擎根目录",
+			"engineRootInvalid": "缺少依赖",
+			"engineRootNone": "未探测到可用引擎根",
+			"history": "打包历史",
+			"historyEmpty": "暂无打包记录",
+			"historyDelete": "删除",
+			"historyDeleteConfirm": "确定删除此记录？",
+			"historyRetry": "重试",
+			"historyCleanArtifacts": "同时清理产物",
+			"progressTitle": "正在打包你的游戏",
+			"progressPhase": "阶段: {{phase}}",
+			"progressClose": "关闭",
+			"progressHint": "这可能需要一点时间——你可以继续忙别的，打包完成会通知你。",
+			"progressLogs": "构建日志",
+			"phaseLabel": {
+				"queued": "准备中",
+				"starting": "准备中",
+				"cleanup": "清理上一次构建",
+				"shell": "准备启动器",
+				"shell-build": "编译启动器",
+				"toolchain": "配置工具链",
+				"engine-rebuild": "重建引擎核心",
+				"web-build": "打包游戏",
+				"assemble": "组装安装包",
+				"export-android-project": "导出 Android 工程",
+				"done": "收尾中",
+				"failed": "失败",
+				"error": "出错"
+			},
+			"jobSuccess": "打包成功",
+			"jobFailed": "打包失败",
+			"cachedShell": "使用了缓存的启动器",
+			"clean": "清理本地缓存",
+			"cleanTitle": "清理本地打包环境",
+			"cleanBody": "将删除以下本地打包环境（不可恢复，下次打包会自动重建）：",
+			"cleanItemToolchain": "隔离 Rust 工具链 ~/.forgeax/toolchains（rustup + cargo + wasm-pack）",
+			"cleanItemShell": "启动器外壳缓存 ~/.forgeax/cache/player-shell",
+			"cleanItemTmp": "残留临时导出目录 .forgeax-export",
+			"cleanKeepHint": "不会删除已生成的打包产物与打包历史。",
+			"cleanConfirm": "全部删除",
+			"cleanDone": "已清理完成",
+			"cleanPartial": "部分清理完成（有项目删除失败）",
+			"cleanFailed": "清理失败",
+			"cleanFreed": "已释放约 {{size}}",
+			"cleaning": "正在清理本地缓存…",
+			"cleaningHint": "正在删除隔离工具链与缓存，请稍候（体积较大时可能需要几秒到十几秒）。",
+			"platformCloud": "一键发布到平台",
+			"comingSoon": "即将支持",
+			"viewGuide": "查看发布引导",
+			"success": {
+				"ready": "游戏打包完成 —— 可以本地试玩，或把文件夹分享出去。",
+				"play": "立即试玩",
+				"playServing": "正在启动本地服务…",
+				"playFailed": "无法启动本地服务，请复制下面的命令到终端运行。",
+				"open": "打开文件夹",
+				"copyPath": "复制路径",
+				"copyCmd": "复制命令",
+				"copied": "已复制"
+			},
+			"doc": {
+				"web": {
+					"what": "把游戏打包成一个自包含的网站文件夹，丢到任意服务器（或本地）就能跑，发个链接别人就能玩。",
+					"when": "最轻量的分享方式 · 需 WebGPU 浏览器"
+				},
+				"windows": {
+					"what": "生成一个带启动器 .exe 的文件夹，双击即玩，不用装浏览器、不用联网。",
+					"when": "适合做成可下载的 PC 版"
+				},
+				"macos": {
+					"what": "生成一个带启动器 + 可双击「Play」.command 的文件夹，在这台 Mac 上本地运行游戏。",
+					"when": "适合本地试玩 / 做可下载的 Mac 版"
+				},
+				"android": {
+					"what": "导出一个标准的 Android Studio 工程（不是直接 APK），在 Android Studio 里编译成手机 App。",
+					"when": "点它会先让你填应用名 / 包名 / 图标"
+				},
+				"cloud": {
+					"what": "最省事的方式：不用导出、不用配置，点一下就发布到云端，几秒后拿到在线链接，任何人打开即玩。",
+					"when": "即将支持"
+				},
+				"ios": {
+					"what": "导出 Xcode 工程以构建 iOS App。",
+					"when": "点它会先让你填应用名 / Bundle ID / 图标"
+				},
+				"engine": {
+					"what": "高级开关，打包前重新编译引擎核心，一般不用管。",
+					"when": "仅当导出结果和预览不一致时勾选"
+				},
+				"engineRoot": {
+					"what": "导出时绑定的引擎构建版本。",
+					"when": "通常自动选好，保持默认即可"
+				},
+				"history": {
+					"what": "每一次导出的记录都在这里，可一键重试或删除。",
+					"when": "想追溯或重跑某次导出时"
+				},
+				"clean": {
+					"what": "释放打包缓存占用的磁盘空间，只删缓存，不碰你已导出的成品和历史。",
+					"when": "磁盘紧张时"
+				}
+			}
+		},
+		"onboard": {
+			"introTitle": "游戏做好啦！",
+			"introDesc": "你和 Forge 一起做出了一个能跑的游戏 —— 右边预览里就是它。现在，试试把它发布出去吧！",
+			"introHint": "点一下右上角的「发布」按钮继续",
+			"next": "下一步",
+			"prev": "上一步",
+			"skip": "跳过",
+			"done": "开始使用",
+			"counter": "{{n}} / {{total}}"
+		},
+		"android": {
+			"title": "导出 Android Studio 工程",
+			"subtitle": "生成一个可离线打开的 Android Studio 工程（内嵌 WebView 外壳 + 完整游戏），你可在其中集成 SDK 并编译 APK/AAB。",
+			"appIdLabel": "应用包名 (applicationId)",
+			"appIdHint": "例如 com.acme.mygame，至少两段，每段以字母开头。",
+			"appIdError": "包名格式无效，示例：com.acme.mygame",
+			"appNameLabel": "应用名称",
+			"appNameError": "长度需为 1–30 个字符",
+			"projectNameLabel": "工程名 (project_name)",
+			"projectNameHint": "作为 Android 工程根目录名与 Gradle rootProject.name。",
+			"projectNameError": "仅允许字母、数字、「-」和「_」",
+			"orientationLabel": "屏幕方向",
+			"orientationLandscape": "横屏",
+			"orientationPortrait": "竖屏",
+			"orientationHint": "导出的 App 将锁定为所选方向启动。",
+			"iconLabel": "应用图标 (ICON)",
+			"iconPick": "选择 PNG",
+			"iconRemove": "移除",
+			"iconHint": "可选，PNG，建议 512×512，≤2MB。",
+			"iconErrType": "图标必须为 PNG 图片",
+			"iconErrSize": "图标过大（需 ≤2MB）",
+			"cancel": "取消",
+			"confirm": "开始导出"
+		},
+		"ios": {
+			"title": "导出 Xcode 工程",
+			"subtitle": "生成一个可用 Xcode 打开的 iOS 工程（内嵌 WKWebView 外壳 + 完整游戏），你可在其中配置签名并归档导出 IPA（需 macOS + Xcode）。",
+			"bundleIdLabel": "应用标识 (Bundle ID)",
+			"bundleIdHint": "例如 com.acme.mygame，至少两段，每段以字母开头。",
+			"bundleIdError": "Bundle ID 格式无效，示例：com.acme.mygame",
+			"appNameLabel": "应用名称",
+			"appNameError": "长度需为 1–30 个字符",
+			"projectNameLabel": "工程名 (project_name)",
+			"projectNameHint": "作为 Xcode 工程目录名（.xcodeproj）。",
+			"projectNameError": "仅允许字母、数字、「-」和「_」",
+			"orientationLabel": "屏幕方向",
+			"orientationLandscape": "横屏",
+			"orientationPortrait": "竖屏",
+			"orientationHint": "导出的 App 将锁定为所选方向启动。",
+			"iconLabel": "应用图标 (ICON)",
+			"iconPick": "选择 PNG",
+			"iconRemove": "移除",
+			"iconHint": "可选，PNG，建议 1024×1024，≤2MB。",
+			"iconErrType": "图标必须为 PNG 图片",
+			"iconErrSize": "图标过大（需 ≤2MB）",
+			"cancel": "取消",
+			"confirm": "开始导出"
+		},
+		"layout": {
+			"tooltip": "布局 · 重开 / 重置 / 预设"
+		},
+		"settings": {
+			"tooltip": "系统设置 · Extensions / Keys / Models / About"
+		},
+		"publish": {
+			"packaging": "正在打包 {{platform}}…",
+			"tooltip": "打包游戏到目标平台"
+		}
+	},
+	"agentSwitcher": {
+		"hintBusExpand": "cli 未启动 · ⌘+click → Bus",
+		"hintBusList": "cli 未启动 · ⌘+click → Bus 列表",
+		"titlePlaceholder": "{{id}} ({{role}}) · marketplace 占位 · cli daemon 未启动则不可切换 · ⌘/Ctrl+click → Bus",
+		"titlePlaceholderExpand": " · expand {{busPluginId}}",
+		"titlePlaceholderAgentKind": " (agent kind)",
+		"titleAgent": "{{id}} ({{role}}) · 单击=切换为主对话目标 · 双击=本 thread 下条消息发给它",
+		"hintNotInitialized": "未初始化"
+	},
+	"askUser": {
+		"noQuestion": "(无问题)",
+		"questionProgress": "{{current}} / {{total}}",
+		"preparing": "正在准备选项…",
+		"noOptions": "（ask_user 缺少有效选项）",
+		"multiSelect": "多选",
+		"singleSelect": "单选",
+		"other": "其他…",
+		"otherDesc": "自己填一个答案",
+		"customPlaceholder": "输入你的答案…",
+		"selected": "已选择：{{values}}",
+		"none": "（无）",
+		"submitting": "提交中…",
+		"confirm": "确认",
+		"submitFailed": "提交失败，已保留选择，请重试。",
+		"expired": "这个问题已停止接收回答。",
+		"unparseableHistory": "历史答案无法解析。",
+		"collapse": "收起",
+		"expand": "展开"
+	},
+	"contextMenu": {
+		"cut": "剪切",
+		"copy": "复制",
+		"paste": "粘贴",
+		"selectAll": "全选",
+		"copyCode": "复制代码",
+		"copyPath": "复制路径",
+		"textReference": "文本引用",
+		"selectedTextReference": "选中文本引用"
+	},
+	"shortcuts": {
+		"gameFullscreen": "游戏全屏 · 只隐 Studio 自己的 TopBar / Sidebar / ChatPanel / StatusBar(浏览器边框还在)",
+		"browserFullscreen": "浏览器全屏(PPT 放映式)· 浏览器原生 fullscreen API(连标签栏 / 地址栏一起消失)",
+		"toggleSidebar": "切换左侧 Sidebar（页面栏）",
+		"toggleChatPanel": "切换右侧 ChatPanel",
+		"revealChat": "切换 chat(隐藏则调出 / 非默认位则归位 / 默认位则关闭)",
+		"toggleDashboard": "切换 Dashboard 总览面板",
+		"toggleSettings": "打开 / 关闭 Settings 浮层",
+		"openChangelog": "Settings → 关于（更新日志）",
+		"closeOverlay": "关闭当前浮层 · 浏览器全屏 → 游戏全屏 → Settings → Dashboard 依次撤回",
+		"modePreview": "切到 Preview 模式",
+		"modePage": "切到 Page 模式",
+		"switchPageN": "切到第 {{n}} 个 extension(Blender 风格 · 按列表索引)",
+		"openExtensions": "Settings → Extensions(原 Bus mode tab)",
+		"focusComposer": "聚焦右侧 ChatPanel 输入框",
+		"toggleCommandPalette": "切换命令面板"
+	},
+	"analytics": {
+		"clickToBusDetail": "单击切到 Bus 详情 →",
+		"clickToBusAdminFilter": "单击 → Bus admin (filter={{label}}) →"
+	},
+	"centerExtension": {
+		"backToTileGridTitle": "返回 12 个扩展 tile 网格",
+		"backToPage": "返回扩展页",
+		"pluginMainWindow": "插件 · 主窗口",
+		"close": "关闭",
+		"redockTitle": "把独立窗口收回主窗",
+		"redock": "收回主窗",
+		"detachTitle": "弹出为独立窗口",
+		"detach": "弹出窗口",
+		"openedInWindowPrefix": "扩展 ",
+		"openedInWindowSuffix": " 已在独立窗口中打开。",
+		"loadingExtensionPrefix": "正在加载扩展 ",
+		"loadingExtensionSuffix": "…",
+		"missingStandalonePrefix": "扩展 ",
+		"missingStandaloneMid": " 缺少 ",
+		"missingStandaloneSuffix": " 入口。",
+		"extensionUnavailablePrefix": "无法加载扩展 ",
+		"extensionUnavailableSuffix": "。请确认 forgeax-server 已启动（在 forgeax-studio 目录运行 bun fx start），然后刷新页面。"
+	},
+	"errorBoundary": {
+		"retry": "重试",
+		"reloadRegion": "重载此区域",
+		"reloadStudio": "重新加载 Studio",
+		"panelRenderError": "此面板渲染出错",
+		"panelHint": "可重试 / 重载本区域，无需重启整个 Studio。",
+		"fullscreenTitle": "界面渲染崩溃",
+		"fullscreenHint": "React 界面渲染时抛错。先试「重试」；不行再「重载此区域」；仍异常则「重新加载 Studio」。桌面 app 无地址栏，必须用下面的按钮恢复。"
+	},
+	"footerPanel": {
+		"info": "信息",
+		"checkpoints": "检查点",
+		"events": "事件"
+	},
+	"infoPanel": {
+		"clickToCopy": "点击复制此条 / Click to copy",
+		"repeatedTimes": "重复 {{count}} 次",
+		"filterLevel": "筛选 {{level}}",
+		"filterSource": "筛选来源 {{source}}",
+		"copyAll": "复制全部",
+		"clear": "清空",
+		"emptyNoMessages": "暂无消息。来自 Play / Edit / 扩展 / shell 的错误会显示在这里。",
+		"emptyNoMatch": "当前筛选无匹配条目。"
+	},
+	"permission": {
+		"askAriaLabel": "AI 提问",
+		"commandAriaLabel": "命令权限审批",
+		"askTitle": "AI 想问你",
+		"commandTitle": "需要你授权一条命令",
+		"multiSelectHint": "（可多选）",
+		"selectBeforeSubmit": "↑ 先选一个选项再提交",
+		"submit": "提交",
+		"deny": "拒绝",
+		"allow": "允许",
+		"capabilityLabel": "能力:{{capability}}",
+		"rememberSession": "记住本会话",
+		"expand": "▼ 展开 ({{count}} 字)",
+		"collapse": "▲ 收起"
+	},
+	"dockShell": {
+		"popoutToWindow": "弹出为独立 OS 窗口",
+		"resetLayout": "重置布局",
+		"emptySurface": "打开项目资源或扩展以开始。",
+		"reset": "重置",
+		"resetPositions": "重置面板位置",
+		"editorPanels": "编辑器面板",
+		"mainPanels": "主面板",
+		"morePanels": "更多面板",
+		"extensionPanels": "扩展面板",
+		"hidePanelTitle": "隐藏面板标题栏",
+		"showPanelTitle": "显示面板标题栏",
+		"moveToSide": "移动到侧边",
+		"moveOffSide": "移出侧边",
+		"moveToPrimaryDock": "移回主停靠区",
+		"chatToDefault": "在默认位置显示",
+		"detachedWindowPlaceholder": "已在独立窗口打开",
+		"tabContext": {
+			"openInNewWindow": "在独立窗口中打开",
+			"close": "关闭",
+			"closeOthers": "关闭其他"
+		},
+		"panelTitles": {
+			"tools": "工具",
+			"main": "Studio",
+			"viewport": "视口",
+			"chat": "ForgeaX CLI",
+			"agents": "智能体",
+			"files": "文件",
+			"console": "控制台",
+			"telemetry": "遥测",
+			"hierarchy": "场景树",
+			"assets": "文件资源管理器",
+			"inspector": "物体属性",
+			"history": "历史",
+			"capabilities": "能力",
+			"launcher": "启动器",
+			"asset-properties": "资源属性",
+			"mesh-slots": "网格插槽",
+			"info": "信息",
+			"checkpoints": "检查点",
+			"events": "事件"
+		}
+	},
+	"pageTabs": {
+		"openPages": "打开的页签",
+		"newPage": "新建页签",
+		"allPages": "全部页签",
+		"noOpenableTypes": "没有可新建的页签类型",
+		"searchPageTypes": "搜索页签类型…",
+		"noMatchingTypes": "没有匹配的页签类型",
+		"availableTypes": "可新建页签",
+		"closeTab": "关闭 {{title}}",
+		"context": {
+			"close": "关闭",
+			"closeOthers": "关闭其他",
+			"closeToRight": "关闭右侧全部"
+		}
+	},
+	"firstRun": {
+		"errMissingKey": "请输入 OpenRouter API Key",
+		"errSaveFailed": "保存失败",
+		"title": "👋 欢迎使用 ForgeaX Studio",
+		"lead": "跟 Forge 聊一句「做个 XX 游戏」,它就会帮你规划、写代码,右侧实时跑出来。开始前,选一种方式让 Forge 能调用模型:",
+		"opt1Title": "① 用 OpenRouter Key",
+		"opt1Badge": "推荐 · 自助",
+		"opt1DescBefore": "去 ",
+		"opt1DescAfter": " 生成一个 sk-or-… 密钥填进来即可。仅写入本机 ~/ForgeaxProjects/.env,不上传任何地方。",
+		"opt2Title": "② 用你本地已装的 CLI",
+		"opt2Desc": "claude-code / codex / cursor —— 各自 login 登录后,在聊天框左下角切换 provider 即可,无需在这里填任何 key。",
+		"skip": "先跳过",
+		"useLocalCli": "我用本地 CLI",
+		"fillKey": "填 Key ▶",
+		"step2Title": "🔑 填入 OpenRouter API Key",
+		"step2LeadBefore": "在 ",
+		"step2LeadAfter": " 创建,格式 sk-or-…。OpenRouter 会按你的账户余额计费。",
+		"keyPlaceholder": "sk-or-...",
+		"advanced": "高级(代理地址,一般无需修改)",
+		"baseUrlPlaceholder": "https://openrouter.ai/api",
+		"back": "◀ 返回",
+		"saving": "保存中…",
+		"saveAndStart": "保存并开始"
+	},
+	"fsBrowser": {
+		"parentDir": "上一级",
+		"browse": "浏览…（打开系统文件夹选择器）",
+		"addrHint": "输入路径后按回车跳转",
+		"emptyDir": "空目录",
+		"initWorkspaceWhenNoGame": "无 game 时初始化默认游戏",
+		"selectDir": "选择 {{dir}}",
+		"processing": "处理中…",
+		"selectThisDir": "选择此目录"
+	},
+	"subAgent": {
+		"status": {
+			"running": "运行中…",
+			"error": "失败",
+			"done": "完成"
+		},
+		"role": {
+			"iori": "核心玩法师",
+			"suzu": "体验设计师",
+			"kotone": "剧情师",
+			"iro": "美术师",
+			"tsumugi": "工程师",
+			"ccCoder": "the reference agent CLI 工程师",
+			"fallback": "sub-agent"
+		}
+	},
+	"surfaces": {
+		"chip": {
+			"close": "关闭 surface overlay",
+			"open": "打开 surface overlay (dev)"
+		},
+		"overlay": {
+			"empty": "无 extension 调用 surface.expose"
+		},
+		"action": {
+			"formClose": "关闭表单",
+			"formOpen": "打开表单运行",
+			"collapse": "收起",
+			"run": "运行",
+			"runConfirm": "运行（需确认）"
+		}
+	},
+	"filesPanel": {
+		"fileCount": "{{count}} 个文件",
+		"jumpToFile": "跳转到 {{name}}",
+		"splitByFamily": "按 6 个 family 拆分",
+		"clickToCollapse": "单击 折叠",
+		"clickToExpand": "单击 展开"
+	},
+	"schemaForm": {
+		"addItem": "+ 添加",
+		"missingRequired": "缺少必填字段: {{fields}}",
+		"run": "运行"
+	},
+	"extensionAgentPicker": {
+		"unbound": "未绑定",
+		"target": "当前对话目标",
+		"targetWithRecommend": "当前对话目标 · 推荐 {{display}}",
+		"noAgents": "无可用 agent",
+		"recommendedPrefix": "推荐",
+		"recommendedSuffix": "未在当前 session 中"
+	},
+	"extensionDock": {
+		"loadingExtension": "正在加载 {{extensionId}}…",
+		"loadingExtensionGeneric": "正在加载扩展…",
+		"loadingPageHost": "正在连接 Page 宿主…",
+		"extensionHostFailed": "Page 宿主加载失败：{{error}}",
+		"extensionExtensionMissing": "Page 宿主未注册 {{extensionId}}。",
+		"extensionGameRequired": "请先打开游戏，再加载此 Page 扩展。",
+		"retry": "重试"
+	},
+	"chatAgentCapsule": {
+		"prevPage": "上一页",
+		"nextPage": "下一页",
+		"unreadMessage": "未读消息"
+	},
+	"confirmDialog": {
+		"wantsToRunTool": "{{caller}} 想运行一个需要确认的 tool",
+		"deny": "拒绝",
+		"allow": "允许"
+	},
+	"detachedSurface": {
+		"unknownPanel": "未知面板 surface「{{id}}」。",
+		"loadingExtension": "正在加载扩展 {{id}}…",
+		"extensionNotFound": "未找到扩展 {{id}}。"
+	},
+	"forgeCard": {
+		"thinking": "{{displayName}} 正在思考",
+		"emptyResponse": "(空响应 — 上游 cli 这次没产出内容；再发一次试试)"
+	},
+	"agentStatus": {
+		"expectant": ["正在待命中", "摸鱼中", "搓手手准备开工", "整装待发"],
+		"focused": ["正在烧脑中", "脑内开会中", "齿轮疯狂转动", "闭关思考"],
+		"cheerful": ["正在叭叭中", "键盘冒火中", "碎碎念中", "飞速码字"],
+		"diligent": ["正在烧烤中", "叮叮当当施工中", "正在开炉", "埋头苦干"],
+		"delegating": ["正在派活中", "喊人来帮忙", "指挥小队", "当甩手掌柜"],
+		"proud": ["新鲜出炉啦", "成品出锅", "叮~搞定", "骄傲交付"],
+		"weary": ["正在回血中", "喝口水歇会儿", "电量告急", "瘫一会儿"],
+		"sad": ["不小心翻车了", "撞墙中", "emo 一下", "正在擦眼泪"],
+		"curious": ["正在围观中", "好奇张望", "东瞅瞅西看看", "探头探脑"]
+	},
+	"markdownView": {
+		"taskDoneReadonly": "已完成（只读）",
+		"taskTodoReadonly": "未完成（只读）",
+		"taskStatusReadonly": "任务状态只读 — 这是消息内容的一部分，不能点击切换"
+	},
+	"agentsPanel": {
+		"noActiveSession": "无活跃 session",
+		"empty": "暂无 agent — 发送消息后 Forge 会派遣团队",
+		"mainAgent": "主 agent"
+	},
+	"dialog": {
+		"confirmActionTitle": "确认操作",
+		"alertTitle": "提示",
+		"unsavedTitle": "未保存的更改",
+		"unsavedBody": "{{title}} 有未保存的更改。关闭前要保存吗？",
+		"discardChanges": "不保存"
+	},
+	"eventFormatter": {
+		"filePart": "[文件: {{path}}]",
+		"imagePart": "[图片: {{path}}]",
+		"imageGeneric": "[图片]"
+	},
+	"extensionSwitcher": {
+		"addPage": "新建 extension",
+		"rename": "重命名",
+		"duplicate": "复制",
+		"deletePage": "删除 extension"
+	},
+	"consolePanel": {
+		"clearTitle": "清空 console",
+		"empty": "暂无 console 输出 — 游戏/编辑器的 console.log·warn·error 会实时显示"
+	},
+	"sessionStream": {
+		"imageRef": "[图片: {{path}}]",
+		"fileRef": "[文件: {{path}}]",
+		"narrativeWorkshop": "叙事工坊"
+	},
+	"standaloneExtension": {
+		"noEntryPrefix": "扩展",
+		"noEntryMiddle": "没有",
+		"noEntrySuffix": "入口。",
+		"iframeLoadFailed": "iframe 加载失败：{{error}}"
+	},
+	"themes": {
+		"classicLime": {
+			"label": "Classic Lime",
+			"desc": "现有风格 · lime 强调色 + 横向进度条"
+		},
+		"neonPulse": {
+			"label": "Neon Pulse",
+			"desc": "径向脉冲动画 + 全屏 logo + 弧形进度条"
+		}
+	},
+	"toolChip": {
+		"collapse": "▲ 收起 ({{chars}} 字 · {{lines}} 行 · {{bytes}})",
+		"viewAll": "▼ 查看全部 (剩 {{chars}} 字 · 共 {{lines}} 行 · {{bytes}})"
+	},
+	"healthIndicator": {
+		"tooltipWithMsg": "{{source}}: {{message}}\n\n点击打开 Info 面板",
+		"tooltipEmpty": "暂无消息 · 点击打开 Info 面板"
+	},
+	"forgeText": {
+		"collapse": "▲ 折叠",
+		"expand": "▼ 展开 ({{count}} 字)"
+	},
+	"kcCopyBtn": {
+		"copyMessage": "复制整段消息"
+	},
+	"pillChip": {
+		"expandedFormTip": "发送给 AI 的展开形式"
+	},
+	"modelPicker": {
+		"showInComposer": "在 Composer picker 里显示这个模型",
+		"hideFromComposer": "从 Composer picker 隐藏这个模型(Settings/ModelLab 仍可见)"
+	},
+	"busHealthLamp": {
+		"linkTitle": "{{base}} — 单击在 Bus 详情查看 →"
+	},
+	"extensionModuleStrip": {
+		"ariaLabel": "扩展模块",
+		"empty": "暂无扩展"
+	},
+	"providerBadge": {
+		"clickToBusDetail": "{{title}} · 单击在 Bus 详情查看 →"
+	},
+	"menubar": {
+		"brand": "ForgeaX Studio",
+		"file": "文件",
+		"edit": "编辑",
+		"window": "窗口",
+		"build": "构建",
+		"select": "选择",
+		"help": "帮助"
+	},
+	"menu": {
+		"brand": {
+			"settings": "设置…",
+			"about": "关于 ForgeaX",
+			"checkUpdate": "检查更新"
+		},
+		"file": {
+			"newGame": "新建游戏…",
+			"openGameDirectory": "打开游戏目录…",
+			"openRecent": "打开最近",
+			"openRecentEmpty": "暂无最近记录",
+			"closeGame": "关闭游戏",
+			"saveAll": "全部保存",
+			"reveal": "在系统中显示",
+			"import": "导入资产…",
+			"export": "导出为独立站点…",
+			"package": "打包并预览"
+		},
+		"edit": {
+			"cut": "剪切",
+			"copy": "复制",
+			"paste": "粘贴",
+			"copyPath": "复制路径",
+			"copyGuid": "复制 GUID",
+			"find": "查找…",
+			"rollback": "回滚到检查点…"
+		},
+		"window": {
+			"timeline": "时间线",
+			"runtime": "运行时",
+			"viewport": "视口",
+			"chat": "聊天",
+			"resetLayout": "重置布局",
+			"fullscreen": "进入全屏"
+		},
+		"build": {
+			"export": "导出为独立站点…",
+			"settings": "构建设置…"
+		},
+		"help": {
+			"onboarding": "新手指引…",
+			"docs": "文档",
+			"tutorials": "教程",
+			"examples": "示例",
+			"blog": "博客",
+			"games": "游戏演示",
+			"marketplace": "素材市场",
+			"changelog": "更新日志",
+			"shortcuts": "快捷键",
+			"askAi": "问 AI",
+			"github": "GitHub 仓库",
+			"report": "报告问题",
+			"about": "关于 ForgeaX",
+			"license": "许可协议"
+		}
+	},
+	"taskFlow": {
+		"process": "执行过程",
+		"processInterrupted": "执行过程（已中断）",
+		"processMeta": "{{steps}} 步 · {{duration}}",
+		"workedFor": "Worked for {{duration}}",
+		"processRunning": "制作中…",
+		"processWaiting": "等待你的选择…",
+		"processError": "失败",
+		"processAborted": "已中断",
+		"collapseProcess": "收起制作过程",
+		"expandProcess": "展开制作过程",
+		"planLabel": "需求规划",
+		"planTitle": "收到开始执行 {{count}} 项任务",
+		"statusRunning": "执行中",
+		"statusDone": "完成",
+		"statusPending": "待执行",
+		"statusError": "失败",
+		"stepsEmpty": "等待步骤…",
+		"thinking": "Thinking",
+		"openAgentThread": "查看 {{name}} 的工作过程",
+		"backToMain": "返回主对话",
+		"backToSub": "回到 {{name}}",
+		"subAgentReadOnly": "子 agent 工作过程(只读)· 如需追加需求,请返回主对话由 Forge 中转",
+		"role": {
+			"orchestrator": "编排",
+			"pillar": "核心玩法",
+			"design": "场景设计",
+			"narrative": "叙事",
+			"art": "美术",
+			"coding": "玩法程序"
+		},
+		"totalLabel": "总共产生",
+		"chipEdit": "改",
+		"chipNew": "新增",
+		"chipDel": "删除",
+		"groupEdit": "改动",
+		"groupNew": "新增",
+		"groupDel": "删除",
+		"groupEmpty": "无",
+		"artifactPartial": "部分归因",
+		"artifactUnavailable": "统计不可用",
+		"artifactStatsUnavailable": "文件统计暂不可用",
+		"artifactReason": "原因：{{reason}}",
+		"artifactUnattributed": "有 {{count}} 个文件改动无法归因",
+		"artifactCandidates": "可信候选路径",
+		"artifactNoCandidates": "没有可信候选路径",
+		"artifactOutcomeComplete": "需求工作已交付，请查看下方总结、测试依据与推荐事项。",
+		"artifactOutcomePartial": "任务尚未完全完成，请查看未决事项并确认后续方向。",
+		"deliveredAt": "交付",
+		"outcome": "交付结论",
+		"deliveryCardTitle": "任务交付卡片",
+		"featureUnderConstruction": "功能建设中...",
+		"copyArtifact": "复制交付结果",
+		"copied": "已复制",
+		"files": "交付文件",
+		"filesCount": "{{count}} 个",
+		"tests": "测试",
+		"testsCount": "✓ {{pass}}/{{total}} 通过",
+		"testsNotReported": "本次交付未提供测试结果。",
+		"nextSteps": "建议下一步",
+		"confirmDeliveryRecommendation": "查看本次交付，并确认是否继续。",
+		"buildPrepare": "准备构建 {{version}}",
+		"buildNote": "将保存当前改动，并生成新的可试玩版本",
+		"buildAction": "构建",
+		"buildBuilding": "构建中…",
+		"buildRetry": "重试构建",
+		"buildReady": "构建版本 {{version}}",
+		"buildFailed": "构建 {{version}} 失败",
+		"play": "PLAY",
+		"playing": "PLAYING",
+		"badgeDone": "完成",
+		"badgeError": "错误",
+		"badgeAssets": "{{count}} 资源",
+		"unplanned": "计划外步骤",
+		"tool": {
+			"readFile": "读取文件",
+			"writeFile": "写入文件",
+			"editFile": "编辑文件",
+			"multiEdit": "更新文件",
+			"bash": "运行命令",
+			"applyPatch": "应用补丁",
+			"grep": "搜索代码",
+			"glob": "查找文件",
+			"subagent": "委派任务",
+			"askUser": "请求澄清",
+			"listDir": "列出目录"
+		}
+	},
+	"feedback": {
+		"button": "反馈",
+		"tooltip": "提交反馈 / 报告问题",
+		"panel": {
+			"title": "反馈",
+			"write": "写反馈",
+			"mine": "我的反馈"
+		},
+		"form": {
+			"type": "问题类型",
+			"description": "问题描述",
+			"descriptionPh": "例如：点击 Play 后画面卡住…",
+			"screenshots": "截图",
+			"screenshotLimit": "最多 5 张",
+			"pasteScreenshot": "可直接粘贴截图（⌘V / Ctrl+V）",
+			"previewScreenshot": "放大预览截图",
+			"zoomIn": "放大",
+			"zoomOut": "缩小",
+			"resetZoom": "重置缩放",
+			"removeScreenshot": "删除截图",
+			"email": "邮箱",
+			"emailPh": "建议填写公司邮箱",
+			"cancel": "取消",
+			"submit": "提交",
+			"snapshot": "当前快照",
+			"upload": "本地上传"
+		},
+		"errors": {
+			"serverUnavailable": "无法连接 ForgeaX 本地服务，反馈尚未提交。请确认 Studio 服务正常后重试。",
+			"requestTimeout": "本地服务响应超时，反馈尚未提交。请稍后重试。",
+			"invalidResponse": "本地服务返回了无法识别的响应，反馈尚未提交。",
+			"localSaveFailed": "反馈无法保存到本机待发送箱，请检查是否禁用了浏览器存储或磁盘空间不足。",
+			"submitFailed": "提交失败：{{detail}}",
+			"loadFailed": "暂时无法读取反馈记录，请重试连接。",
+			"attempt": "第 {{attempt}} 次尝试 · {{time}}",
+			"retryConnection": "重试连接",
+			"retrySubmit": "重新提交"
+		},
+		"types": {
+			"stuck": "崩溃或无响应",
+			"wrong": "功能异常",
+			"slow": "性能问题",
+			"ui": "界面缺陷",
+			"idea": "功能建议",
+			"other": "其他"
+		},
+		"success": {
+			"title": "已收到你的反馈",
+			"body": "我们会尽快处理。",
+			"id": "反馈编号",
+			"copy": "复制",
+			"guide": "处理进展可在「我的反馈」查看。",
+			"viewMine": "查看我的反馈",
+			"ok": "完成"
+		},
+		"mine": {
+			"empty": "还没有提交过反馈。",
+			"id": "编号",
+			"updated": "更新时间",
+			"autoTitle": "自动错误报告",
+			"pendingSend": "待发送",
+			"localId": "本地编号",
+			"saved": "保存时间",
+			"savedLocally": "已保存在本机",
+			"pendingHint": "本地服务恢复后可重新发送；在成功送达前此记录会一直保留。",
+			"retryPending": "重新发送",
+			"attempts": "已尝试 {{count}} 次"
+		},
+		"status": {
+			"processing": "处理中",
+			"pending-confirm": "待确认",
+			"resolved": "已解决"
+		},
+		"statusHint": {
+			"processing": "问题已收到,开发团队正在处理中。",
+			"pending-confirm": "修复已发布,请更新到最新版本确认问题是否解决。",
+			"resolved": "感谢确认,此反馈已关闭。"
+		},
+		"delivery": {
+			"local": "仅保存在本地",
+			"queued": "等待上传",
+			"working": "正在上传诊断数据",
+			"published": "已提交到问题中心",
+			"failed": "上传失败，反馈已保存在本地",
+			"refreshFailed": "反馈状态刷新失败，当前显示可能已过期，稍后将自动重试。",
+			"openIssue": "在 GitHub 查看反馈"
+		},
+		"actions": {
+			"resolved": "已解决",
+			"stillBroken": "仍有问题"
+		},
+		"passive": {
+			"fullStack": "完整堆栈跟踪",
+			"ignore": "忽略",
+			"dismiss": "关闭异常反馈",
+			"incidents": {
+				"mainThread": "编辑器主线程无响应",
+				"renderer": "渲染进程异常终止",
+				"gpu": "GPU 设备已丢失",
+				"uncaught": "检测到连续未捕获异常",
+				"build": "构建连续失败",
+				"play": "Play 无法启动",
+				"save": "场景保存失败",
+				"runtime": "视口运行时已断开",
+				"agent": "Agent 无响应"
+			},
+			"actions": {
+				"feedbackContinue": "反馈并继续",
+				"restartRenderer": "重启渲染进程并反馈",
+				"reloadPreview": "重新加载预览并反馈",
+				"reloadStudio": "刷新 Studio 并反馈",
+				"retryBuild": "反馈并重试构建",
+				"retryPlay": "重试 Play 并反馈",
+				"retrySave": "重试保存并反馈",
+				"reconnectRuntime": "重连运行时并反馈",
+				"reconnectAgent": "重连会话并反馈"
+			}
+		}
+	}
+}

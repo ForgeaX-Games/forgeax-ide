@@ -1,0 +1,203 @@
+@import "@forgeax/app-shell/resize.css";
+@import "@forgeax/app-shell/panel.css";
+@import "@forgeax/app-shell/detached.css";
+@import "@forgeax/app-shell/surface.css";
+@import "@forgeax/app-shell/dock-tab.css";
+
+.studio-shell {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	background: var(--bg-0);
+	overflow: hidden;
+}
+
+/* forgeax-preview scene layer (.scene-fx) stays behind all shell chrome.
+   Whitelist layout-flow children only — overlays (.dash-overlay, .sp-overlay,
+   .pulse-feeds) must keep their own `position: fixed`. */
+.studio-shell > .topbar,
+.studio-shell > .studio-body,
+.studio-shell > .health-status-bar,
+.studio-shell > .global-status-bar {
+	position: relative;
+	z-index: 1;
+}
+
+/* TopBar owns fixed-position dropdowns; keep it above body panes. */
+.studio-shell > .topbar {
+	z-index: var(--z-top);
+	overflow: visible;
+}
+
+.studio-body {
+	flex: 1;
+	display: flex;
+	overflow: hidden;
+	min-width: 0;
+	min-height: 0;
+	/* The darkest canvas layer shows through the 6px gaps we open around the
+     ActivityRail (see .activity-rail margins), so the plugin rail reads as a
+     floating dock cell just like the native inter-group gaps in the dockview
+     grid. Every in-flow child (main col / rail / chat) is opaque, so this only
+     paints in those gaps. */
+	background: var(--color-background-canvas, #0d0d0d);
+}
+
+/* Main (Layout) column: the page-tab strip stacked over the DockShell + AuxBar
+   docks. Sits left of the full-height ActivityRail + chat, so the tab strip's
+   width matches the editor Layout area and stops before the plugin rail. */
+.studio-main-col {
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+.studio-main-dock {
+	flex: 1;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	overflow: hidden;
+}
+
+/* Fixed chat column — chat was pulled out of the dockview so the ActivityRail
+   (its own 64px column) can sit immediately to its left. Width is drag-resizable
+   (inline style from useChatWidth), so flex is fixed-basis:auto. */
+.studio-chat-col {
+	flex: 0 0 auto;
+	max-width: 100%;
+	min-width: 0;
+	height: 100%;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-left: 1px solid var(--color-border-default);
+}
+
+/* Keep the persisted desktop width, but leave room for the activity rail and
+   a usable editor when the shell becomes phone-sized. The inline width from
+   useChatWidth still wins everywhere above this breakpoint. */
+@media (max-width: 640px) {
+	.studio-chat-col {
+		max-width: min(360px, calc(100% - 160px));
+	}
+}
+.studio-chat-col > .fx-panel {
+	flex: 1 1 0;
+	min-height: 0;
+	height: 100%;
+}
+/* Left-edge resize handle (6px). During drag, a full-viewport ::after catcher +
+   iframe pointer-events:none keep the engine/plugin iframes from stealing the
+   pointer mid-drag — same technique as .fx-auxbar-resizer. */
+/* Sit ON the 6px canvas gap between the ActivityRail and the chat column (the
+   rail's margin-right), NOT just inside the chat edge — so the GAP itself is the
+   drag target and lights up lime, exactly like a dockview grid sash. Transparent
+   at rest lets the canvas show through (the visible gap); hover/drag fills it. */
+.fx-chat-resizer {
+	position: absolute;
+	left: -6px;
+	top: 0;
+	bottom: 0;
+	width: 6px;
+	margin: 0;
+	cursor: col-resize;
+	z-index: 10;
+	background: transparent;
+	transition: background 120ms ease;
+}
+.resize-handle.fx-chat-resizer::after {
+	content: none;
+}
+/* Match dockview's UE sash: a solid lime bar revealed on hover / during drag,
+   so the chat column's left-edge resizer reads the same as the 6px grid gaps
+   sitting right beside it (was a blue bar → clashed with the lime sashes). */
+.fx-chat-resizer:hover,
+body.fx-chat-resizing .fx-chat-resizer {
+	background: var(--lime, #7ee04a);
+}
+body.fx-chat-resizing::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	z-index: 9;
+	cursor: col-resize;
+}
+body.fx-chat-resizing iframe {
+	pointer-events: none;
+}
+
+.studio-pane {
+	flex-shrink: 0;
+	display: flex;
+	min-width: 0;
+	min-height: 0;
+	overflow: hidden;
+}
+.studio-pane > * {
+	flex: 1;
+	min-height: 0;
+	width: 100%;
+}
+
+.studio-shell--preview-skin .studio-pane-right {
+	overflow: visible;
+	z-index: var(--z-overlay);
+}
+
+/* Preview rail: Sidebar sets its own width (60px collapsed / 60+drawer expanded) */
+.studio-pane-left--rail {
+	flex: 0 0 auto;
+	width: auto;
+	min-width: 0;
+}
+/* ──────────────────────────────────────────────────────────────────────
+   Fullscreen ("immersive") mode · driven by Ctrl+Shift+F · store.fullscreen
+   ----------------------------------------------------------------------
+   Hides every chrome surface so MainArea (the canvas / extension) owns the
+   whole viewport. Toggled on/off by .studio-shell[data-fullscreen="1"].
+   Esc also exits (see lib/global-shortcuts.ts Esc cascade).
+
+   Surfaces hidden: TopBar · Sidebar · ChatPanel · GlobalStatusBar.
+   Surfaces kept:   MainArea + any overlay (Settings / Dashboard) so the
+                    user can still open settings while immersive.
+   ────────────────────────────────────────────────────────────────────── */
+.studio-shell[data-fullscreen="1"] > .topbar,
+.studio-shell[data-fullscreen="1"] [data-fx-slot="PageTabs"],
+.studio-shell[data-fullscreen="1"] > .studio-body > .studio-pane-left,
+.studio-shell[data-fullscreen="1"] > .studio-body > .resize-handle-col,
+.studio-shell[data-fullscreen="1"] > .studio-body > .studio-pane-right,
+.studio-shell[data-fullscreen="1"] > .global-status-bar {
+	display: none !important;
+}
+
+/* Subtle hint at top edge so user remembers they're in fullscreen — a 2px
+   lime line they can click to exit (in addition to Esc / Ctrl+Shift+F). */
+.studio-shell[data-fullscreen="1"]::before {
+	content: "全屏模式 · Ctrl+Shift+F 或 Esc 退出";
+	position: fixed;
+	top: 8px;
+	right: 12px;
+	z-index: 2000;
+	font-family: var(--font-mono);
+	font-size: 10.5px;
+	letter-spacing: 0.06em;
+	color: rgba(255, 255, 255, 0.55);
+	background: rgba(20, 24, 26, 0.78);
+	border: 1px solid var(--color-border-default);
+	padding: 3px 9px;
+	border-radius: 99px;
+	pointer-events: none;
+	animation: kc-fs-hint-fade 3s ease-out 2s forwards;
+}
+@keyframes kc-fs-hint-fade {
+	to {
+		opacity: 0.12;
+	}
+}

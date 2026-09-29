@@ -1,0 +1,30 @@
+{
+	"app": {
+		"windows": [
+			{
+				"label": "main",
+				"title": "ForgeaX Studio (WebDriver test)",
+				"width": 1440,
+				"height": 900,
+				"minWidth": 960,
+				"minHeight": 600,
+				"resizable": true,
+				"fullscreen": false,
+				"center": true,
+				"visible": false,
+				"dragDropEnabled": false
+			}
+		],
+		"security": {
+			"capabilities": [
+				"main-capability",
+				"remote-webview-capability",
+				{
+					"identifier": "embedded-webdriver-test-capability",
+					"windows": ["main"],
+					"permissions": ["wdio-webdriver:default"]
+				}
+			]
+		}
+	}
+}

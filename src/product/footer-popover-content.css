@@ -1,0 +1,117 @@
+/* IDE footer popover content for build status and diagnostics. */
+
+/* ── shared key-value + section primitives (popover bodies) ── */
+.fx-pop-sec {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 2px 4px;
+}
+.fx-pop-div {
+	height: 1px;
+	background: var(--color-divider-default);
+	margin: 8px 2px;
+}
+.fx-kv {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	font-size: 11px;
+	padding: 1px 4px;
+}
+.fx-kv > span {
+	color: var(--color-text-tertiary);
+}
+.fx-kv > b {
+	color: var(--color-text-secondary);
+	font-weight: 500;
+	font-family: var(--font-mono);
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+}
+.fx-kv > b.ok {
+	color: var(--color-accent-green, #4ade80);
+}
+.fx-kv > b svg {
+	width: 12px;
+	height: 12px;
+}
+
+/* meter (memory usage) */
+.fx-meter {
+	padding: 1px 4px;
+}
+.fx-meter-top {
+	display: flex;
+	justify-content: space-between;
+	font-size: 10.5px;
+	margin-bottom: 3px;
+}
+.fx-meter-top > span {
+	color: var(--color-text-tertiary);
+}
+.fx-meter-top > b {
+	color: var(--color-text-secondary);
+	font-family: var(--font-mono);
+	font-weight: 500;
+}
+.fx-meter-bar {
+	height: 5px;
+	border-radius: 3px;
+	background: rgba(255, 255, 255, 0.07);
+	overflow: hidden;
+}
+.fx-meter-bar > i {
+	display: block;
+	height: 100%;
+	background: linear-gradient(
+		90deg,
+		var(--primary),
+		var(--color-accent-cyan, #38bdf8)
+	);
+	border-radius: 3px;
+}
+
+/* version rows */
+.fx-ver {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 11px;
+	padding: 4px;
+	border-radius: 5px;
+	font-family: var(--font-mono);
+}
+.fx-ver:hover {
+	background: var(--color-interaction-hover);
+}
+.fx-ver .ver {
+	color: var(--color-text-primary);
+	font-weight: 600;
+	flex: 0 0 auto;
+}
+.fx-ver.cur .ver {
+	color: var(--primary);
+}
+.fx-ver .lbl {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--color-text-secondary);
+}
+.fx-ver .t {
+	color: var(--color-text-tertiary);
+	font-size: 10px;
+	flex: 0 0 auto;
+}
+
+/* empty / placeholder state for any footer list (no data / no active game) */
+.fx-empty {
+	padding: 10px 6px;
+	font-size: 11px;
+	color: var(--color-text-tertiary);
+	text-align: center;
+}

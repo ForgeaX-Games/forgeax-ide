@@ -1,0 +1,143 @@
+/* UE-style searchable tool menu: dense rows, dark raised panel, search first. */
+.fx-searchable-menu {
+	width: 360px;
+	max-width: calc(100vw - 16px);
+	overflow: hidden;
+	padding: 6px 0 6px 6px !important;
+	border: 1px solid var(--color-border-default) !important;
+	border-radius: 6px !important;
+	background: var(--color-background-floating) !important;
+	color: var(--color-text-primary);
+	box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55) !important;
+}
+
+.fx-searchable-menu__command {
+	gap: 0;
+	background: transparent !important;
+}
+
+.fx-searchable-menu__command [cmdk-input-wrapper] {
+	height: 30px;
+	gap: 7px;
+	margin: 0 6px 5px 0;
+	padding: 0 9px;
+	border: 1px solid var(--color-border-subtle);
+	border-radius: 15px;
+	background: var(--color-background-canvas);
+	color: var(--color-text-tertiary);
+}
+
+.fx-searchable-menu__command [cmdk-input-wrapper]:focus-within {
+	border-color: var(--color-border-strong);
+	box-shadow: inset 0 0 0 1px var(--color-divider-default);
+}
+
+.fx-searchable-menu__command [cmdk-input-wrapper] > svg {
+	width: 14px;
+	height: 14px;
+}
+
+.fx-searchable-menu__input {
+	box-sizing: border-box;
+	height: 28px !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-radius: 0 !important;
+	outline: none !important;
+	box-shadow: none !important;
+	font-family: var(--font-sans);
+	font-size: 12px !important;
+	color: var(--color-text-primary) !important;
+}
+
+.fx-searchable-menu__list {
+	width: auto;
+	max-height: min(520px, calc(100vh - 100px)) !important;
+	margin-right: 0;
+	padding: 0 !important;
+}
+
+.fx-searchable-menu__group {
+	padding: 0 6px 0 0 !important;
+}
+
+.fx-searchable-menu__group [cmdk-group-heading] {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	height: 20px;
+	padding: 0 3px !important;
+	color: var(--color-text-tertiary) !important;
+	font-family: var(--font-sans);
+	font-size: 9px !important;
+	font-weight: 500 !important;
+	letter-spacing: 0.08em !important;
+	text-transform: uppercase;
+}
+
+.fx-searchable-menu__group [cmdk-group-heading]::after {
+	content: "";
+	flex: 1 1 auto;
+	height: 1px;
+	background: var(--color-divider-default);
+}
+
+.fx-searchable-menu__item {
+	min-height: 28px;
+	gap: 8px !important;
+	padding: 4px 7px !important;
+	border-radius: 3px !important;
+	color: var(--color-text-primary);
+	font-family: var(--font-sans);
+	font-size: 12px !important;
+}
+
+.fx-searchable-menu__item[data-selected="true"] {
+	background: var(--color-interaction-selected-neutral) !important;
+	color: var(--color-text-primary) !important;
+}
+
+.fx-searchable-menu__icon {
+	width: 15px;
+	height: 15px;
+	flex: 0 0 auto;
+	color: var(--color-text-secondary);
+}
+
+.fx-searchable-menu__content {
+	display: flex;
+	align-items: center;
+	min-width: 0;
+	flex: 1 1 auto;
+}
+
+.fx-searchable-menu__label {
+	min-width: 0;
+	overflow: hidden;
+	flex: 1 1 auto;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.fx-searchable-menu__description {
+	display: none;
+}
+
+.fx-searchable-menu__empty {
+	padding: 24px 8px !important;
+	color: var(--color-text-tertiary) !important;
+	font-size: 11px !important;
+}
+
+.fx-searchable-menu__separator {
+	margin: 3px 2px !important;
+	background: var(--color-divider-default) !important;
+}
+
+.fx-searchable-menu__footer {
+	margin: 5px 0 -6px -6px;
+	padding: 6px 9px;
+	border-top: 1px solid var(--color-divider-default);
+	color: var(--color-text-tertiary);
+	font-size: 9px;
+}

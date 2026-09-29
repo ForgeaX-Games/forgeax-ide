@@ -16,8 +16,85 @@ use tauri::{
     tray::TrayIconBuilder,
     Emitter, Manager,
 };
+#[cfg(all(feature = "embedded-webdriver", not(debug_assertions)))]
+compile_error!("embedded-webdriver is test-only and must not be built in release mode");
 #[cfg(not(debug_assertions))]
 use tauri_plugin_shell::ShellExt;
+
+#[derive(Default)]
+struct BackendStatusStore {
+    revision: std::sync::atomic::AtomicU64,
+    snapshot: std::sync::Mutex<serde_json::Map<String, serde_json::Value>>,
+}
+
+fn publish_backend_status(app: &tauri::AppHandle, update: serde_json::Value) {
+    let Some(update) = update.as_object() else {
+        return;
+    };
+    let Some(store) = app.try_state::<BackendStatusStore>() else {
+        return;
+    };
+    let snapshot = {
+        let Ok(mut snapshot) = store.snapshot.lock() else {
+            return;
+        };
+        snapshot.extend(update.clone());
+        let revision = store
+            .revision
+            .fetch_add(1, std::sync::atomic::Ordering::SeqCst)
+            + 1;
+        snapshot.insert("revision".into(), revision.into());
+        serde_json::Value::Object(snapshot.clone())
+    };
+    let _ = app.emit("backend-status", snapshot);
+}
+
+#[tauri::command]
+fn desktop_runtime_snapshot(store: tauri::State<'_, BackendStatusStore>) -> serde_json::Value {
+    store
+        .snapshot
+        .lock()
+        .map(|snapshot| serde_json::Value::Object(snapshot.clone()))
+        .unwrap_or_else(|_| {
+            serde_json::json!({
+                "revision": store.revision.load(std::sync::atomic::Ordering::SeqCst),
+                "who": "local-runtime",
+                "state": "failed",
+                "error": "desktop runtime status lock is poisoned"
+            })
+        })
+}
+
+#[tauri::command]
+fn open_desktop_runtime_log(store: tauri::State<'_, BackendStatusStore>) -> Result<(), String> {
+    let log_file = store
+        .snapshot
+        .lock()
+        .map_err(|_| "desktop runtime status lock is poisoned".to_string())?
+        .get("logFile")
+        .and_then(|value| value.as_str())
+        .map(std::path::PathBuf::from)
+        .ok_or_else(|| "desktop runtime log path is unavailable".to_string())?;
+
+    #[cfg(target_os = "windows")]
+    let mut command = std::process::Command::new("notepad.exe");
+    #[cfg(target_os = "macos")]
+    let mut command = std::process::Command::new("open");
+    #[cfg(not(any(target_os = "windows", target_os = "macos")))]
+    let mut command = std::process::Command::new("xdg-open");
+    command
+        .arg(&log_file)
+        .spawn()
+        .map(|_| ())
+        .map_err(|error| format!("failed to open {}: {error}", log_file.display()))
+}
+
+#[tauri::command]
+fn retry_desktop_runtime(app: tauri::AppHandle) -> Result<(), String> {
+    let restart_handle = app.clone();
+    app.run_on_main_thread(move || restart_handle.restart())
+        .map_err(|error| format!("failed to schedule desktop runtime restart: {error}"))
+}
 
 // ───────────────────────── SidecarSupervisor ─────────────────────────
 //
@@ -31,13 +108,18 @@ mod supervisor {
     use std::sync::{Arc, Mutex};
     use std::time::Duration;
 
-    use tauri::{AppHandle, Emitter};
+    use tauri::AppHandle;
     use tauri_plugin_shell::process::{CommandChild, CommandEvent};
 
     /// Max restart attempts before a sidecar is declared `failed`.
     const MAX_RESTARTS: u32 = 5;
-    /// Grace period between SIGTERM and SIGKILL during shutdown.
-    const KILL_GRACE: Duration = Duration::from_secs(3);
+    /// The JS launcher has a bounded guardian/tree wait. Keep this outer
+    /// budget materially larger, while polling the launcher PID so an early
+    /// launcher exit never turns into a blind fixed sleep.
+    const LAUNCHER_SHUTDOWN_GRACE: Duration = Duration::from_secs(15);
+    const LAUNCHER_SHUTDOWN_POLL: Duration = Duration::from_millis(100);
+    #[cfg(unix)]
+    const GUARDIAN_CLOSE_GRACE: Duration = Duration::from_secs(5);
 
     /// How to (re)spawn a given sidecar. Returns the live child + its event rx.
     /// Boxed so the monitor task can respawn without re-borrowing the AppHandle's
@@ -73,9 +155,9 @@ mod supervisor {
         pub runtime: Arc<SidecarHandle>,
     }
 
-    /// Append a chunk of sidecar output to a rolling per-sidecar log file under
-    /// <projects>/.logs. Best-effort: logging must never crash the monitor.
-    fn log_to_disk(log_dir: &std::path::Path, name: &str, bytes: &[u8]) {
+    /// Append an output chunk byte-for-byte to the rolling per-sidecar log.
+    /// Best-effort: logging must never crash the monitor.
+    fn append_log_bytes(log_dir: &std::path::Path, name: &str, bytes: &[u8]) {
         let _ = std::fs::create_dir_all(log_dir);
         let path = log_dir.join(format!("{name}.log"));
         if let Ok(mut f) = std::fs::OpenOptions::new()
@@ -84,8 +166,14 @@ mod supervisor {
             .open(&path)
         {
             let _ = f.write_all(bytes);
-            let _ = f.write_all(b"\n");
         }
+    }
+
+    fn log_line_to_disk(log_dir: &std::path::Path, name: &str, line: &str) {
+        let mut bytes = Vec::with_capacity(line.len() + 1);
+        bytes.extend_from_slice(line.as_bytes());
+        bytes.push(b'\n');
+        append_log_bytes(log_dir, name, &bytes);
     }
 
     /// Roll the log if it grew past ~4 MiB so it can't grow unbounded.
@@ -116,9 +204,14 @@ mod supervisor {
             child: Mutex::new(Some(child)),
             spawn: spawn.clone(),
         });
-        let _ = app.emit(
-            "backend-status",
-            serde_json::json!({ "who": name, "state": "connecting" }),
+        super::publish_backend_status(
+            app,
+            serde_json::json!({
+                "who": name,
+                "state": "connecting",
+                "restartExhausted": false,
+                "supervisorError": null
+            }),
         );
         spawn_monitor(app.clone(), handle.clone(), log_dir, rx);
         Ok(handle)
@@ -138,24 +231,19 @@ mod supervisor {
                     match ev {
                         CommandEvent::Stdout(b) | CommandEvent::Stderr(b) => {
                             roll_log_if_big(&log_dir, name);
-                            log_to_disk(&log_dir, name, &b);
+                            append_log_bytes(&log_dir, name, &b);
                         }
                         CommandEvent::Error(e) => {
-                            log_to_disk(
-                                &log_dir,
-                                name,
-                                format!("[supervisor] error: {e}").as_bytes(),
-                            );
+                            log_line_to_disk(&log_dir, name, &format!("[supervisor] error: {e}"));
                         }
                         CommandEvent::Terminated(payload) => {
-                            log_to_disk(
+                            log_line_to_disk(
                                 &log_dir,
                                 name,
-                                format!(
+                                &format!(
                                     "[supervisor] sidecar '{name}' terminated code={:?} signal={:?} (restart #{restarts})",
                                     payload.code, payload.signal
-                                )
-                                .as_bytes(),
+                                ),
                             );
                             break;
                         }
@@ -172,23 +260,27 @@ mod supervisor {
                     return; // intentional shutdown, don't resurrect.
                 }
                 if restarts >= MAX_RESTARTS {
-                    let _ = app.emit(
-                        "backend-status",
-                        serde_json::json!({ "who": name, "state": "failed" }),
+                    super::publish_backend_status(
+                        &app,
+                        serde_json::json!({
+                            "who": name,
+                            "state": "failed",
+                            "restartExhausted": true,
+                            "supervisorError": format!("local runtime exceeded MAX_RESTARTS={MAX_RESTARTS}")
+                        }),
                     );
-                    log_to_disk(
+                    log_line_to_disk(
                         &log_dir,
                         name,
-                        format!(
+                        &format!(
                             "[supervisor] '{name}' exceeded MAX_RESTARTS={MAX_RESTARTS}, giving up"
-                        )
-                        .as_bytes(),
+                        ),
                     );
                     return;
                 }
 
-                let _ = app.emit(
-                    "backend-status",
+                super::publish_backend_status(
+                    &app,
                     serde_json::json!({ "who": name, "state": "restarting", "attempt": restarts + 1 }),
                 );
                 // 0.5 → 1 → 2 → 4 → 8 → 16s cap.
@@ -206,22 +298,21 @@ mod supervisor {
                         if let Ok(mut child) = handle.child.lock() {
                             *child = Some(new_child);
                         }
-                        log_to_disk(
+                        log_line_to_disk(
                             &log_dir,
                             name,
-                            format!(
+                            &format!(
                                 "[supervisor] '{name}' restarted (pid {})",
                                 handle.pid.load(Ordering::SeqCst)
-                            )
-                            .as_bytes(),
+                            ),
                         );
                         // loop back and consume the new rx.
                     }
                     Err(e) => {
-                        log_to_disk(
+                        log_line_to_disk(
                             &log_dir,
                             name,
-                            format!("[supervisor] '{name}' respawn failed: {e}").as_bytes(),
+                            &format!("[supervisor] '{name}' respawn failed: {e}"),
                         );
                         // Treat a failed respawn like another crash for backoff
                         // purposes; loop continues with the same (now empty) rx
@@ -229,9 +320,14 @@ mod supervisor {
                         let backoff = Duration::from_millis(500u64 << restarts.min(5));
                         restarts += 1;
                         if restarts >= MAX_RESTARTS {
-                            let _ = app.emit(
-                                "backend-status",
-                                serde_json::json!({ "who": name, "state": "failed" }),
+                            super::publish_backend_status(
+                                &app,
+                                serde_json::json!({
+                                    "who": name,
+                                    "state": "failed",
+                                    "restartExhausted": true,
+                                    "supervisorError": format!("local runtime exceeded MAX_RESTARTS={MAX_RESTARTS}")
+                                }),
                             );
                             return;
                         }
@@ -243,9 +339,13 @@ mod supervisor {
     }
 
     impl Supervisor {
-        /// Ask the launcher to stop its process tree and persist `stopped`, then
-        /// force-kill only if it outlives the grace period. The stdin protocol
-        /// and CommandChild fallback are both cross-platform.
+        /// Ask the launcher to stop its process tree and persist its terminal
+        /// state. Rust only owns the launcher: the JS runtime is the sole owner
+        /// of server/engine/agent-host teardown and its PID runtime directory.
+        /// Poll the launcher PID so an early exit is observed immediately.
+        /// On POSIX the launcher is a runtime guardian: the only fallback is
+        /// SIGTERM to that direct child, allowing it to close its owned target
+        /// group. A direct SIGKILL here would strand the target group.
         pub fn shutdown_all(&self) {
             if self.runtime.shutting_down.swap(true, Ordering::SeqCst) {
                 return;
@@ -255,11 +355,35 @@ mod supervisor {
                     let _ = child.write(b"shutdown\n");
                 }
             }
-            std::thread::sleep(KILL_GRACE);
+            let started = std::time::Instant::now();
+            while self.runtime.pid().is_some() && started.elapsed() < LAUNCHER_SHUTDOWN_GRACE {
+                std::thread::sleep(LAUNCHER_SHUTDOWN_POLL);
+            }
             if self.runtime.pid().is_some() {
+                #[cfg(unix)]
+                if let Ok(mut child) = self.runtime.child.lock() {
+                    // Closing the only CommandChild owner writer delivers EOF
+                    // to the guardian. Never signal a borrowed/raw PID here:
+                    // after the monitor clears it, that number may already
+                    // belong to another process.
+                    drop(child.take());
+                }
+                #[cfg(windows)]
                 if let Ok(mut child) = self.runtime.child.lock() {
                     if let Some(child) = child.take() {
                         let _ = child.kill();
+                    }
+                }
+                #[cfg(unix)]
+                {
+                    // A POSIX fallback TERM starts the guardian's own bounded
+                    // group shutdown. Give it enough time to reap its target;
+                    // there is deliberately no parent-side SIGKILL fallback.
+                    let fallback_started = std::time::Instant::now();
+                    while self.runtime.pid().is_some()
+                        && fallback_started.elapsed() < GUARDIAN_CLOSE_GRACE
+                    {
+                        std::thread::sleep(LAUNCHER_SHUTDOWN_POLL);
                     }
                 }
             }
@@ -308,8 +432,7 @@ struct NativeMenuItemJson {
 #[derive(Debug, serde::Deserialize)]
 struct NativeMenuJson {
     /// The MenuId bucket ('brand' | 'file' | 'edit' | ...); used to
-    /// select platform-specific placement (e.g. 'brand' → app menu on macOS)
-    /// and to skip buckets the OS bar doesn't render (e.g. 'publish').
+    /// select platform-specific placement (e.g. 'brand' → app menu on macOS).
     menu: String,
     /// Already-translated title for the top-level submenu (e.g. "File",
     /// "Edit"). The JS bridge fills it via `t('menubar.<menu>')`. Falls
@@ -330,9 +453,6 @@ struct MenuInvokePayload {
 /// Replace the app's native menu bar with the given payload. Called by the
 /// webview once the menu registry is populated (and again whenever it changes,
 /// so runtime toggles of `when`/`enabled` predicates flow to the OS bar).
-///
-/// `publish` is intentionally skipped — it's an in-app dropdown, not an OS
-/// menu category (T5 spec).
 ///
 /// MUST stay non-`async`: Tauri runs sync commands on the main thread but
 /// spawns `async` ones onto the async runtime, and macOS requires NSMenu to be
@@ -358,7 +478,7 @@ fn set_app_menu(app: tauri::AppHandle, payload: Vec<NativeMenuJson>) -> Result<(
     })?;
     let mut installed = 0usize;
     for m in payload.iter() {
-        if m.menu == "publish" {
+        if m.items.is_empty() {
             continue;
         }
         let title = m.title.as_deref().unwrap_or(m.menu.as_str());
@@ -418,6 +538,15 @@ fn append_items(
                 .map_err(|e| e.to_string())?;
             append_items(app, &child, children)?;
             parent.append(&child).map_err(|e| e.to_string())?;
+        } else if matches!(item.id.as_str(), "edit.cut" | "edit.copy" | "edit.paste") {
+            // Preserve the OS responder chain and clipboard formats for the
+            // focused control (including selectable text outside an input).
+            let native = match item.id.as_str() {
+                "edit.cut" => PredefinedMenuItem::cut(app, Some(&item.label)),
+                "edit.copy" => PredefinedMenuItem::copy(app, Some(&item.label)),
+                _ => PredefinedMenuItem::paste(app, Some(&item.label)),
+            }.map_err(|e| e.to_string())?;
+            parent.append(&native).map_err(|e| e.to_string())?;
         } else {
             let mi = MenuItem::with_id(
                 app,
@@ -438,14 +567,22 @@ fn append_items(
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    let builder = tauri::Builder::default()
+        .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_os::init())
-        .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_shell::init());
+    #[cfg(feature = "embedded-webdriver")]
+    let builder = builder.plugin(tauri_plugin_wdio_webdriver::init());
+    builder
         .invoke_handler(tauri::generate_handler![
             set_pointer_capture,
             set_app_menu,
-            fx_trace
+            fx_trace,
+            desktop_runtime_snapshot,
+            open_desktop_runtime_log,
+            retry_desktop_runtime
         ])
+        .manage(BackendStatusStore::default())
         // Global menu event handler — fires for BOTH the tray menu and the
         // app menu bar. The tray keeps its own callback (build_tray) for
         // 'show'/'hide'/'quit'; here we forward everything else to the webview
@@ -465,18 +602,36 @@ pub fn run() {
                 Err(e) => fx_trace_line(&format!("on_menu_event: emit FAILED id={echo} err={e}")),
             }
         })
+        .on_page_load(|webview, payload| {
+            #[cfg(debug_assertions)]
+            let _ = (webview, payload);
+            #[cfg(not(debug_assertions))]
+            {
+                if webview.label() != "main" {
+                    return;
+                }
+                let Some(receipt) = webview.app_handle().try_state::<DesktopPageLoadReceipt>() else { return; };
+                let Ok(mut expected) = receipt.0.lock() else { return; };
+                observe_desktop_page_load(&mut expected, payload.event(), webview.label(), payload.url().as_str());
+            }
+        })
         .setup(|app| {
             #[cfg(debug_assertions)]
             {
-                // scripts/desktop.ts has already started and verified the
-                // desktop-dev profile and injected its resolved devUrl.
+                // Tauri beforeDevCommand starts the Studio desktop-dev services;
+                // the root entry projects the RuntimeInstance devUrl.
                 if let Some(win) = app.get_webview_window("main") {
+                    // The WebDriver flavor keeps its WebView off-screen and
+                    // dispatches DOM events without taking the desktop mouse.
+                    #[cfg(not(feature = "embedded-webdriver"))]
                     let _ = win.show();
                     // DevTools is noisy (engine multi-light warnings etc.) and not
                     // wanted by default. Only auto-open when explicitly asked via
-                    // FORGEAX_DEVTOOLS=1 (set by `bash app.sh debug`). You can always
+                    // FORGEAX_DEVTOOLS=1 (set by `bun fx start desktop debug`). You can always
                     // open it manually with the standard inspector shortcut.
-                    if std::env::var("FORGEAX_DEVTOOLS").as_deref() == Ok("1") {
+                    if !cfg!(feature = "embedded-webdriver")
+                        && std::env::var("FORGEAX_DEVTOOLS").as_deref() == Ok("1")
+                    {
                         win.open_devtools();
                     }
                 }
@@ -508,6 +663,144 @@ pub fn run() {
 /// Start the one bundled local-runtime launcher and consume its state contract.
 /// Tauri does not prepare services, choose ports, or probe HTTP independently.
 #[cfg(not(debug_assertions))]
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum DesktopPageLoadPhase { AwaitingStarted, AwaitingFinished }
+
+#[cfg(not(debug_assertions))]
+#[derive(Clone)]
+struct DesktopPageLoadExpectation {
+    app_pid: u32,
+    project_root: std::path::PathBuf,
+    receipt_file: std::path::PathBuf,
+    expected_origin: String,
+    runtime_started_at: String,
+    navigation_generation: String,
+    phase: DesktopPageLoadPhase,
+}
+
+#[cfg(not(debug_assertions))]
+struct DesktopPageLoadReceipt(std::sync::Arc<std::sync::Mutex<Option<DesktopPageLoadExpectation>>>);
+
+#[cfg(not(debug_assertions))]
+fn write_desktop_page_load_receipt(expectation: &DesktopPageLoadExpectation, event: &str, window_label: &str, page_url: &str) -> std::io::Result<()> {
+    let receipt = serde_json::json!({
+        "schemaVersion": 1,
+        "appPid": expectation.app_pid,
+        "projectRoot": expectation.project_root,
+        "windowLabel": window_label,
+        "expectedOrigin": expectation.expected_origin,
+        "runtimeStartedAt": expectation.runtime_started_at,
+        "navigationGeneration": expectation.navigation_generation,
+        "pageUrl": page_url,
+        "event": event,
+    });
+    let temporary = expectation.receipt_file.with_extension("json.tmp");
+    std::fs::write(&temporary, format!("{receipt}\n"))?;
+    std::fs::rename(temporary, &expectation.receipt_file)
+}
+
+#[cfg(not(debug_assertions))]
+fn observe_desktop_page_load(latch: &mut Option<DesktopPageLoadExpectation>, event: tauri::webview::PageLoadEvent, window_label: &str, page_url: &str) {
+    let page_url = page_url.trim_end_matches('/');
+    let Some(expectation) = latch.as_mut() else { return; };
+    if page_url != expectation.expected_origin { return; }
+    match (expectation.phase, event) {
+        (DesktopPageLoadPhase::AwaitingStarted, tauri::webview::PageLoadEvent::Started) => {
+            if write_desktop_page_load_receipt(expectation, "started", window_label, page_url).is_ok() {
+                expectation.phase = DesktopPageLoadPhase::AwaitingFinished;
+            } else { *latch = None; }
+        }
+        (DesktopPageLoadPhase::AwaitingFinished, tauri::webview::PageLoadEvent::Finished) => {
+            let _ = write_desktop_page_load_receipt(expectation, "finished", window_label, page_url);
+            *latch = None;
+        }
+        _ => {}
+    }
+}
+
+#[cfg(all(test, not(debug_assertions)))]
+mod page_load_receipt_tests {
+    use super::*;
+
+    fn expectation(root: &std::path::Path) -> DesktopPageLoadExpectation {
+        DesktopPageLoadExpectation {
+            app_pid: 99, project_root: root.to_path_buf(), receipt_file: root.join("receipt.json"),
+            expected_origin: "http://127.0.0.1:18810".into(), runtime_started_at: "launch-a".into(), navigation_generation: "ready-a".into(),
+            phase: DesktopPageLoadPhase::AwaitingStarted,
+        }
+    }
+
+    #[test]
+    fn latch_requires_started_then_consumes_after_finished() {
+        let root = std::env::temp_dir().join(format!("forgeax-page-load-receipt-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root); std::fs::create_dir_all(&root).unwrap();
+        let expected = expectation(&root); let mut latch = Some(expected.clone());
+        write_desktop_page_load_receipt(&expected, "finished", "main", "http://127.0.0.1:18810").unwrap();
+        let url = tauri::Url::parse("http://127.0.0.1:18810").unwrap();
+        assert_eq!(url.as_str(), "http://127.0.0.1:18810/");
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Started, "main", url.as_str());
+        assert!(std::fs::read_to_string(&expected.receipt_file).unwrap().contains("\"event\":\"started\""));
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Finished, "main", url.as_str());
+        assert!(std::fs::read_to_string(&expected.receipt_file).unwrap().contains("\"event\":\"finished\""));
+        assert!(latch.is_none());
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Started, "main", "http://127.0.0.1:18810");
+        assert!(std::fs::read_to_string(&expected.receipt_file).unwrap().contains("\"event\":\"finished\""));
+        let _ = std::fs::remove_dir_all(root);
+    }
+
+    #[test]
+    fn write_failure_returns_error_without_reporting_a_finished_receipt() {
+        let root = std::env::temp_dir().join(format!("forgeax-page-load-receipt-failure-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root); std::fs::create_dir_all(&root).unwrap();
+        let mut expected = expectation(&root); expected.receipt_file = root.join("missing").join("receipt.json");
+        assert!(write_desktop_page_load_receipt(&expected, "started", "main", "http://127.0.0.1:18810").is_err());
+        assert!(!expected.receipt_file.exists());
+        let _ = std::fs::remove_dir_all(root);
+    }
+
+    #[test]
+    fn started_write_failure_consumes_latch_and_leaves_pending_not_finished() {
+        let root = std::env::temp_dir().join(format!("forgeax-page-load-receipt-started-failure-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root); std::fs::create_dir_all(&root).unwrap();
+        let expected = expectation(&root);
+        write_desktop_page_load_receipt(&expected, "pending", "main", "").unwrap();
+        let mut latch = Some(expected.clone());
+        std::fs::create_dir(expected.receipt_file.with_extension("json.tmp")).unwrap();
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Started, "main", "http://127.0.0.1:18810");
+        assert!(latch.is_none());
+        assert!(std::fs::read_to_string(&expected.receipt_file).unwrap().contains("\"event\":\"pending\""));
+        let _ = std::fs::remove_dir_all(root);
+    }
+
+    #[test]
+    fn new_generation_pending_replaces_prior_generation_finished() {
+        let root = std::env::temp_dir().join(format!("forgeax-page-load-receipt-generation-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root); std::fs::create_dir_all(&root).unwrap();
+        let first = expectation(&root);
+        write_desktop_page_load_receipt(&first, "finished", "main", "http://127.0.0.1:18810").unwrap();
+        let mut second = expectation(&root); second.runtime_started_at = "launch-b".into(); second.navigation_generation = "ready-b".into();
+        write_desktop_page_load_receipt(&second, "pending", "main", "").unwrap();
+        let receipt = std::fs::read_to_string(&second.receipt_file).unwrap();
+        assert!(receipt.contains("\"event\":\"pending\"") && receipt.contains("\"runtimeStartedAt\":\"launch-b\""));
+        let _ = std::fs::remove_dir_all(root);
+    }
+
+    #[test]
+    fn finished_write_failure_consumes_latch_and_preserves_started() {
+        let root = std::env::temp_dir().join(format!("forgeax-page-load-receipt-finished-failure-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root); std::fs::create_dir_all(&root).unwrap();
+        let expected = expectation(&root); let mut latch = Some(expected.clone());
+        write_desktop_page_load_receipt(&expected, "pending", "main", "").unwrap();
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Started, "main", "http://127.0.0.1:18810");
+        std::fs::create_dir(expected.receipt_file.with_extension("json.tmp")).unwrap();
+        observe_desktop_page_load(&mut latch, tauri::webview::PageLoadEvent::Finished, "main", "http://127.0.0.1:18810");
+        assert!(latch.is_none());
+        assert!(std::fs::read_to_string(&expected.receipt_file).unwrap().contains("\"event\":\"started\""));
+        let _ = std::fs::remove_dir_all(root);
+    }
+}
+
+#[cfg(not(debug_assertions))]
 fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     use std::fs;
 
@@ -522,6 +815,35 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
         .into());
     }
 
+    #[cfg(unix)]
+    let (guardian, bun) = {
+        let (triple, extension) = match (std::env::consts::OS, std::env::consts::ARCH) {
+            ("macos", "aarch64") => ("aarch64-apple-darwin", ""),
+            ("macos", "x86_64") => ("x86_64-apple-darwin", ""),
+            ("linux", "x86_64") => ("x86_64-unknown-linux-gnu", ""),
+            (os, arch) => {
+                return Err(format!("unsupported POSIX desktop target: {os}/{arch}").into())
+            }
+        };
+        let guardian = res_root
+            .join("sidecars")
+            .join(format!("runtime-guardian-{triple}{extension}"));
+        let bun = res_root
+            .join("sidecars")
+            .join(format!("bun-{triple}{extension}"));
+        if !guardian.is_file() {
+            return Err(format!(
+                "bundled runtime guardian is missing: {}",
+                guardian.display()
+            )
+            .into());
+        }
+        if !bun.is_file() {
+            return Err(format!("bundled Bun sidecar is missing: {}", bun.display()).into());
+        }
+        (guardian, bun)
+    };
+
     let projects_dir = std::env::var_os("FORGEAX_PROJECT_ROOT")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(|| {
@@ -534,12 +856,32 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
     let state_file = projects_dir
         .join(".forgeax")
         .join("runtime")
-        .join("desktop-prod.json");
+        .join(format!("desktop-prod-{}.json", std::process::id()));
     if let Some(parent) = state_file.parent() {
         fs::create_dir_all(parent)?;
     }
     let _ = fs::remove_file(&state_file);
+    let page_load_file = projects_dir
+        .join(".forgeax")
+        .join("runtime")
+        .join(format!("desktop-prod-page-load-{}.json", std::process::id()));
+    let _ = fs::remove_file(&page_load_file);
+    let page_load_receipt = std::sync::Arc::new(std::sync::Mutex::new(None));
+    app.manage(DesktopPageLoadReceipt(page_load_receipt.clone()));
     let log_dir = projects_dir.join(".logs");
+    let log_file = log_dir.join("local-runtime.log");
+    publish_backend_status(
+        &handle,
+        serde_json::json!({
+            "who": "local-runtime",
+            "state": "starting",
+            "error": null,
+            "stateFile": state_file.to_string_lossy(),
+            "logFile": log_file.to_string_lossy(),
+            "restartExhausted": false,
+            "supervisorError": null
+        }),
+    );
 
     let runtime_spawn: std::sync::Arc<supervisor::SpawnFn> = {
         let app = app.handle().clone();
@@ -547,9 +889,29 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
         let res_root = res_root.clone();
         let projects_dir = projects_dir.clone();
         let state_file = state_file.clone();
+        #[cfg(unix)]
+        let guardian = guardian.clone();
+        #[cfg(unix)]
+        let bun = bun.clone();
         std::sync::Arc::new(move || {
             let _ = fs::remove_file(&state_file);
-            app.shell()
+            #[cfg(unix)]
+            let command = {
+                let args = [
+                    "--grace-ms".to_string(),
+                    "3000".to_string(),
+                    "--".to_string(),
+                    bun.to_string_lossy().into_owned(),
+                    "run".to_string(),
+                    launcher.to_string_lossy().into_owned(),
+                    "--profile".to_string(),
+                    "desktop-prod".to_string(),
+                ];
+                app.shell().command(&guardian).args(args)
+            };
+            #[cfg(not(unix))]
+            let command = app
+                .shell()
                 .sidecar("bun")
                 .map_err(|e| e.to_string())?
                 .args([
@@ -557,7 +919,8 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
                     launcher.to_string_lossy().into_owned(),
                     "--profile".to_string(),
                     "desktop-prod".to_string(),
-                ])
+                ]);
+            command
                 .env("FORGEAX_STARTUP_PROFILE", "desktop-prod")
                 .env(
                     "FORGEAX_RESOURCE_ROOT",
@@ -576,7 +939,7 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
         })
     };
     let runtime_handle =
-        supervisor::spawn_supervised(&handle, "local-runtime", log_dir, runtime_spawn)
+        supervisor::spawn_supervised(&handle, "local-runtime", log_dir.clone(), runtime_spawn)
             .map_err(|e| -> Box<dyn std::error::Error> { e.into() })?;
     app.manage(supervisor::Supervisor {
         runtime: runtime_handle,
@@ -598,23 +961,55 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
                         .and_then(|value| value.as_str())
                         .unwrap_or("invalid");
                     let error = state.get("error").cloned();
-                    let signature = format!("{status}:{error:?}");
+                    // A supervised launcher restart can return to the same ready
+                    // status/error. Its launch timestamp is part of the observed
+                    // state identity so it must install a fresh navigation receipt.
+                    let runtime_started_at = state.get("startedAt").and_then(|value| value.as_str()).unwrap_or("missing");
+                    let signature = format!("{status}:{error:?}:{runtime_started_at}");
                     let state_changed = signature != last_state;
                     if state_changed {
-                        let _ = handle.emit(
-                            "backend-status",
-                            serde_json::json!({
-                                "who": "local-runtime",
-                                "state": status,
-                                "error": error,
-                            }),
+                        let mut update = state.as_object().cloned().unwrap_or_default();
+                        update.insert("who".into(), "local-runtime".into());
+                        update.insert("state".into(), status.into());
+                        if status == "ready" {
+                            update.insert("error".into(), serde_json::Value::Null);
+                        } else if let Some(error) = error.clone().filter(|value| !value.is_null()) {
+                            update.insert("error".into(), error);
+                        } else {
+                            update.remove("error");
+                        }
+                        update.insert(
+                            "stateFile".into(),
+                            state_file.to_string_lossy().to_string().into(),
                         );
+                        update.insert(
+                            "logFile".into(),
+                            log_file.to_string_lossy().to_string().into(),
+                        );
+                        update.insert("restartExhausted".into(), false.into());
+                        update.insert("supervisorError".into(), serde_json::Value::Null);
+                        publish_backend_status(&handle, serde_json::Value::Object(update));
                         last_state = signature;
                     }
                     if status == "ready" && state_changed {
-                        if let Some(origin) =
-                            state.get("publicOrigin").and_then(|value| value.as_str())
-                        {
+                        if let (Some(origin), Some(runtime_started_at), Some(updated_at)) = (
+                            state.get("publicOrigin").and_then(|value| value.as_str()),
+                            state.get("startedAt").and_then(|value| value.as_str()),
+                            state.get("updatedAt").and_then(|value| value.as_str()),
+                        ) {
+                            let expectation = DesktopPageLoadExpectation {
+                                app_pid: std::process::id(), project_root: projects_dir.clone(), receipt_file: page_load_file.clone(),
+                                expected_origin: origin.trim_end_matches('/').to_string(), runtime_started_at: runtime_started_at.to_string(), navigation_generation: updated_at.to_string(), phase: DesktopPageLoadPhase::AwaitingStarted,
+                            };
+                            // Serialize generation replacement with page-load callbacks.
+                            // A receipt I/O failure only disables smoke evidence; it never
+                            // blocks the user's production navigation.
+                            if let Ok(mut receipt) = page_load_receipt.lock() {
+                                *receipt = None;
+                                if write_desktop_page_load_receipt(&expectation, "pending", "main", "").is_ok() {
+                                    *receipt = Some(expectation);
+                                }
+                            }
                             if let Some(win) = handle.get_webview_window("main") {
                                 if let Ok(url) = origin.parse() {
                                     let _ = win.navigate(url);
@@ -629,14 +1024,16 @@ fn start_bundled_backend(app: &tauri::App) -> Result<(), Box<dyn std::error::Err
             }
             if !ever_ready
                 && !timeout_reported
-                && started.elapsed() >= std::time::Duration::from_secs(60)
+                && started.elapsed() >= std::time::Duration::from_secs(120)
             {
-                let _ = handle.emit(
-                    "backend-status",
+                publish_backend_status(
+                    &handle,
                     serde_json::json!({
                         "who": "local-runtime",
                         "state": "failed",
-                        "error": "runtime state did not become ready within 60 seconds",
+                        "error": "runtime state did not become ready within 120 seconds",
+                        "stateFile": state_file.to_string_lossy(),
+                        "logFile": log_file.to_string_lossy(),
                     }),
                 );
                 if let Some(win) = handle.get_webview_window("main") {

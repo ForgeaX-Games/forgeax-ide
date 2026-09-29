@@ -1,0 +1,29 @@
+/**
+ * forgeax-preview → forgeax-interface design system bridge
+ *
+ * 颜色 / 圆角 / 字体：唯一来源 src/styles/tokens.css + primitive.css
+ * （Figma semantic.tokens.json）。本文件只做「预览布局」局部别名，禁止 hex 覆盖。
+ *
+ * 分割线：面板缝用 --color-divider-*，不用 --border（#404040 结构线）。
+ * 品牌选中：--primary / --primary-bg / --color-interaction-selected-brand
+ * Kind 色：--color-role-* / --color-kind-*（与 StatusChip / BusAdmin 一致）
+ */
+
+.studio-shell--preview-skin {
+	/* layout metrics only */
+	--forgeax-shell-top-h: 48px;
+	--forgeax-shell-status-h: 28px;
+	--forgeax-rail-icon-w: 60px;
+
+	/* chrome aliases → semantic (for migrated preview CSS) */
+	--forgeax-divider: var(--color-border-default);
+	--forgeax-divider-strong: var(--color-border-strong);
+	--forgeax-panel-bg: var(--color-background-elevated);
+	--forgeax-canvas-tint: color-mix(
+		in srgb,
+		var(--color-background-canvas) 65%,
+		transparent
+	);
+	--forgeax-brand-glow: color-mix(in srgb, var(--primary) 35%, transparent);
+	--forgeax-brand-ring: color-mix(in srgb, var(--primary) 45%, transparent);
+}

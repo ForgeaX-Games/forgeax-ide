@@ -1,24 +1,134 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/candidate.v1.schema.json",
-  "title": "ForgeaX IDE Release Candidate v1",
-  "type": "object",
-  "additionalProperties": false,
-  "required": ["schema","digest","orchestrationId","mode","source","target","publisher","sidecarManifest","platforms"],
-  "properties": {
-    "schema": {"const":"forgeax-ide-release-candidate/v1"},
-    "digest": {"type":"string","pattern":"^[0-9a-f]{64}$"},
-    "orchestrationId": {"type":"string","pattern":"^(?!.*--)[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"},
-    "mode": {"enum":["dry-run","publish"]},
-    "source": {"type":"object","additionalProperties":false,"required":["ide","integration"],"properties":{"ide":{"$ref":"#/$defs/source"},"integration":{"$ref":"#/$defs/source"}}},
-    "target": {"type":"object","additionalProperties":false,"required":["repository","tag","commit"],"properties":{"repository":{"const":"ForgeaX-Games/forgeax-ide"},"tag":{"type":"string","pattern":"^ide-v\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"},"commit":{"type":"string","pattern":"^[0-9a-f]{40}$"}}},
-    "publisher": {"type":"object","additionalProperties":false,"required":["workflowPath","workflowRunId","workflowRunAttempt","workflowDefinitionRevision"],"properties":{"workflowPath":{"const":".github/workflows/release.yml"},"workflowRunId":{"type":"string","pattern":"^[1-9][0-9]*$"},"workflowRunAttempt":{"type":"string","pattern":"^[1-9][0-9]*$"},"workflowDefinitionRevision":{"type":"string","pattern":"^[0-9a-f]{40}$"}}},
-    "sidecarManifest": {"type":"object","additionalProperties":false,"required":["url","sha256"],"properties":{"url":{"type":"string","format":"uri"},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"}}},
-    "platforms": {"type":"array","minItems":3,"maxItems":3,"items":{"$ref":"#/$defs/platform"}}
-  },
-  "$defs": {
-    "source":{"type":"object","additionalProperties":false,"required":["repository","revision"],"properties":{"repository":{"type":"string"},"revision":{"type":"string","pattern":"^[0-9a-f]{40}$"}}},
-    "file":{"type":"object","additionalProperties":false,"required":["logicalId","fileName","mediaType","sha256","size"],"properties":{"logicalId":{"type":"string"},"fileName":{"type":"string"},"mediaType":{"type":"string"},"sha256":{"type":"string","pattern":"^[0-9a-f]{64}$"},"size":{"type":"integer","minimum":1}}},
-    "platform":{"type":"object","additionalProperties":false,"required":["logicalId","targetTriple","trust","artifacts","evidence"],"properties":{"logicalId":{"type":"string"},"targetTriple":{"type":"string"},"trust":{"enum":["unsigned-user-authorized","suppressed-not-applicable"]},"artifacts":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/file"}},"evidence":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/file"}}}}
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/candidate.v1.schema.json",
+	"title": "ForgeaX IDE Release Candidate v1",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"digest",
+		"orchestrationId",
+		"mode",
+		"source",
+		"target",
+		"publisher",
+		"sidecarManifest",
+		"platforms"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-release-candidate/v1" },
+		"digest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+		"orchestrationId": {
+			"type": "string",
+			"pattern": "^(?!.*--)[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
+		},
+		"mode": { "enum": ["dry-run", "publish"] },
+		"source": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["ide", "integration"],
+			"properties": {
+				"ide": { "$ref": "#/$defs/source" },
+				"integration": { "$ref": "#/$defs/source" }
+			}
+		},
+		"target": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["repository", "tag", "commit"],
+			"properties": {
+				"repository": { "const": "ForgeaX-Games/forgeax-studio" },
+				"tag": {
+					"type": "string",
+					"pattern": "^v\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$"
+				},
+				"commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+			}
+		},
+		"publisher": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"workflowPath",
+				"workflowRunId",
+				"workflowRunAttempt",
+				"workflowDefinitionRevision"
+			],
+			"properties": {
+				"workflowPath": { "const": ".github/workflows/release.yml" },
+				"workflowRunId": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+				"workflowRunAttempt": { "type": "string", "pattern": "^[1-9][0-9]*$" },
+				"workflowDefinitionRevision": {
+					"type": "string",
+					"pattern": "^[0-9a-f]{40}$"
+				}
+			}
+		},
+		"sidecarManifest": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["url", "sha256"],
+			"properties": {
+				"url": { "type": "string", "format": "uri" },
+				"sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+			}
+		},
+		"platforms": {
+			"type": "array",
+			"minItems": 3,
+			"maxItems": 3,
+			"items": { "$ref": "#/$defs/platform" }
+		}
+	},
+	"$defs": {
+		"source": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["repository", "revision"],
+			"properties": {
+				"repository": { "type": "string" },
+				"revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+			}
+		},
+		"file": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["logicalId", "fileName", "mediaType", "sha256", "size"],
+			"properties": {
+				"logicalId": { "type": "string" },
+				"fileName": { "type": "string" },
+				"mediaType": { "type": "string" },
+				"sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+				"size": { "type": "integer", "minimum": 1 }
+			}
+		},
+		"platform": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"logicalId",
+				"targetTriple",
+				"trust",
+				"artifacts",
+				"evidence"
+			],
+			"properties": {
+				"logicalId": { "type": "string" },
+				"targetTriple": { "type": "string" },
+				"trust": {
+					"enum": ["unsigned-user-authorized", "suppressed-not-applicable"]
+				},
+				"artifacts": {
+					"type": "array",
+					"minItems": 1,
+					"items": { "$ref": "#/$defs/file" }
+				},
+				"evidence": {
+					"type": "array",
+					"minItems": 1,
+					"items": { "$ref": "#/$defs/file" }
+				}
+			}
+		}
+	}
 }

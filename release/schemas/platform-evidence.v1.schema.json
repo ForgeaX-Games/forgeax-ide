@@ -1,18 +1,57 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/platform-evidence.v1.schema.json",
-  "type":"object",
-  "additionalProperties":false,
-  "required":["schema","orchestrationId","mode","logicalId","targetTriple","trust","signer","checks","artifacts"],
-  "properties":{
-    "schema":{"const":"forgeax-ide-platform-evidence/v1"},
-    "orchestrationId":{"type":"string","pattern":"^(?!.*--)[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"},
-    "mode":{"enum":["dry-run","publish"]},
-    "logicalId":{"enum":["macos-arm64","macos-x64","windows-x64"]},
-    "targetTriple":{"enum":["aarch64-apple-darwin","x86_64-apple-darwin","x86_64-pc-windows-msvc"]},
-    "trust":{"enum":["unsigned-user-authorized","suppressed-not-applicable"]},
-    "signer":{"type":"null"},
-    "checks":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["id","status"],"properties":{"id":{"type":"string","minLength":1},"status":{"enum":["unsigned-user-authorized","suppressed-not-applicable"]}}}},
-    "artifacts":{"type":"array","minItems":1,"items":{"$ref":"candidate.v1.schema.json#/$defs/file"}}
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/platform-evidence.v1.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"orchestrationId",
+		"mode",
+		"logicalId",
+		"targetTriple",
+		"trust",
+		"signer",
+		"checks",
+		"artifacts"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-platform-evidence/v1" },
+		"orchestrationId": {
+			"type": "string",
+			"pattern": "^(?!.*--)[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
+		},
+		"mode": { "enum": ["dry-run", "publish"] },
+		"logicalId": { "enum": ["macos-arm64", "macos-x64", "windows-x64"] },
+		"targetTriple": {
+			"enum": [
+				"aarch64-apple-darwin",
+				"x86_64-apple-darwin",
+				"x86_64-pc-windows-msvc"
+			]
+		},
+		"trust": {
+			"enum": ["unsigned-user-authorized", "suppressed-not-applicable"]
+		},
+		"signer": { "type": "null" },
+		"checks": {
+			"type": "array",
+			"minItems": 1,
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["id", "status"],
+				"properties": {
+					"id": { "type": "string", "minLength": 1 },
+					"status": {
+						"enum": ["unsigned-user-authorized", "suppressed-not-applicable"]
+					}
+				}
+			}
+		},
+		"artifacts": {
+			"type": "array",
+			"minItems": 1,
+			"items": { "$ref": "candidate.v1.schema.json#/$defs/file" }
+		}
+	}
 }

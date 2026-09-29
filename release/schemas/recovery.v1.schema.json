@@ -1,18 +1,30 @@
 {
-  "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/recovery.v1.schema.json",
-  "type":"object",
-  "additionalProperties":false,
-  "required":["schema","orchestrationId","candidateDigest","mode","state","mutation","verified","releaseId","releaseUrl"],
-  "properties":{
-    "schema":{"const":"forgeax-ide-release-recovery/v1"},
-    "orchestrationId":{"type":"string"},
-    "candidateDigest":{"type":"string","pattern":"^[0-9a-f]{64}$"},
-    "mode":{"enum":["dry-run","publish"]},
-    "state":{"enum":["candidate-verified","draft-reconciled","completed"]},
-    "mutation":{"enum":["suppressed","draft","published"]},
-    "verified":{"type":"boolean"},
-    "releaseId":{"type":["integer","null"]},
-    "releaseUrl":{"type":["string","null"]}
-  }
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/recovery.v1.schema.json",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"orchestrationId",
+		"candidateDigest",
+		"mode",
+		"state",
+		"mutation",
+		"verified",
+		"releaseId",
+		"releaseUrl"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-release-recovery/v1" },
+		"orchestrationId": { "type": "string" },
+		"candidateDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+		"mode": { "enum": ["dry-run", "publish"] },
+		"state": {
+			"enum": ["candidate-verified", "draft-reconciled", "completed"]
+		},
+		"mutation": { "enum": ["suppressed", "draft", "published"] },
+		"verified": { "type": "boolean" },
+		"releaseId": { "type": ["integer", "null"] },
+		"releaseUrl": { "type": ["string", "null"] }
+	}
 }

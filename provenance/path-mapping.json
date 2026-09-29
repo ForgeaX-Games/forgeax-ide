@@ -1,9 +1,0 @@
-{
-  "schemaVersion": 1,
-  "mappings": [
-    {"sourceRepo":"forgeax-studio","sourceCommit":"ba491f5a761ed2c64d8965f2d39e024eb810520b","oldPath":"packages/studio/src","newPath":"imported/studio/src","migrationScope":"ide-product-web","owner":"forgeax-ide"},
-    {"sourceRepo":"forgeax-studio","sourceCommit":"ba491f5a761ed2c64d8965f2d39e024eb810520b","oldPath":"packages/studio/package.json","newPath":"imported/studio/package.json","migrationScope":"ide-product-manifest","owner":"forgeax-ide"},
-    {"sourceRepo":"forgeax-interface","sourceCommit":"563164b10bb27b1ee8cd6420c1f4d820fe41ac21","oldPath":"src-tauri","newPath":"imported/interface/src-tauri","migrationScope":"ide-tauri-shell","owner":"forgeax-ide"},
-    {"sourceRepo":"forgeax-interface","sourceCommit":"563164b10bb27b1ee8cd6420c1f4d820fe41ac21","oldPath":"test","newPath":"imported/interface/test","migrationScope":"ide-product-qa","owner":"forgeax-ide"}
-  ]
-}

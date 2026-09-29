@@ -1,6 +1,0 @@
-{
-  "frontendDist": "../dist",
-  "resources": ["resources/sidecars/bun"],
-  "externalBin": ["resources/sidecars/bun"],
-  "capabilities": ["main"]
-}

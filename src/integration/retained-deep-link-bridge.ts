@@ -1,8 +1,12 @@
-export type IdeDeepLinkTopic = 'bus:filter-kind' | 'bus:expand-plugin';
+export type IdeDeepLinkTopic = "bus:filter-kind" | "bus:expand-plugin";
 
 export interface RetainedDeepLinkBus {
-  publish(topic: string, payload: unknown, options?: { retain?: boolean }): void;
-  clearRetained(topic: string): void;
+	publish(
+		topic: string,
+		payload: unknown,
+		options?: { retain?: boolean },
+	): void;
+	clearRetained(topic: string): void;
 }
 
 /**
@@ -10,13 +14,13 @@ export interface RetainedDeepLinkBus {
  * keeps the shared subscriber and retained-state singleton in Interface.
  */
 export function createRetainedDeepLinkBridge(bus: RetainedDeepLinkBus) {
-  return {
-    emitDeepLink(topic: IdeDeepLinkTopic, payload: string): void {
-      bus.publish(topic, payload, { retain: true });
-    },
-    clearDeepLink(topic: IdeDeepLinkTopic): void {
-      bus.clearRetained(topic);
-      bus.publish(topic, null);
-    },
-  };
+	return {
+		emitDeepLink(topic: IdeDeepLinkTopic, payload: string): void {
+			bus.publish(topic, payload, { retain: true });
+		},
+		clearDeepLink(topic: IdeDeepLinkTopic): void {
+			bus.clearRetained(topic);
+			bus.publish(topic, null);
+		},
+	};
 }

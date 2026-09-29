@@ -1,0 +1,9 @@
+{
+	"build": {
+		"beforeDevCommand": "bun ../../scripts/tauri-dev-services.ts"
+	},
+	"bundle": {
+		"externalBin": [],
+		"resources": []
+	}
+}

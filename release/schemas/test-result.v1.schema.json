@@ -1,0 +1,293 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://github.com/ForgeaX-Games/forgeax-ide/blob/main/release/schemas/test-result.v1.schema.json",
+	"title": "ForgeaX IDE Test Result v1",
+	"type": "object",
+	"additionalProperties": false,
+	"required": [
+		"schema",
+		"case",
+		"outcome",
+		"product",
+		"environment",
+		"execution",
+		"evidence",
+		"metrics"
+	],
+	"properties": {
+		"schema": { "const": "forgeax-ide-test-result/v1" },
+		"case": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["expectedId", "actualId", "expectedChecks", "actualChecks"],
+			"properties": {
+				"expectedId": { "$ref": "#/$defs/caseId" },
+				"actualId": {
+					"oneOf": [{ "$ref": "#/$defs/caseId" }, { "type": "null" }]
+				},
+				"expectedChecks": {
+					"type": "array",
+					"minItems": 1,
+					"uniqueItems": true,
+					"items": { "type": "string", "minLength": 1 }
+				},
+				"actualChecks": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"required": ["id", "status", "observed"],
+						"properties": {
+							"id": { "type": "string", "minLength": 1 },
+							"status": { "enum": ["pass", "fail", "skip"] },
+							"observed": { "type": "string" }
+						}
+					}
+				}
+			}
+		},
+		"outcome": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["status", "error"],
+			"properties": {
+				"status": { "enum": ["pass", "fail", "skip"] },
+				"error": {
+					"oneOf": [
+						{ "type": "null" },
+						{
+							"type": "object",
+							"additionalProperties": false,
+							"required": ["type", "code", "message"],
+							"properties": {
+								"type": {
+									"enum": [
+										"assertion",
+										"product",
+										"environment",
+										"harness",
+										"timeout",
+										"cleanup"
+									]
+								},
+								"code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+								"message": { "type": "string", "minLength": 1 }
+							}
+						}
+					]
+				}
+			}
+		},
+		"product": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": [
+				"kind",
+				"version",
+				"ideRevision",
+				"studioRevision",
+				"platform",
+				"installer",
+				"executableSha256",
+				"runtimeManifestSha256"
+			],
+			"properties": {
+				"kind": {
+					"enum": [
+						"installed-product",
+						"assembled-runtime",
+						"test-build",
+						"web"
+					]
+				},
+				"version": { "type": "string", "minLength": 1 },
+				"ideRevision": { "$ref": "#/$defs/revision" },
+				"studioRevision": { "$ref": "#/$defs/revision" },
+				"platform": {
+					"enum": ["macos-arm64", "macos-x64", "windows-x64", "linux-x64"]
+				},
+				"installer": {
+					"oneOf": [
+						{ "type": "null" },
+						{
+							"type": "object",
+							"additionalProperties": false,
+							"required": ["format", "sha256"],
+							"properties": {
+								"format": { "enum": ["dmg", "msi", "nsis", "deb"] },
+								"sha256": { "$ref": "#/$defs/sha256" }
+							}
+						}
+					]
+				},
+				"executableSha256": {
+					"oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+				},
+				"runtimeManifestSha256": {
+					"oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+				}
+			}
+		},
+		"environment": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["osVersion", "architecture", "machineClass", "webView"],
+			"properties": {
+				"osVersion": { "type": "string", "minLength": 1 },
+				"architecture": { "type": "string", "minLength": 1 },
+				"machineClass": { "type": "string", "minLength": 1 },
+				"webView": {
+					"type": "object",
+					"additionalProperties": false,
+					"required": ["engine", "version"],
+					"properties": {
+						"engine": {
+							"enum": ["WKWebView", "WebView2", "Chromium", "WebKit", "none"]
+						},
+						"version": { "type": ["string", "null"] }
+					}
+				}
+			}
+		},
+		"execution": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["cwd", "command", "startedAt", "durationMs", "exitCode"],
+			"properties": {
+				"cwd": { "type": "string", "minLength": 1 },
+				"command": {
+					"type": "array",
+					"minItems": 1,
+					"items": { "type": "string" }
+				},
+				"startedAt": { "type": "string", "format": "date-time" },
+				"durationMs": { "type": "number", "minimum": 0 },
+				"exitCode": { "type": ["integer", "null"] }
+			}
+		},
+		"evidence": {
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["root", "items"],
+			"properties": {
+				"root": { "type": "string", "minLength": 1 },
+				"items": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"additionalProperties": false,
+						"required": ["kind", "path", "sha256"],
+						"properties": {
+							"kind": {
+								"enum": [
+									"receipt",
+									"screenshot",
+									"log",
+									"diagnostic",
+									"result",
+									"artifact"
+								]
+							},
+							"path": { "type": "string", "minLength": 1 },
+							"sha256": { "$ref": "#/$defs/sha256" }
+						}
+					}
+				}
+			}
+		},
+		"metrics": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"additionalProperties": false,
+				"required": ["name", "value", "unit"],
+				"properties": {
+					"name": { "type": "string", "minLength": 1 },
+					"value": { "type": "number", "minimum": 0 },
+					"unit": { "enum": ["ms", "KiB", "MiB", "bytes", "count"] }
+				}
+			}
+		}
+	},
+	"allOf": [
+		{
+			"if": {
+				"properties": {
+					"outcome": { "properties": { "status": { "const": "pass" } } }
+				}
+			},
+			"then": {
+				"properties": {
+					"outcome": { "properties": { "error": { "type": "null" } } },
+					"case": {
+						"properties": {
+							"actualId": { "$ref": "#/$defs/caseId" },
+							"actualChecks": {
+								"minItems": 1,
+								"items": { "properties": { "status": { "const": "pass" } } }
+							}
+						}
+					},
+					"execution": { "properties": { "exitCode": { "const": 0 } } },
+					"evidence": { "properties": { "items": { "minItems": 1 } } }
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"outcome": {
+						"properties": { "status": { "enum": ["fail", "skip"] } }
+					}
+				}
+			},
+			"then": {
+				"properties": {
+					"outcome": { "properties": { "error": { "type": "object" } } }
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"outcome": { "properties": { "status": { "const": "skip" } } }
+				}
+			},
+			"then": {
+				"properties": {
+					"outcome": {
+						"properties": {
+							"error": {
+								"properties": { "type": { "enum": ["environment", "harness"] } }
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"if": {
+				"properties": {
+					"product": {
+						"properties": { "kind": { "const": "installed-product" } }
+					}
+				}
+			},
+			"then": {
+				"properties": {
+					"product": {
+						"properties": {
+							"installer": { "type": "object" },
+							"executableSha256": { "$ref": "#/$defs/sha256" }
+						}
+					}
+				}
+			}
+		}
+	],
+	"$defs": {
+		"caseId": { "type": "string", "pattern": "^IDE-[A-Z]+-[0-9]{3}$" },
+		"revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+		"sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+	}
+}

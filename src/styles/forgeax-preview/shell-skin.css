@@ -1,0 +1,140 @@
+/**
+ * Preview shell skin — layout chrome; colors via design-tokens.css
+ */
+
+.studio-shell--preview-skin {
+	background:
+		radial-gradient(
+			ellipse 80% 50% at 50% -20%,
+			color-mix(in srgb, var(--primary) 6%, transparent),
+			transparent
+		),
+		radial-gradient(
+			ellipse 60% 40% at 100% 50%,
+			color-mix(in srgb, var(--accent-cyan) 4%, transparent),
+			transparent
+		),
+		var(--bg-0);
+}
+
+.glass-subtle {
+	background: color-mix(
+		in srgb,
+		var(--color-background-elevated) 55%,
+		transparent
+	);
+}
+
+.studio-shell--preview-skin .chat-panel.chat-rail {
+	overflow: visible;
+}
+
+/* Override .glass-subtle's all-sides border + blur.
+   Chat panel should only carry a single border-left, matching the sidebar's
+   border-right — same token (--forgeax-divider), same visual weight. */
+.studio-shell--preview-skin .chat-panel.chat-rail.glass-subtle {
+	background: color-mix(
+		in srgb,
+		var(--color-background-elevated) 55%,
+		transparent
+	);
+	border: none;
+	box-shadow: none;
+}
+
+.studio-shell--preview-skin .chat-panel .cp-topbar {
+	display: none;
+}
+
+.studio-shell--preview-skin .chat-agent-detail-bar .cp-agent-bar {
+	flex: 1;
+	min-width: 0;
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+.studio-shell--preview-skin .chat-agent-detail-bar .cp-agent-bar-label {
+	font-size: 11px;
+	color: var(--text-muted);
+}
+
+.studio-shell--preview-skin .chat-agent-detail-bar .cp-agent-bar-id.is-link,
+.studio-shell--preview-skin .chat-agent-detail-bar .cp-agent-bar-id.is-empty {
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 8px;
+	border-radius: var(--radius-sm);
+}
+
+.studio-shell--preview-skin .chat-agent-detail-bar .cp-agent-bar-bus {
+	flex: 1;
+	min-width: 0;
+	font-family: var(--font-mono);
+	font-size: 10px;
+	padding: 4px 8px;
+	border-radius: var(--radius-sm);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.studio-shell--preview-skin .chat-agent-detail-action.cp-ico .cp-ico-arrow {
+	display: none;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab-strip {
+	background: transparent;
+	border: none;
+	padding: 0;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab-strip-track {
+	gap: 6px;
+	padding: 0;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab {
+	max-width: 140px;
+	padding: 5px 10px;
+	border-radius: var(--radius-md);
+	border: 1px solid var(--forgeax-divider);
+	background: var(--color-interaction-hover);
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab.tab-active {
+	border-color: color-mix(
+		in srgb,
+		var(--primary) 55%,
+		var(--color-border-default)
+	);
+	background: var(--color-background-base);
+	color: var(--primary);
+	font-weight: 600;
+	box-shadow: none;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab.tab-active * {
+	color: inherit;
+}
+
+.studio-shell--preview-skin .chat-session-tabs-wrap .tab-add {
+	width: 28px;
+	height: 28px;
+	border-radius: var(--radius-sm);
+	border: 1px solid var(--forgeax-divider);
+	background: var(--color-interaction-hover);
+}
+
+.studio-shell--preview-skin .cp-empty-title {
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.studio-shell--preview-skin .user-bubble {
+	background: var(--primary);
+	color: var(--color-text-on-bright-primary);
+	border-radius: var(--radius-md);
+}

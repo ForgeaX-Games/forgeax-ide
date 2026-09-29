@@ -1,6 +1,6 @@
 {
-  "packageText": "{\"dependencies\":{\"@forgeax/extension-platform\":\"workspace:*\"}}",
-  "lockText": "file:../extension-platform",
-  "productText": "sourceAdapter: development-link",
-  "bundleText": "/Users/you/forgeax-studio/packages/editor"
+	"packageText": "{\"dependencies\":{\"@forgeax/extension-platform\":\"workspace:*\"}}",
+	"lockText": "file:../extension-platform",
+	"productText": "sourceAdapter: development-link",
+	"bundleText": "/Users/you/forgeax-studio/packages/editor"
 }

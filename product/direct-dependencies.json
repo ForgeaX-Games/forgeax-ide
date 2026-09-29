@@ -1,0 +1,61 @@
+{
+	"schemaVersion": 1,
+	"packages": {
+		"@forgeax/agents": {
+			"repository": "ForgeaX-Games/forgeax-agents",
+			"mode": "npm"
+		},
+		"@forgeax/app-shell": {
+			"repository": "ForgeaX-Games/forgeax-app-shell",
+			"mode": "workspace",
+			"path": "packages/app-shell"
+		},
+		"@forgeax/chat": {
+			"repository": "ForgeaX-Games/forgeax-chat",
+			"mode": "workspace",
+			"path": "packages/chat"
+		},
+		"@forgeax/dashboard": {
+			"repository": "ForgeaX-Games/forgeax-dashboard",
+			"mode": "workspace",
+			"path": "packages/dashboard"
+		},
+		"@forgeax/editor": {
+			"repository": "ForgeaX-Games/forgeax-editor",
+			"mode": "workspace",
+			"path": "packages/editor"
+		},
+		"@forgeax/extension-gallery": {
+			"repository": "ForgeaX-Games/forgeax-ide",
+			"mode": "workspace",
+			"path": "packages/ide/packages/extension-gallery"
+		},
+		"@forgeax/extension-host": {
+			"repository": "ForgeaX-Games/forgeax-extension-host",
+			"mode": "npm"
+		},
+		"@forgeax/extension-platform": {
+			"repository": "ForgeaX-Games/forgeax-extension-platform",
+			"mode": "npm"
+		},
+		"@forgeax/files": {
+			"repository": "ForgeaX-Games/forgeax-ide",
+			"mode": "workspace",
+			"path": "packages/ide/packages/files"
+		},
+		"@forgeax/interface": {
+			"repository": "ForgeaX-Games/forgeax-interface",
+			"mode": "workspace",
+			"path": "packages/interface"
+		},
+		"@forgeax/settings": {
+			"repository": "ForgeaX-Games/forgeax-settings",
+			"mode": "workspace",
+			"path": "packages/settings"
+		},
+		"@forgeax/types": {
+			"repository": "ForgeaX-Games/forgeax-types",
+			"mode": "npm"
+		}
+	}
+}

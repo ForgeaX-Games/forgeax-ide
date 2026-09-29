@@ -1,8 +1,0 @@
-{
-  "schemaVersion": 1,
-  "algorithm": "git-tree-sha1",
-  "sources": [
-    {"sourceRepo":"forgeax-studio","sourceCommit":"ba491f5a761ed2c64d8965f2d39e024eb810520b","tree":"39cda87cc89bf9c0ccc81416d9803cf8dc63e6a5"},
-    {"sourceRepo":"forgeax-interface","sourceCommit":"563164b10bb27b1ee8cd6420c1f4d820fe41ac21","tree":"cf807d4ddc2ab1f7615b5c8f1e13d2a337a205a3"}
-  ]
-}

@@ -1,0 +1,199 @@
+/* =============================================================================
+   PRIMITIVE LAYER — 来自 foundation.tokens.json (Figma Primitive 集合)
+   不直接在组件中使用，仅供 tokens.css 的 semantic 层引用。
+   命名规则：--prim-{category}-{subcategory}-{step}
+   ============================================================================= */
+:root {
+	/* ── z-axis ─────────────────────────────────────────────────────────────── */
+	--prim-z-level-0: 0;
+	--prim-z-level-1: 100;
+	--prim-z-level-2: 200;
+	--prim-z-level-3: 300;
+	--prim-z-level-4: 9999;
+
+	/* ── radius (unitless int → used as `Xpx` in semantic layer) ────────────── */
+	--prim-radius-0: 0px;
+	--prim-radius-2: 2px;
+	--prim-radius-4: 4px;
+	--prim-radius-6: 6px;
+	--prim-radius-8: 8px;
+	--prim-radius-12: 12px;
+	--prim-radius-16: 16px;
+	--prim-radius-20: 20px;
+	--prim-radius-24: 24px;
+	--prim-radius-full: 9999px;
+
+	/* ── opacity ────────────────────────────────────────────────────────────── */
+	--prim-opacity-5: 0.05;
+	--prim-opacity-10: 0.1;
+	--prim-opacity-20: 0.2;
+	--prim-opacity-30: 0.3;
+	--prim-opacity-40: 0.4;
+	--prim-opacity-50: 0.5;
+	--prim-opacity-60: 0.6;
+	--prim-opacity-70: 0.7;
+	--prim-opacity-80: 0.8;
+	--prim-opacity-90: 0.9;
+	--prim-opacity-100: 1;
+
+	/* ── space ──────────────────────────────────────────────────────────────── */
+	--prim-space-2: 2px;
+	--prim-space-4: 4px;
+	--prim-space-6: 6px;
+	--prim-space-8: 8px;
+	--prim-space-10: 10px;
+	--prim-space-12: 12px;
+	--prim-space-16: 16px;
+	--prim-space-20: 20px;
+
+	/* ── typography ─────────────────────────────────────────────────────────── */
+	--prim-font-sans:
+		"Inter", -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue",
+		system-ui, sans-serif;
+	--prim-font-mono:
+		"Fira Mono", "JetBrains Mono", "SF Mono", "Menlo", ui-monospace, monospace;
+
+	/* ── color / neutral ────────────────────────────────────────────────────── */
+	--prim-color-neutral-0: #ffffff;
+	--prim-color-neutral-50: #f2f2f2;
+	--prim-color-neutral-100: #e6e6e6;
+	--prim-color-neutral-150: #d9d9d9;
+	--prim-color-neutral-200: #cccccc;
+	--prim-color-neutral-250: #bfbfbf;
+	--prim-color-neutral-300: #b3b3b3;
+	--prim-color-neutral-350: #a6a6a6;
+	--prim-color-neutral-400: #999999;
+	--prim-color-neutral-450: #8c8c8c;
+	--prim-color-neutral-500: #808080;
+	--prim-color-neutral-550: #737373;
+	--prim-color-neutral-600: #666666;
+	--prim-color-neutral-650: #595959;
+	--prim-color-neutral-700: #4d4d4d;
+	--prim-color-neutral-750: #404040;
+	--prim-color-neutral-800: #333333;
+	--prim-color-neutral-850: #242424;
+	--prim-color-neutral-900: #191919;
+	--prim-color-neutral-950: #0d0d0d;
+	--prim-color-neutral-1000: #000000;
+
+	/* ── color / lime ───────────────────────────────────────────────────────── */
+	--prim-color-lime-50: #fcfff0;
+	--prim-color-lime-100: #f6ffd8;
+	--prim-color-lime-200: #ebffa8;
+	--prim-color-lime-300: #dfff78;
+	--prim-color-lime-400: #d4ff48; /* brand ForgeaX primary */
+	--prim-color-lime-500: #b1d43c;
+	--prim-color-lime-600: #8daa30;
+	--prim-color-lime-700: #6a7f24;
+	--prim-color-lime-800: #465418;
+	--prim-color-lime-900: #232a0c;
+	--prim-color-lime-950: #111406;
+
+	/* ── color / orange ─────────────────────────────────────────────────────── */
+	--prim-color-orange-50: #fff7ee;
+	--prim-color-orange-100: #ffedd8;
+	--prim-color-orange-200: #ffd9ad;
+	--prim-color-orange-300: #ffc481;
+	--prim-color-orange-400: #ffb056;
+	--prim-color-orange-500: #ff9c2a; /* brand zaohua */
+	--prim-color-orange-600: #cb7c21;
+	--prim-color-orange-700: #975c19;
+	--prim-color-orange-800: #633c10;
+	--prim-color-orange-900: #2e1c08;
+	--prim-color-orange-950: #140c03;
+
+	/* ── color / blue ───────────────────────────────────────────────────────── */
+	--prim-color-blue-50: #eff5fe;
+	--prim-color-blue-100: #dbe8fd;
+	--prim-color-blue-200: #b3cffc;
+	--prim-color-blue-300: #8bb5fa;
+	--prim-color-blue-400: #639cf8;
+	--prim-color-blue-500: #3b82f6;
+	--prim-color-blue-600: #2f67c4;
+	--prim-color-blue-700: #234d91;
+	--prim-color-blue-800: #17325f;
+	--prim-color-blue-900: #0b182d;
+	--prim-color-blue-950: #050a14;
+
+	/* ── color / green ──────────────────────────────────────────────────────── */
+	--prim-color-green-50: #edfaf2;
+	--prim-color-green-100: #d7f4e2;
+	--prim-color-green-200: #aae9c1;
+	--prim-color-green-300: #7cdda0;
+	--prim-color-green-400: #4fd17f;
+	--prim-color-green-500: #22c55e;
+	--prim-color-green-600: #1b9d4b;
+	--prim-color-green-700: #147438;
+	--prim-color-green-800: #0d4c24;
+	--prim-color-green-900: #062411;
+	--prim-color-green-950: #031008;
+
+	/* ── color / red ────────────────────────────────────────────────────────── */
+	--prim-color-red-50: #fef0f0;
+	--prim-color-red-100: #fcdddd;
+	--prim-color-red-200: #f9b7b7;
+	--prim-color-red-300: #f69090;
+	--prim-color-red-400: #f26a6a;
+	--prim-color-red-500: #ef4444;
+	--prim-color-red-600: #be3636;
+	--prim-color-red-700: #8d2828;
+	--prim-color-red-800: #5c1a1a;
+	--prim-color-red-900: #2c0c0c;
+	--prim-color-red-950: #130505;
+
+	/* ── color / yellow ─────────────────────────────────────────────────────── */
+	--prim-color-yellow-50: #fdf9eb;
+	--prim-color-yellow-100: #fbf1d2;
+	--prim-color-yellow-200: #f7e29f;
+	--prim-color-yellow-300: #f3d26d;
+	--prim-color-yellow-400: #eec33a;
+	--prim-color-yellow-500: #eab308;
+	--prim-color-yellow-600: #ba8e06;
+	--prim-color-yellow-700: #8a6a05;
+	--prim-color-yellow-800: #5a4503;
+	--prim-color-yellow-900: #2b2101;
+	--prim-color-yellow-950: #130e01;
+
+	/* ── color / purple ─────────────────────────────────────────────────────── */
+	--prim-color-purple-50: #f8f1fe;
+	--prim-color-purple-100: #efe0fe;
+	--prim-color-purple-200: #ddbdfc;
+	--prim-color-purple-300: #cc9bfa;
+	--prim-color-purple-400: #ba78f9;
+	--prim-color-purple-500: #a855f7;
+	--prim-color-purple-600: #8644c5;
+	--prim-color-purple-700: #633292;
+	--prim-color-purple-800: #412160;
+	--prim-color-purple-900: #1f0f2d;
+	--prim-color-purple-950: #0d0714;
+
+	/* ── color / teal ───────────────────────────────────────────────────────── */
+	--prim-color-teal-50: #edfdf8;
+	--prim-color-teal-100: #c9f9ed;
+	--prim-color-teal-200: #96f3de;
+	--prim-color-teal-300: #63eacf;
+	--prim-color-teal-400: #48ffcf; /* brand ForgeaX secondary */
+	--prim-color-teal-500: #2acda8;
+	--prim-color-teal-600: #20a086;
+	--prim-color-teal-700: #1d6655;
+	--prim-color-teal-800: #134840;
+	--prim-color-teal-900: #0a2a24;
+	--prim-color-teal-950: #051510;
+
+	/* ── color / pink ───────────────────────────────────────────────────────── */
+	--prim-color-pink-50: #fff0f7;
+	--prim-color-pink-100: #ffd4ee;
+	--prim-color-pink-200: #ffa8da;
+	--prim-color-pink-300: #ff6db8;
+	--prim-color-pink-400: #ff0080; /* accent-pink */
+	--prim-color-pink-500: #cc0067;
+	--prim-color-pink-600: #99004d;
+	--prim-color-pink-700: #700038;
+	--prim-color-pink-800: #4d0026;
+	--prim-color-pink-900: #2a0015;
+	--prim-color-pink-950: #150009;
+
+	/* ── color / sky ────────────────────────────────────────────────────── */
+	--prim-color-sky-300: #7dd3fc; /* art role */
+	--prim-color-sky-400: #6cc4ff; /* cli-provider / bus-link */
+}

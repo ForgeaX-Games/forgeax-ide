@@ -1,0 +1,56 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.13/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": [
+			"src/**",
+			"packages/**",
+			"scripts/**",
+			"tests/**",
+			"*.{json,jsonc,ts,tsx,js,mjs,cjs}",
+			"!!node_modules",
+			"!!**/.worktrees",
+			"!!.git",
+			"!!dist",
+			"!!build",
+			"!!.cache",
+			"!!.vite",
+			"!!src-tauri/target",
+			"!!src-tauri/gen",
+			"!!src-tauri/resources"
+		]
+	},
+	"formatter": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"correctness": {
+				"noUnusedImports": "error",
+				"noUnusedVariables": "error",
+				"noUnusedFunctionParameters": "error",
+				"noUnusedPrivateClassMembers": "error",
+				"noUnusedLabels": "error"
+			}
+		}
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"root": false
+}

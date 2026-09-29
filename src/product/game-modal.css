@@ -1,0 +1,125 @@
+.tb-modal-label {
+	font-size: 11px;
+	color: var(--text-muted, rgba(255, 255, 255, 0.5));
+	margin-top: 4px;
+}
+
+.tb-modal-input,
+.tb-modal-textarea,
+.tb-modal-select {
+	background: rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: var(--text-primary);
+	font-size: 12px;
+	padding: 6px 8px;
+	border-radius: 4px;
+	outline: none;
+	font-family: inherit;
+}
+
+.tb-modal-input:focus,
+.tb-modal-textarea:focus,
+.tb-modal-select:focus {
+	border-color: var(--primary);
+}
+
+.tb-modal-textarea {
+	resize: vertical;
+}
+
+.tb-modal-help,
+.tb-game-empty {
+	font-size: 11px;
+	color: var(--text-muted, rgba(255, 255, 255, 0.4));
+	padding: 2px 0;
+}
+
+.tb-game-empty {
+	padding: 8px 10px;
+}
+
+.tb-modal-error {
+	font-size: 11px;
+	color: var(--accent-error);
+	background: rgba(255, 107, 107, 0.08);
+	padding: 6px 8px;
+	border-radius: 4px;
+}
+
+.tb-modal-actions {
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.tb-game-row {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	border-radius: 4px;
+	background: transparent;
+}
+
+.tb-game-row.active {
+	background: rgba(212, 255, 72, 0.08);
+}
+
+.tb-game-pick {
+	flex: 1;
+	min-width: 0;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 6px 10px;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+}
+
+.tb-game-pick:hover {
+	background: var(--color-interaction-hover);
+	color: var(--color-text-primary);
+}
+
+.tb-game-row.active .tb-game-pick {
+	color: var(--primary);
+}
+
+.tb-game-name {
+	font-size: 12px;
+	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tb-game-meta {
+	font-size: 10px;
+	color: var(--text-muted, rgba(255, 255, 255, 0.4));
+}
+
+.tb-game-del {
+	width: 24px;
+	height: 24px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	color: var(--text-muted, rgba(255, 255, 255, 0.4));
+	border-radius: 4px;
+}
+
+.tb-game-del:hover {
+	color: var(--color-accent-error-default);
+	background: var(--color-interaction-error);
+}
+
+.tb-game-add-session:hover {
+	color: var(--primary);
+	background: rgba(212, 255, 72, 0.08);
+}
